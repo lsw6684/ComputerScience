@@ -12,30 +12,30 @@
     - O(N²) : N² + 2N + 4, 6N² + 20N, 10lgN
     - O(NlgN) : NlgN + 30N + 10, 5NlgN + 6
     - O(1) : 5, 16, 36
+<p align="center"><img src="./../images/timeComplexity.png" width="50%"><img src="./../images/tcComparison.png" width="50%" height="370"></p>
 
-<p align="center"><img src="./../images/timeComplexity.png" width="50%"></p>
-<p align="center"><img src="./../images/tcComparison.png" width="50%"></p>
-   
-    ```cpp
-    int func(int arr[], int n) {
-        int cnt = 0;                    // cnt 1번
-        for(int i = 0; i < n; i++)      // for( 1번; n번; n번 )
-            if(arr[i] % 5 == 0) cnt++;  // if(1번, 1번) 1번
-        }
-        return cnt;                     // 1 + 1 + n(2 + 2 + 1) + 1 = 5n + 3                                   
-    }   
-    ```
-    n이 100만이면 약 500만의 연산이 필요하여 1초 안에 **가능**.
-
-    n이 10억이면 약 50억번의 연사이 필요하여 1초 안에 **불가능**.
-
-    ※ **5n+3 → n에 비례** 한다고 표현합니다.
-    ```cpp
-    int func(int N) {
-        for(int i = 1; i * i <= N; i++) {
-            if(i*i == N) return 1;
-        }
-        return 0;
+```cpp
+int func(int arr[], int n) {
+    int cnt = 0;                    // cnt 1번
+    for(int i = 0; i < n; i++)      // for( 1번; n번; n번 )
+        if(arr[i] % 5 == 0) cnt++;  // if(1번, 1번) 1번
     }
-    ```
-    $\sqrtN$
+    return cnt;                     // 1 + 1 + n(2 + 2 + 1) + 1 = 5n + 3                                   
+}   
+```
+n이 100만이면 약 500만의 연산이 필요하여 1초 안에 **가능**.
+
+n이 10억이면 약 50억번의 연사이 필요하여 1초 안에 **불가능**.
+
+※ **5n+3 → n에 비례** 한다고 표현합니다.
+
+```cpp
+int func(int N) {
+    for(int i = 1; i * i <= N; i++) {
+        if(i*i == N) return 1;
+    }
+    return 0;
+}
+```
+
+$\sqrt{N}$
