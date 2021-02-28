@@ -12,7 +12,10 @@
     - O(N²) : N² + 2N + 4, 6N² + 20N, 10lgN
     - O(NlgN) : NlgN + 30N + 10, 5NlgN + 6
     - O(1) : 5, 16, 36
-<p align="center"><img src="./../images/timeComplexity.png" width="50%"><img src="./../images/tcComparison.png" width="50%" height="370"></p>
+<p align="center"><img src="./../images/timeComplexity.png" width="50%"></p>
+
+<p align="center"><img src="./../images/bigO.png" width="50%"></p>
+
 
 ```cpp
 int func(int arr[], int n) {
@@ -37,5 +40,6 @@ int func(int N) {
     return 0;
 }
 ```
+# dfs
 
-$\sqrt{N}$
+$$\sqrt{43}$$
