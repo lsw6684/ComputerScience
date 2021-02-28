@@ -99,34 +99,88 @@
             ```
         - LENGTH - 문자열의 길이 반환
             ```sql
-            SELECT LENGTH('Hello')      -- 5 반환
+            SELECT LENGTH('Hello')                      -- 5 반환
             ```
         - CONCAT - 문자열 결합
             ```sql
-            SELECT CONCAT('He', 'llo'),         -- Hello 반환
-                   CONCAT('H', NULL, 'ello')    -- 하나라도 NULL이면 NULL 반환
+            SELECT CONCAT('He', 'llo'),                 -- Hello 반환
+                   CONCAT('H', NULL, 'ello')            -- 하나라도 NULL이면 NULL 반환
             ```
         - LOCATE - 문자열이 처음 등장하는 위치 반환, 인덱스는 1부터, 존재하지 않으면 0 반환.
             ```sql
-            SELECT LOCATE('abc', 'aaabc'),      -- 3 반환
-                   LOCATE('abc', 'abab')        -- 0 반환
+            SELECT LOCATE('abc', 'aaabc'),              -- 3 반환
+                   LOCATE('abc', 'abab')                -- 0 반환
             ```
         - LEFT, RIGHT - 한 방향에서 지정된 개수만큼의 문자 반환
             ```sql
-            SELECT LEFT('abcdefg', 2),          -- ab 반환
-                   RIGHT('abcdefg', 2)          -- fg 반환
+            SELECT LEFT('abcdefg', 2),                  -- ab 반환
+                   RIGHT('abcdefg', 2)                  -- fg 반환
             ```
         - UPPER(), LOWER() - 대, 소문자로 변환
             ```sql
-            SELECT UPPER('aBc'),                -- ABC 반환
-                   LOWER('aBc')                 -- abc 반환
+            SELECT UPPER('aBc'),                        -- ABC 반환
+                   LOWER('aBc')                         -- abc 반환
             ```
-        - REPLACE
+        - REPLACE - 문자 대체
             ```sql
-            SELECT REPLACE('MSSQL', 'MS', 'My') -- MySQL 반환
+            SELECT REPLACE('MSSQL', 'MS', 'My');        -- MySQL 반환
             ```
-        - TRIM
+        - TRIM - 특정 문자 제거
             ```sql
-            
+            SELECT TRIM('  a  '),                       -- a 반환
+                   TRIM(LEADING '#' FROM '###My###'),   -- My### 반환, 앞의 문자 제거
+                   TRIM(TRAILING '#' FROM '###My###');  -- ###My 반환, 뒤의 문자 제거
             ```
-        
+        - FORMAT - 숫자 타입의 데이터를 세 자리마다 쉼표로 구분. '#,###,###.##' 형식으로 변환
+            ```sql
+            문자열로 반환되며, 두 번째 인수는 반올림할 소수 자릿수
+            SELECT FORMAT(123123123.123123, 3),        -- 123,123,123.123 반환
+                   FORMAT(123123123.123123, 6);        -- 123,123,123.123123 반환
+            ```
+        - FLOOR, CEIL, ROUND - 내림, 올림, 반올림
+            ```sql
+            SELECT FLOOR(10.6),                         -- 10
+                   CEIL(10.6),                          -- 11
+                   ROUND(10.6, 0);                      -- 11, 0번째 자리에서 반올림
+            ```
+        - SQRT, POW, EXP, LOG - 양의 제곱근, (a, b)에서 a<sup>b</sup>, e의 거듭제곱, 자연로그 값 계산
+            ```sql
+            SELECT SQRT(4),                             -- 2 
+                   POW(2, 3),                           -- 8
+                   EXP(3),                              -- 20.085536...
+                   LOG(3);                              -- 1.09861...
+            ```
+        - SIN, COS, TAN - 사인값, 코사인값, 탄젠트값 반환
+            ```sql
+            PI() - 파이값
+            SELECT SIN(PI()/2),                         -- 1
+                   COS(PI()),                           -- -1
+                   TAN(PI()/4);                         -- 0.99999999...
+            ```
+        - ABS, RAND - 절댓값 반환, 0.0 초과 1.0 미만의 실수 무작위 생성
+            ```sql
+            SELECT ABS(-3),                             -- 3
+                   RAND(),                              -- 0.4923..
+                   ROUND(RAND()*100, 0);                -- 58
+            ```
+        - NOW - 현재 날짜와 시간 반환('YYYY-MM-DD HH:MM:SS' or YYYYMMDDHHMMSS)
+        - CURDATE - 현재 날짜 반환('YYYY-MM-DD' or YYYYMMDD)
+        - CURTIME - 현재 시각 반환('HH:MM:SS' or HHMMSS)
+            ```sql
+            SELECT NOW(),                               -- 2021-02-28 20:17:08
+                   CURDATE(),                           -- 2021-02-28
+                   CURTIME();                           -- 20:17:08
+            ```
+        - DATE, MONTH, DAY, HOUR, MINUTE, SECOND, MONTHNAME, DAYNAME
+            ```sql
+            SELECT 
+            NOW(),                                      -- 2021-02-28 20:22:03
+            DATE(NOW()),                                -- 2021-02-28
+            MONTH(NOW()),                               -- 2
+            DAY(NOW()),                                 -- 28
+            HOUR(NOW()),                                -- 20
+            MINUTE(NOW()),                              -- 22
+            SECOND(NOW()),                              -- 3
+            MONTHNAME(NOW()),                           -- February
+            DAYNAME(NOW());                             -- Sunday
+            ```
