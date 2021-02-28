@@ -1,6 +1,7 @@
 # WEB
+- [WEB](#web)
   - [언어](#언어)
-  - [HTTP Protocol](#http)
+  - [HTTP](#http)
   - [WAS](#was)
 
 </br>
