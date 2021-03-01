@@ -1,3 +1,7 @@
+<p align="center" style="font-size:50px">
+    <a href="https://github.com/lsw6684/ComputerScience">HOME</a>
+</p>
+
 # Database
 - [SQL](#sql)
 
@@ -54,7 +58,7 @@
     
     - 기타
         - \* : 모든 데이터 
-        - LIKE : 데이터의 부분 일치``
+        - LIKE : 데이터의 부분 일치
             ```sql
             SELECT *
             WHERE CountryCode LIKE 'KO_'
@@ -171,7 +175,8 @@
                    CURDATE(),                           -- 2021-02-28
                    CURTIME();                           -- 20:17:08
             ```
-        - DATE, MONTH, DAY, HOUR, MINUTE, SECOND, MONTHNAME, DAYNAME
+        - DATE, MONTH, DAY, HOUR, MINUTE, SECOND 
+        - MONTHNAME, DAYNAME, DAYOFWEEK, DAYOFMONTH, DAYOFYEAR
             ```sql
             SELECT 
             NOW(),                                      -- 2021-02-28 20:22:03
@@ -182,5 +187,15 @@
             MINUTE(NOW()),                              -- 22
             SECOND(NOW()),                              -- 3
             MONTHNAME(NOW()),                           -- February
-            DAYNAME(NOW());                             -- Sunday
+            DAYNAME(NOW()),                             -- Sunday
+            DAYOFWEEK(NOW()),                           -- 28
+            DAYOFMONTH(NOW()),                          -- 1, "일" 월 화 수 목 금 토 순
+            DAYOFYEAR(NOW());                           -- 59
+            ```
+        - DATE_FORMAT() - 특정 형식에 맞춰 날짜와 시간 정보를 문자열로 변환
+            
+            [Date and Time Function 공식 문서](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
+            ```sql
+            SELECT
+            DATE_FORMAT(NOW(), '%D %y %a %d %m %j'); -- 28th 21 Sun 28 11 59
             ```
