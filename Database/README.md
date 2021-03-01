@@ -161,11 +161,11 @@
         - 데이터 삽입
             ```sql
             INSERT INTO test
-            VALUE(1, 123, 1.1, "test");             -- 컬럼 수에 주의
+            VALUE(1, 123, 1.1, "test");                 -- 컬럼 수에 주의
             ```
         - INSERT INTO SELECT
             ```sql
-            INSERT INTO test2 SELECT * FROM test;   -- test에 있는 모든 데이터를 test2에 삽입합니다.
+            INSERT INTO test2 SELECT * FROM test;       -- test에 있는 모든 데이터를 test2에 삽입합니다.
             ```
     - ### UPDATE
         - 기존에 입력되어 있는 값을 변경합니다.
