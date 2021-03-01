@@ -2,6 +2,10 @@
     <a href="https://github.com/lsw6684/ComputerScience">HOME</a>
 </p>
 
+***
+
+<br />
+
 # Database
 - [SQL](#sql)
 
