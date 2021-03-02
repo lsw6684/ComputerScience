@@ -7,11 +7,11 @@
 <br />
 
 # ALGORITHM (Including Data Structure)
-  - [CPP 입출력 속도 향상](#CPP-입출력-속도-향상)
-  - [시간복잡도 & 공간복잡도](#시간복잡도--공간복잡도)
-  - [배열](#배열)
-  - [벡터](#벡터)
-  - [연결 리스트](#연결-리스트)
+- [CPP 입출력 속도 향상](#CPP-입출력-속도-향상)
+- [시간복잡도 & 공간복잡도](#시간복잡도--공간복잡도)
+- [배열](#배열)
+- [벡터](#벡터)
+- [연결 리스트](#연결-리스트)
 
 
 <br />
@@ -34,9 +34,9 @@
     - O(N²) : N² + 2N + 4, 6N² + 20N, 10lgN
     - O(NlgN) : NlgN + 30N + 10, 5NlgN + 6
     - O(1) : 5, 16, 36
-<p align="center"><img src="./../images/timeComplexity.png" width="50%"></p>
+<p align="center"><img src="images/timeComplexity.png" width="50%"></p>
 
-<p align="center"><img src="./../images/bigO.png" width="50%"></p>
+<p align="center"><img src="images/bigO.png" width="50%"></p>
 
 **ex 1) O(N)**
 ```cpp
@@ -157,7 +157,7 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
 ## 연결 리스트
 - 원소를 저장할 때 그 다음 원소가 있는 위치를 포함시키는 방식으로 저장하는 자료구조입니다.
 - 선형 자료구조입니다.
-<p align="center"><img src="./../images/linkedList.png" width="80%"></p>
+<p align="center"><img src="images/linkedList.png" width="80%"></p>
 
 　　　　　　**특정 원소릴 알면 후의 원소들도 알 수 있습니다.**
 - k 번째 원소를 확인/변경하기 위해 **O(k)** 가 필요합니다.
@@ -169,7 +169,7 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
 - 임의의 원소에 대한 작업이 필요한 경우 용이합니다.
 - 🎁 배열 vs 연결리스트
 
-<p align="center"><img src="./../images/arrayVSlinkedlist.png" width="80%"></p>
+<p align="center"><img src="images/arrayVSlinkedlist.png" width="80%"></p>
 
 - 야매 연결 리스트 (실무❌, STL 사용 불가한 코딩 테스트⭕)
     ```cpp
@@ -212,7 +212,7 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
     ```
 - 🎁 중간에서 만나는 두 연결 리스트의 시작점들이 주어졌을 때 만나는 지점을 구하는 방법은?
 
-<p align="center"><img src="./../images/meetingPoint.png" width="80%"></p>
+<p align="center"><img src="images/meetingPoint.png" width="80%"></p>
  
 ```cpp
 1. 두 시작점 각각에 대해 끝까지 진행시키고 각각의 길이를 구합니다.
@@ -222,7 +222,7 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
 ```
 - 🎁 주어진 연결 리스트 안에 사이클이 있는지 판단하라.
 
-<p align="center"><img src="./../images/floyd.png" width="70%"></p>
+<p align="center"><img src="images/floyd.png" width="70%"></p>
 
 ```cpp
 Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복잡도 O(N)으로 구할 수 있습니다.

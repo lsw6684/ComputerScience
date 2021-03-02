@@ -8,9 +8,9 @@
 
 # WEB
 - [WEB](#web)
-  - [언어](#언어)
-  - [HTTP](#http)
-  - [WAS](#was)
+- [언어](#언어)
+- [HTTP](#http)
+- [WAS](#was)
 
 <br />
 
@@ -43,7 +43,7 @@
 ## HTTP
 HTTP는 Hypertext Transfer Protocol의 준말로 팀 버너스리와 그가 속한 팀 CERN에서 발명하였습니다. 서버와 클라이언트가 인터넷상에서 데이터를 주고 받기 위한 프로토콜이며, 어떤 종류의 데이터도 전송 가능합니다.
 
-<p align="center"><img src="./../images/http.png"></p>
+<p align="center"><img src="images/http.png"></p>
 
 - **장점 :** 불특정 다수를 대상으로 하는 서비스에 적합합니다. 클라이언트와 서버간의 최대 연결수보다 훨씬 많은 요청, 응답을 처리할 수 있습니다.
 
@@ -59,7 +59,7 @@ HTTP는 Hypertext Transfer Protocol의 준말로 팀 버너스리와 그가 속�
 
 **URL :** Uniform Resource Locator의 준말로 특정 웹 서버의 특정파일에 접근하기 위한 경로 혹은 주소.
 
-<p align="center"><img src="./../images/URL.png" width="60%"></p>
+<p align="center"><img src="images/URL.png" width="60%"></p>
 
 - **GET :** 정보 요청 (SELECT)
   - URL에 데이터를 포함시켜 요청한다.
@@ -80,7 +80,7 @@ HTTP는 Hypertext Transfer Protocol의 준말로 팀 버너스리와 그가 속�
 - **TRACE :** 클라이언트의 요청 반환.
   - echo 서비스로 서버 상태를 확인하기 위한 목적으로 주로 사용.
 
-<p align="center"><img src="./../images/getPost.png"></p>
+<p align="center"><img src="images/getPost.png"></p>
 
 ```
 ❗
