@@ -196,10 +196,10 @@
         - LIKE : 데이터의 부분 일치
             ```sql
             SELECT *
-            WHERE CountryCode LIKE 'KO_'
-            ----------------------------
-            LIKE '%TEL'                                 -- TEL로 시작하는 모든 데이터 
-            LIKE 'TEL%'                                 -- TEL로 끝나는 모든 데이터
+            WHERE CountryCode LIKE 'KO_'                -- 언더바"_" 개수만큼 글자 수 지정.
+            ----------------------------                         "%" 글자 수 제한 없음.
+            LIKE 'TEL%'                                 -- TEL로 시작하는 모든 데이터
+            LIKE '%TEL'                                 -- TEL로 끝나는 모든 데이터 
             LIKE '%TEL%'                                -- TEL이 들어가는 모든 데이터
             ```
         - Sub Query
