@@ -194,16 +194,16 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
 
     int main() {
         ios::sync_with_stdio(0), cin.tie(0);
-        list<int> L = { 1,2 };	            // 1 2
-        list<int>::iterator t = L.begin();	// c++11 이상부터 auto t = L.begin() 가능
-        L.push_front(10);		            // 10 1 2
-        cout << *t << endl;		            // t가 가리키는 값 = 1 출력
+        list<int> L = { 1,2 };	                        // 1 2
+        list<int>::iterator t = L.begin();	            // c++11 이상부터 auto t = L.begin() 가능
+        L.push_front(10);		                // 10 1 2
+        cout << *t << endl;		                // t가 가리키는 값 = 1 출력
         L.push_back(5);			            // 10 1 2 5
         L.insert(t, 6);			            // t가 가리키는 곳 앞에 6을 삽입, 10 6 1 2 5
-        t++;					            // t를 1칸 앞으로 전진? t가 가리키는 값은 2.
+        t++;					        // t를 1칸 앞으로 전진? t가 가리키는 값은 2.
         t = L.erase(t);			            // t가 가리키는 값 제거. 10 6 1 5, 이제 t는 5를 가리킴
 
-        cout << *t << endl;	                // 5
+        cout << *t << endl;	                        // 5
         
         for (auto i : L) cout << i << ' ';	// c++11 이상부터 가능. 불가능 하면 아래 방법.
         cout << endl;
