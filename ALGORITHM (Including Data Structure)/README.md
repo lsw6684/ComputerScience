@@ -13,6 +13,7 @@
 - [벡터](#벡터)
 - [연결 리스트](#연결-리스트)
 - [스택, 큐, 덱](#스택,-큐,-덱)
+- [BFS](#bfs)
 
 <br />
 
@@ -135,6 +136,8 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
         }
         ```
 
+<br />
+
 ## 벡터
 - 원소가 메모리에 연속하여 저장되어 있기 때문에 O(1)에 인덱스로 접근 가능.
 - loop comparison
@@ -154,6 +157,9 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
     for(int i = 0 ; i <= v1.size() - 1; i++)
         cout << v[i] << ' ';
     ```
+
+<br />
+
 ## 연결 리스트
 - 원소를 저장할 때 그 다음 원소가 있는 위치를 포함시키는 방식으로 저장하는 자료구조입니다.
 - 선형 자료구조입니다.
@@ -229,6 +235,9 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
 한 칸씩 가는 커서와 두 칸씩 가는 커서를 동일 시점에서 출발 시키면, 사이클이 있을 경우 두 커서는 만나게 됩니다.
 반대로 사이클이 존재하지 않다면, 만나지 못하고 연결 리스트의 끝에 도달하게 됩니다.
 ```
+
+<br />
+
 ## 스택, 큐, 덱
 상위 세 가지 자료구조는 원소를 삽입하고 제거하는 위치가 정해져 있어서 **Restricted Structured**로 불리기도 합니다.
 - 스택
@@ -246,3 +255,72 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
     - deque, Double Ended Queue로 양쪽 끝에서 삽입, 삭제가 가능합니다.
     - 원소의 추가, 제거, 그리고 앞/뒤의 원소들의 확인이 O(1)입니다.
     - 맨 앞/뒤가 아닌 나머지 원소들의 확인/변경이 **원칙적으로는 불가능**합니다. ***STL deque에서는 인덱스로 접근 가능***합니다.
+
+<br />
+
+## BFS
+- Breadth First Search, 다차원 배열에서 각 칸을 방문할 때 너비를 우선으로 방문하는 알고리즘입니다.
+- 자료구조에서 정점과 간선으로 이루어진 그래프에서 모든 노드를 방문하기 위한 알고리즘입니다.
+- 노드가 N개일 때 O(N). **행이 R이고 열이 C이면 O(RC)**
+1. 시작 점을 Queue에 push하고 방문했다는 표시를 남깁니다.
+2. Queue의 원소를 꺼내어 상하좌우 인접한 칸에 대해 3번을 진행합니다.
+3. 방문하지 않은 인접 공간에 방문했다는 표시를 남기고 Queue에 push합니다.
+4. Queue가 empty상태가 될 때까지 2번을 반복합니다.
+
+- pair 활용 : 두 자료형을 묶어서 사용할 수 있습니다.
+    ```cpp
+    #include<iostream>
+    using namespace std;
+    int main() {
+        pair<int, int> t1 = make_pair(10, 13);			// pair 생성
+        pair<int, int> t2 = { 4, 6 };					// since c++11
+        cout << t2.first << ' ' << t2.second << '\n';	// 원소 접근
+        if (t2 < t1) cout << "t2 < t1";                 // first 비교하고 second 비교
+    }    
+    4 6
+    t2 < t1
+    ```
+- BFS 구현
+    ```cpp
+    #include <iostream>
+    #include <queue>
+    using namespace std;
+    #define endl '\n'
+    #define X first
+    #define Y second		// pair에서 first, second 줄여 쓰기 위함.
+    int board[502][502] =
+    {
+        {1,1,1,0,1,0,0,0,0,0},
+        {1,0,0,0,1,0,0,0,0,0},
+        {1,1,1,0,1,0,0,0,0,0},
+        {1,1,0,0,1,0,0,0,0,0},
+        {0,1,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0}
+    };											// 1 == 방, 0 == 벽
+    bool vis[502][502];							// 해당 칸을 방문했는지 여부 저장
+    int n = 7, m = 10;							// 행, 열의 수
+    int dx[4] = { 1, 0, -1, 0 };
+    int dy[4] = { 0, 1, 0, -1 };				// 상하좌우 네 방향 의미
+    int main()
+    {
+        ios::sync_with_stdio, cin.tie(0);
+        queue<pair<int, int>> Q;
+        vis[0][0] = 1;							// (0, 0) 시작, 방문
+        Q.push({ 0,0 });						// Q에 방문한 곳 push
+        while (!Q.empty()) {                    // Q가 empty가 될 때까지
+            pair<int, int> cur = Q.front();
+            Q.pop();
+            cout << '(' << cur.X << ',' << cur.Y << ") -> ";
+            for (int dir = 0; dir < 4; dir++) {	// 상하좌우 살피기
+                int nx = cur.X + dx[dir];
+                int ny = cur.Y + dy[dir];		// nx, ny에 dir에서 정한 방향의 인접한 칸의 좌표
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;	// 범위 밖 제외
+                if (vis[nx][ny] || board[nx][ny] != 1) continue;		// 이미 방문한 칸, 벽 제외
+                vis[nx][ny] = 1;				// (nx, ny) 방문
+                Q.push({ nx,ny });
+            }
+        }
+    }
+    (0,0) -> (1,0) -> (0,1) -> (2,0) -> (0,2) -> (3,0) -> (2,1) -> (3,1) -> (2,2) -> (4,1) ->
+    ```
