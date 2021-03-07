@@ -7,12 +7,12 @@
 <br />
 
 # ALGORITHM (Including Data Structure)
-- [CPP 입출력 속도 향상](#CPP-입출력-속도-향상)
+- [CPP 입출력 속도 향상](#cpp-입출력-속도-향상)
 - [시간복잡도 & 공간복잡도](#시간복잡도--공간복잡도)
 - [배열](#배열)
 - [벡터](#벡터)
 - [연결 리스트](#연결-리스트)
-- [스택, 큐, 덱](#스택,-큐,-덱)
+- [스택, 큐, 덱](#스택-큐-덱)
 - [BFS](#bfs)
 
 <br />
@@ -180,10 +180,10 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
 - 야매 연결 리스트 (실무❌, STL 사용 불가한 코딩 테스트⭕)
     ```cpp
     const int MX = 1000005;         
-    int dat[MX], pre[MX], nxt[MX];              // dat - i번째 원소의 값
-    int unused = 1;                             // pre - 이전, nxt - 다음 원소의 값
+    int dat[MX], pre[MX], nxt[MX];                      // dat - i번째 원소의 값
+    int unused = 1;                                     // pre - 이전, nxt - 다음 원소의 값
     // 0은 시작점을 나타내기 위한 dummy node.   unused부터 새로운 원소가 들어갈 수 있고 1씩 증가.
-    fill(pre, pre+MX, -1);                      // -1 : 이전(pre) 혹은 다음(nxt) 원소가 존재하지 않음.
+    fill(pre, pre+MX, -1);                              // -1 : 이전(pre) 혹은 다음(nxt) 원소가 존재하지 않음.
     fill(nxt, nxt+MX, -1);                  
     ```
 -   ```cpp
@@ -272,10 +272,10 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
     #include<iostream>
     using namespace std;
     int main() {
-        pair<int, int> t1 = make_pair(10, 13);	                // pair 생성
-        pair<int, int> t2 = { 4, 6 };	                        // since c++11
-        cout << t2.first << ' ' << t2.second << '\n';	        // 원소 접근
-        if (t2 < t1) cout << "t2 < t1";                             // first 비교하고 second 비교
+        pair<int, int> t1 = make_pair(10, 13);	                    // pair 생성
+        pair<int, int> t2 = { 4, 6 };	                            // since c++11
+        cout << t2.first << ' ' << t2.second << '\n';	            // 원소 접근
+        if (t2 < t1) cout << "t2 < t1";                                 // first 비교하고 second 비교
     }    
     4 6
     t2 < t1
