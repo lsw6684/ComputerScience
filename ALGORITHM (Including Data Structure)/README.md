@@ -194,16 +194,16 @@ bool cmp2 (vector<int>& v1, vector<int>& v2, int idx)
 
     int main() {
         ios::sync_with_stdio(0), cin.tie(0);
-        list<int> L = { 1,2 };	            // 1 2
-        list<int>::iterator t = L.begin();	// c++11 이상부터 auto t = L.begin() 가능
-        L.push_front(10);		            // 10 1 2
-        cout << *t << endl;		            // t가 가리키는 값 = 1 출력
+        list<int> L = { 1,2 };	                    // 1 2
+        list<int>::iterator t = L.begin();	            // c++11 이상부터 auto t = L.begin() 가능
+        L.push_front(10);		                    // 10 1 2
+        cout << *t << endl;		                    // t가 가리키는 값 = 1 출력
         L.push_back(5);			            // 10 1 2 5
         L.insert(t, 6);			            // t가 가리키는 곳 앞에 6을 삽입, 10 6 1 2 5
-        t++;					            // t를 1칸 앞으로 전진? t가 가리키는 값은 2.
+        t++;					    // t를 1칸 앞으로 전진? t가 가리키는 값은 2.
         t = L.erase(t);			            // t가 가리키는 값 제거. 10 6 1 5, 이제 t는 5를 가리킴
 
-        cout << *t << endl;	                // 5
+        cout << *t << endl;	                            // 5
         
         for (auto i : L) cout << i << ' ';	// c++11 이상부터 가능. 불가능 하면 아래 방법.
         cout << endl;
@@ -272,10 +272,10 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
     #include<iostream>
     using namespace std;
     int main() {
-        pair<int, int> t1 = make_pair(10, 13);			// pair 생성
-        pair<int, int> t2 = { 4, 6 };					// since c++11
-        cout << t2.first << ' ' << t2.second << '\n';	// 원소 접근
-        if (t2 < t1) cout << "t2 < t1";                 // first 비교하고 second 비교
+        pair<int, int> t1 = make_pair(10, 13);	                // pair 생성
+        pair<int, int> t2 = { 4, 6 };	                        // since c++11
+        cout << t2.first << ' ' << t2.second << '\n';	        // 원소 접근
+        if (t2 < t1) cout << "t2 < t1";                             // first 비교하고 second 비교
     }    
     4 6
     t2 < t1
@@ -287,7 +287,7 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
     using namespace std;
     #define endl '\n'
     #define X first
-    #define Y second		// pair에서 first, second 줄여 쓰기 위함.
+    #define Y second				                    // pair에서 first, second 줄여 쓰기 위함.
     int board[502][502] =
     {
         {1,1,1,0,1,0,0,0,0,0},
@@ -297,27 +297,27 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
         {0,1,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0}
-    };											// 1 == 방, 0 == 벽
-    bool vis[502][502];							// 해당 칸을 방문했는지 여부 저장
-    int n = 7, m = 10;							// 행, 열의 수
+    };						                    // 1 == 방, 0 == 벽
+    bool vis[502][502];						    // 해당 칸을 방문했는지 여부 저장
+    int n = 7, m = 10;					            // 행, 열의 수
     int dx[4] = { 1, 0, -1, 0 };
-    int dy[4] = { 0, 1, 0, -1 };				// 상하좌우 네 방향 의미
+    int dy[4] = { 0, 1, 0, -1 };				            // 상하좌우 네 방향 의미
     int main()
     {
         ios::sync_with_stdio, cin.tie(0);
         queue<pair<int, int>> Q;
-        vis[0][0] = 1;							// (0, 0) 시작, 방문
-        Q.push({ 0,0 });						// Q에 방문한 곳 push
-        while (!Q.empty()) {                    // Q가 empty가 될 때까지
+        vis[0][0] = 1;					            // (0, 0) 시작, 방문
+        Q.push({ 0,0 });						    // Q에 방문한 곳 push
+        while (!Q.empty()) {                                            // Q가 empty가 될 때까지
             pair<int, int> cur = Q.front();
             Q.pop();
             cout << '(' << cur.X << ',' << cur.Y << ") -> ";
-            for (int dir = 0; dir < 4; dir++) {	// 상하좌우 살피기
+            for (int dir = 0; dir < 4; dir++) {	                    // 상하좌우 살피기
                 int nx = cur.X + dx[dir];
-                int ny = cur.Y + dy[dir];		// nx, ny에 dir에서 정한 방향의 인접한 칸의 좌표
-                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;	// 범위 밖 제외
-                if (vis[nx][ny] || board[nx][ny] != 1) continue;		// 이미 방문한 칸, 벽 제외
-                vis[nx][ny] = 1;				// (nx, ny) 방문
+                int ny = cur.Y + dy[dir];		                    // nx, ny에 dir에서 정한 방향의 인접한 칸의 좌표
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;   // 범위 밖 제외
+                if (vis[nx][ny] || board[nx][ny] != 1) continue;	    // 이미 방문한 칸, 벽 제외
+                vis[nx][ny] = 1;				            // (nx, ny) 방문
                 Q.push({ nx,ny });
             }
         }
