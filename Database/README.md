@@ -184,6 +184,13 @@
             DELETE FROM test
             WHERE id = 1;
             ```
+    - ### REVOKE
+        - 권한을 회수합니다.
+            ```sql
+            -- USER01이 MEMBERS테이블에 대해 가지는 모든 권한과
+            -- USER01이 다른 사람에게 부여한 권한까지 취소하시오.
+            REVOKE ALL ON MEMBERS USER01 CASCADE;
+            ```
     - TRUNCATE
         - 용량이 줄어 들며 인덱스 등도 모두 삭제됩니다.
         - 테이블은 삭제하지 않고 데이터만 삭제됩니다.
