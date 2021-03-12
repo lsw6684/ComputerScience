@@ -15,16 +15,17 @@
     - 데이터의 일부 Example들을 일반화여 특정 문제를 해결하는 알고리즘입니다.
     - 모델을 만들기 위한 샘플 데이터를 Training data라고 부릅니다.
 - **ML 알고리즘의 종류**
-    - 지도 학습 Supervised Learning : input(X) & desired output(Y)을 포함하는 데이터를 기반으로 수학적 모델(f)을 만듭니다.
-        - Regression : Data point를 Generalization 하여 ax + b 형태의 함수 f,**연속적인** Function line을 만들어 **real value**를 예측합니다.
+    - **지도 학습 Supervised Learning** : **input(X) & desired output(Y)** 을 포함하는 데이터를 기반으로 수학적 **모델(f)** 을 만듭니다.
+        - Regression : Data point를 Generalization 하여 ax + b 형태의 함수 f, **연속적인** Function line을 만들어 **real value**를 예측합니다.
         - Classification : Input이 **어떤 class**에 속하는지 예측합니다.
-    - 비지도 학습 Unsupervised Learning : 데이터에 input(X)만이 있으며 **desired output(Y)이 없습니다**. 데이터의 패턴, 구조를 찾아내어 그룹핑이나 **클러스터링**을 합니다.
+    - **비지도 학습 Unsupervised Learning** : 데이터에 input(X)만이 있으며 **desired output(Y)이 없습니다**. 데이터의 패턴, 구조를 찾아내어 그룹핑이나 **클러스터링**을 합니다.
+        - desired output이 없기 때문에 y=f(x) 불가능.
 
-    - 강화 학습 Reinforcement Learning : 특정 환경에서 Agent(SW or HW)가 현재의 상태를 인식하여, 누적된 보상을 최대화하는 행동 혹은 행동 순서를 선택하는 방법입니다.
+    - **강화 학습 Reinforcement Learning** : 특정 환경에서 Agent(SW or HW)가 현재의 상태를 인식하여, 누적된 보상을 최대화하는 행동 혹은 행동 순서를 선택하는 방법입니다.
         - 데이터라는 표현이 존재하지 않고 특정 Agent의 행동에 따라 Reward를 maximize하여 이해할 수 있도록 합니다.
         - **Trial and Error**, 시행착오를 통해 에러를 줄이고 Reward를 높이는 방향으로 진행됩니다.
         - There might be **delayed rewards** - Positive reward가 나올만한 action이 즉각적으로 발생하지 않으면 지연됩니다.
-        - ### ex) Dog 
+        - ex) Dog 
             ```
             강아지(Agent)에게 캐치볼 하는 것을 가르칩니다. 하지만 명시적으로 가르칠 수 없으니 공을 던지고 다시 가져오는 것을 성공할 때마다 간식(Positive Reward)을 줍니다. 그리고 실패 하면 간식을 주지 않습니다(Negative Reward). 이 과정을 반복하면, 강아지는 어떤 Action을 해야 간식을 얻을 수 있는지 알게됩니다.
             ```
@@ -45,7 +46,7 @@
 
 - **RL이 ML들과 다른 점**
     - Compared to **Supervised Learnning**
-        - 지도학습(Supervised Learning)은 Machine(agent)이 training data로부터 무언가(패턴)를 배웁니다. Learning Data로부터 정규화(normalization)하는 모델을 만드는 것으로 input과 output 즉, 정답값(label)을 가지고 있는  data를 가진다고 할 수 있습니다. 실제로 본적 없는 데이터(unseen data)를 적용했을 때 올바른 결과에 근접할 수 있도록 특정 환경을 기반으로 하는 지식을 보유한 External Supervisor가 존재합니다. [❗상단의 강아지 예시](#ex-dog)
+        - 지도학습(Supervised Learning)은 Machine(agent)이 training data로부터 무언가(패턴)를 배웁니다. Learning Data로부터 정규화(normalization)하는 모델을 만드는 것으로 input과 output 즉, 정답값(label)을 가지고 있는  data를 가진다고 할 수 있습니다. 실제로 본적 없는 데이터(unseen data)를 적용했을 때 올바른 결과에 근접할 수 있도록 특정 환경을 기반으로 하는 지식을 보유한 External Supervisor가 존재합니다.
     - Compared to **Unsupervised Learning**
         - 모델에 training data를 준다는 점은 Supervised Learning과 같지만 output 없이 input만 전달하고 **input에 포함된 hidden pattern**을 학습하여 reward를 maximizing하는 모델을 만듭니다.
 
@@ -65,7 +66,7 @@
             - 여기서 **길**은 어느 쪽으로 가야할 지 알려주는 **Policy**입니다.
     - **Value Function**
         - Reward를 의미하며 Policy마다 Value Function을 가진다고 할 수 있습니다.
-        - Value Function의 symbol은 **v(s)**로 state인 s를 인자로 받습니다. 
+        - Value Function의 symbol은 **v(s)** 로 state인 s를 인자로 받습니다. 
         - Agent가 Environment의 특정 state에 위치할 때, 최종적으로 받을 수 있는 total expected reward를 의미합니다.
         - **Optimal Value Function**은 모든 states에 대하여 더욱 좋은 값을 가지는 Value Function을 최적의 Value Function, Optimal Value Function이라 칭합니다.
         - RL의 궁극적인 목표는 Optimal Value Function을 갖는 **Optimal Policy**를 찾는 것입니다. 
@@ -97,7 +98,7 @@ Environment로 부터 Reward, Rt를 받고 St+1로 State로 바뀝니다.
         - Episode 기반으로 정확하게 나뉘느냐, 안나뉘느냐를 기준으로 합니다.
         - Episodic environment는 non-sequential environment로도 불립니다.
         - Episodic environment는 State만 바뀔 뿐 Action간에 서로 영향을 끼치지 않습니다.(Independent)
-        - non-episodic environment는 Sequentil environment로도 불립니다.
+        - non-episodic environment는 Sequential environment로도 불립니다.
         - Agent의 현재 행동이 State만 바뀔 뿐 아니라 미래의 Action에도 영향을 끼칩니다. (dependent)
     - **◈ Single and multi-agent environment**
         - Agent 개수가 1개냐 아니냐가 기준입니다.
