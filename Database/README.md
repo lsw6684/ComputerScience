@@ -46,7 +46,7 @@
     - 참조 릴레이션의 기본 키와 동일한 키 속성을 가집니다.
 - **복합 키 Comosite Key**
     - 각 튜플을 식별할 수 있는 두 개 이상의 속성들로 구성된 후보 키입니다.
-<p align="center"><img src="images/key.png" width="30%">
+<p align="center"><img src="images/key.png" width="600">
 
 <br />
 
@@ -403,27 +403,27 @@
         - 분해된 두 릴레이션을 조인하면 원래의 릴레이션에 들어 있는 정보를 완전하게 얻을 수 있습니다.
         - 여기서 손실이란 정보의 손실을 뜻하며, 정보의 손실은 정보의 양이 원래의 것보다 많고, 적고 **(기존과 정보의 양이 다름)**를 모두 포함하의 칭합니다.
 - **정규형 : 도부이결다조**
-<p align="center"><img src="images/도부이결다조.png" width="350"></p>
+<p align="center"><img src="images/도부이결다조.png" width="450"></p>
 
 - **제 1정규형**
     - 릴레이션 R의 모든 속성 값이 원자(쪼갤 수 없는) 값을 가집니다.
     - 모든 속성은 한 개의 값을 가집니다.
-<p align="center"><img src="images/제1.png" width="400"></p>
+<p align="center"><img src="images/제1.png" width="500"></p>
 
 - **제 2정규형**
     - 제 1정규형을 만족한 상태에서 부분 함수 종속을 제거합니다.
-<p align="center"><img src="images/제2a.png" width="600"> <img src="images/제2b.png" width="500"></p>
+<p align="center"><img src="images/제2a.png" width="700"> <img src="images/제2b.png" width="600"></p>
 
 - **제 3정규형**
     - 이행적 함수 종속을 제거합니다.
-<p align="center"><img src="images/제3a.png" width="600"> <img src="images/제3b.png" width="450"></p>
+<p align="center"><img src="images/제3a.png" width="700"> <img src="images/제3b.png" width="550"></p>
 
 - **BCNF**
     - 릴레이션의 모든 결정자가 후보 키인 릴레이션입니다.
     - [후보 키](#후보-키-candidate-key)가 아닌 속성이 결정자로 사용되면 안된다는 뜻입니다.
- <p align="center"><img src="images/bcnfa.png" width="600"></p>
- <p align="center"><img src="images/bcnfb.png" width="500"></p>
- <p align="center"><img src="images/bcnfc.png" width="600"></p>
+ <p align="center"><img src="images/bcnfa.png" width="700"></p>
+ <p align="center"><img src="images/bcnfb.png" width="600"></p>
+ <p align="center"><img src="images/bcnfc.png" width="700"></p>
 
 - **제 4정규형**
     - 다치종속(MVD)을 제거합니다.
@@ -454,7 +454,7 @@ DB의 상태를 변환시키는, 하나의 논리적 기능을 수행하기 위�
     - **철회 Aborted** : 트랜잭션이 비정상적으로 종료되어 Rollback 연산을 수행한 상태
     - **부분 완료 Partially Committed** : 트랜잭션의 마지막 연산까지 실행했지만, Commit 연산이 실행되기 직전의 상태
     - **완료 Committed** : 트랜잭션이 성공적으로 종료되어 Commit 연산을 실행한 후의 상태
-<p align="center"><img src="images/transaction_state.png" width="30%">
+<p align="center"><img src="images/transaction_state.png" width="400">
 
 
 
