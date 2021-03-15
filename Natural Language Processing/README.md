@@ -94,4 +94,9 @@
             ['My name is Choi and my E-mail is sunglok@seoultech.ac.kr.']
 
         ```
-- **정규식 Regular Expression** : search를 위한 string 패턴입니다.
+- **정규식 Regular Expression** <br />
+search를 위한 string 패턴입니다. 복잡한 문자열을 처리할 때 사용하는 기법으로, Python만의 고유 문법이 아니라 문자열을 처리하는 모든 곳에서 사용됩니다. 정규 표현식을 배우는 것은 Python을 배우는 것과는 또 다른 영역의 과제라 할 수 있습니다.
+<p align="center"><img src="images/re1.png" width="1000"></p>
+<p align="center"><img src="images/re2.png" width="500"></p>
+<p align="center"><img src="images/re3.png" width="500"></p>
+<p align="center"><img src="images/re4.png" width="1500"></p>
