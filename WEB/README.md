@@ -11,6 +11,7 @@
 - [언어](#언어)
 - [HTTP](#http)
 - [WAS](#was)
+- [REST, REST API, RESTful](#rest-rest-api-restful)
 
 <br />
 
@@ -103,3 +104,79 @@ Web Application Server의 준말입니다. Browser를 Client로 본다면, Brows
 ❗
 장애 극복 기능 (Failover) : 각종 서버, 시스템, 네트워크 등에서 이상이 생겼을 시 예비 시스템으로 자동전환되는 기능으로 서버를 이중화 하여 구현하면 무중단 운영을 시행할 수 있습니다.
 ```
+
+<br />
+
+## REST, REST API, RESTful
+- **REST REpresentational State Transfer** <br />
+  **자원의 표현**을 구분하여 **자원의 상태**를 주고 받는 것을 의미합니다.
+    - **자원** - 해당 소프퉤어가 관리하는 모든 것. `문서, 그림, 데이터, 해당 소프트웨어 자체 등`
+    - **자원의 표현** - 그 자원을 표현하기 위한 이름. `DB의 학생 정보가 자원일 때, 'students를 자원의 표현으로 정합니다.`
+    - **상태 전달** - 데이터가 요청되는 자원의 상태(정보)를 전달합니다. JSON, XML을 통해 주고받는 것이 일반적입니다.
+    - ### CRUD Operation
+      - Create : **POST**(생성)
+      - Read : **get**(읽기)
+      - Update : **put**||**patch**(전체 수정 or 부분 수정)
+      - Delete : **delete**(삭제)
+      - HEAD : **HEAD**(header 정보 조회)
+
+  **REST의 장점**
+    - HTTP 프로토콜의 인프라를 그대로 사용하여, REST API를 위한 별도의 인프라를 구축할 필요가 없습니다.
+    - HTTP 프로토콜의 표준을 최대한 활용하여 여러 추가적인 장점을 함께 가져갈 수 있게 합니다.
+    - HTTP 표준 프로토콜에 따르는 모든 플랫폼에서 사용할 수 있습니다.
+    - Hypermedia API의 기본을 충실히 지키면서 범용성을 보장합니다.
+    - REST API 메시지가 의도하는 바를 명확하게 나타내기 때문에, 그 의도를 쉽게 파악할 수 있습니다.
+    - 서비스 디자인에서 생길 수 있는 문제를 최소화합니다.
+    - 서버와 클라이언트의 역할을 명확하게 분리합니다.
+
+  **REST의 단점** 
+    - 표준이 존재하지 않습니다.
+    - 사용할 수 있는 메소드가 4가지뿐입니다.
+      - HTTP Method 형태가 제한적입니다.
+    - 구버전의 브라우저에 지원할 수 없는 부분이 존재합니다.
+      - PUT, DELETE 사용 불가
+      - pushState 지원 불가.
+    
+  **REST의 특징**
+    - **Server-Client 구조**
+      - REST Server : API를 제공하고 비즈니스 로직 처리 및 저장을 책임집니다.
+      - Client : 사용자 인증이나 context(세션, 로그인 정보) 등을 직접 관리하고 책임집니다.
+    - **무상태 Statelesss**
+      - HTTP 프로토콜은 Stateless Protocol이므로 REST 역시 무상태성을 가집니다.
+      - Client의 context를 Server에 저장하지 않기 때문에 세션, 쿠키와 같은 context 정보를 신경쓰지 않아도 됩니다. (구현 단순화)
+      - Server는 각각의 요청을 독립적으로 인식하고 처리합니다. 처리 방식에 일관성을 부여하고 서비스의 자유도가 높아집니다.
+    - **캐시 처리 가능 Cacheable**
+      - 웹 표준 HTTP 프로토콜을 그대로 사용하므로 웹에서 사용하는 기존의 인프라를 그대로 사용합니다. 따라서, HTTP가 가진 강력한 특징 중 하나인 ***캐싱*** 기능을 적용할 수 있습니다.
+      - 대량의 요청을 효율적으로 처리하기 위해 캐시가 요구됩니다.
+      - 캐시 사용을 통해 응답시간이 빨라지고 REST Server 트랜잭션이 발생하지 않습니다. 즉, 전체 응답시간, 성능, 서버의 자원 이용률을 향상시킬 수 있습니다.
+    - **계층화 Layered System**
+      - Client는 REST API Server만 호출합니다.
+      - REST Server는 다중 계층으로 구성될 수 있습니다.
+      - PROXY, 게이트웨이 같은 네트워크 기반의 중간 매체를 사용할 수 있습니다.
+
+
+- **REST API** <br />
+  - **API Application Programming Interface** <br />
+응용 프로그램에서 사용할 수 있도록, 운영 체제나 프로그래밍 언어가 제공하는 기능을 제어할 수 있게 만든 인터페이스입니다. 간단히 말하면, 컴퓨터의 기능을 실행시키는 방법을 의미합니다. 
+    ```c
+    print('Hi');
+    ```
+    ```js
+    document.write('Hi');
+    ```
+    여기서, print와 write 따위를 말합니다. <br />
+
+  **REST API**는 내 컴퓨터의 기능이 아닌 다른 컴퓨터의 기능을 실행시킨다고 할 수 있습니다. 특정 기술을 의미하는 것이 아닌, 웹의 통신 규약인 HTTP를 이용하여 통신할 때, ***HTTP가 가진 잠재력을 최대로 이용할 수 있게 유도하기 위한 모범 사례*** 라고 할 수 있습니다. <br />
+  - REST 기반으로 서비스 API를 구현.
+  - OpenAPI, 마이크로 서비스 등을 제공하는 업체 대부분이 REST API 제공.<br />
+
+  HTTP URI(Uniform Resource Identifier)를 통해 자원(Resource)을 명시하고, HTTP Method(POST, GET, PUT or PATCH, DELETE)를 통해 [CRUD Operation](#crud-operation)을 적용하는 것을 말합니다.
+
+- **RESTful** <br />
+RESTful은 일반적으로 REST라는 아키텍처를 구현하는 웹 서비스를 나타내기 위해 사용되는 용어입니다. REST를 REST답게 쓰기 위한 방법으로, 공식적인 기술 명칭은 아닙니다.
+  - REST API를 제공하는 웹 서비스를 RESTful하다고 합니다.
+  - REST 원리를 따르는 시스템은 RESTful이란 용어로 지칭됩니다. 
+
+  **RESTful의 목적** <br />
+    - 이해와 사용이 쉬운 REST API를 만듭니다.
+    - RESTful한 API를 구현하는 근본적인 목적은 성능 향상에 있는 것이 아니라 일관적인 컨벤션을 통한 API의 이해도 및 호환성을 높이는 것입니다. 즉, 성능이 중요한 상황에서 굳이 RESTful한 API를 구현할 필요는 없습니다.

@@ -52,7 +52,7 @@
 
 ## SQL
 - **SQL의 종류**
-    - DDL : Data Definition Language ***[CREATE](#create), [DROP](#drop), [ALTER](#alter)***
+    - DDL : Data Definition Language ***[CREATE](#create), [DROP](#drop), [ALTER](#alter), [TRUNCATE](#truncate)***
         - 데이터 정의 언어
         - 데이터베이스, 테이블, 뷰, 인덱스 등의 데이터베이스 개체 생성/삭제/변경
         - DDL은 트랜잭션을 발생시키지 않습니다.
@@ -230,7 +230,7 @@
             -- USER01이 다른 사람에게 부여한 권한까지 취소하시오.
             REVOKE ALL ON MEMBERS USER01 CASCADE;
             ```
-    - TRUNCATE
+    - ### TRUNCATE
         - 용량이 줄어 들며 인덱스 등도 모두 삭제됩니다.
         - 테이블은 삭제하지 않고 데이터만 삭제됩니다.
         - 한 번에 모두 지워지며 ***삭제 후 되돌릴 수 없습니다.***

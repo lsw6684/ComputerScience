@@ -15,7 +15,7 @@
 
 
 ## Foundation
-### **SciPy** : Scientific Computing으로 수학, 과학, 그리고 공학 관련된 연산을 지원합니다.
+**SciPy** : Scientific Computing으로 수학, 과학, 그리고 공학 관련된 연산을 지원합니다. MATLAB에 대응하기 위한 오픈소스 Computing Tool이라고 생각합니다.
 
 - **Matplotlib** : 2차원 그래프를 그려주기 위함입니다. 3차원도 지원 하지만, 별로...
     ```python
@@ -46,8 +46,9 @@
 
 - **NumPy** : 다차원 벡터, 행렬을 쉽게 처리할 수 있는 빠른 속도의 라이브러리입니다. array형태의 데이터를 효율적으로(속도↑ 메모리↓) 처리합니다.
     <p align="center"><img src="images/행렬.png" width="600"></p>
-
-- Data types
+Numpy.array는 **homogeneous**, 제차형 데이터 타입만 포함할 수 있습니다. 
+    
+- **Data types**
 
     대소문자를 구분합니다.
     ```python
