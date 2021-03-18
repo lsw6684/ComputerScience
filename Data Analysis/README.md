@@ -8,6 +8,7 @@
 
 # Data Analysis
 - [통계적 학습 이론 Statistical Learning](#통계적-학습-이론-statistical-learning)
+- [Probability & Statistics](#probability--statistics)
 
 <br />
 
@@ -170,6 +171,4 @@
     - KNN, K-nearest Neighbors : Bayes classifier를 실제 환경에 맞춰둔 것입니다. (실질적으로 사용될 수 있는 classifier) 새로운 데이터를 입력 받았을 때 특정 범위 내에 가장 많은 것이 무엇이냐를 중심으로 새로운 데이터의 종류를 정해주는 알고리즘입니다.
 <p align="center"><img src="images/KNN.png" width="35%"></p>
 
-
-    
-    
+## Probability & Statistics

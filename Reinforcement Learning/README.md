@@ -6,6 +6,7 @@
 
 # Reinforcement Learning
 - [Introduction to Reinforcement Learning](#introduction-to-reinforcement-learning)
+- [OpenAI and TensorFlow(with Docker)](#openai-and-tensorflowwith-docker)
 
 <br />
 
@@ -137,3 +138,21 @@ ex)
     -**Inventory management**- 공급망 Supply chain management, 수요 예측 demand forecasting, warehouse operation 등을 강화학습으로 최적화 시켜 이용됩니다. (전력 소비량 등)
     - **Finance** - 상업적 거래를 예측하기 위한 포트폴리오를 관리합니다.
     - **Natural language processing and Computer vision** - DL과 결합된 DRL에 사용되며, text 요약, 정보 축약, 기계 번역(papago 등), 이미지 인식 등의 정확성을 높히는데 사용됩니다.
+
+## OpenAI and TensorFlow(with Docker)
+- **Docker**
+    - virtual system의 일종으로, 컨테이너에 소프트웨어들이 패키징되어 있습니다.
+    - 컨테이너에는 소프트웨어를 사용하는 데 필요한 libraries, system tools, code, and runtime 등이 모두 포함되어 있습니다.
+    - Application 실행에 필요한 모든 dependency를 제공하기 때문에 쉽고 빠르게 배포할 수 있습니다.
+    - Docker Hub에서 Docker image파일을 사용하여 환경 셋팅이 되어있는 Container를 load하여 쉽고 빠르게 사용할 수 있습니다. 
+        - **Container** - resource-isolated에서 dependency 없이 실행할 수 있도록 해주는 **virtualization**입니다. Application의 코드, dependencies 등 모든 것을 하나의 block으로 패키징 할 수 있습니다.
+        - **Container benefits**
+        1. **Environment consistency** - portability가 있고 organizational and technical frictions of moving and applications를 줄일 수 있습니다. 각 서버를 manually configuring하는 것 없이 새로운 features를 빠르게 release할 수 있습니다.
+        2. **Operational efficiency** - 같은 서버에서 multiple applications를 쉽게 사용할 수 있습니다. 컨테이너에는 정확하게 측정된 memory, disk space, and CPU가 정해져 있기 때문에 사용 시에, 구체화 하기 용이합니다. 일반 virtual system은 Hardware level부터 virtualization이 이루어지기 때문에 매우 느리지만, Container는 하단 level부터 virtualization을 하는 것이 아니기 때문에 **부팅이 매우 빠릅니다.** **Scale-up and Scale-down**에 용이하며 **Blue-Green deployment**패턴과 process isolation을 제공합니다.
+
+            `Blue-Green 배포란, 무중단 배포 Continuous Delivery입니다. 구 버전과 새 버전을 나란히 구성하고 배포 시점이 되면 트래픽을 일제히 전환시키는 방법을 사용하므로 버전 관리 문제를 방지할 수 있고 빠른 롤백이 가능합니다. 또 다른 장점으로, 운영 환경에 영향을 주지 않고 실제 서비스 환경으로 새 버전 테스트가 가능합니다. `
+        3. **Developer Productivity** - independently upgrade each service
+        4. **Version control** - Docker container images have a **manifest file**. 그렇기 때문에, 버전 컨트롤을 하기 용이합니다.
+    - **Container vs Virtual Machine**
+    <p align="center"><img src="images/container_virtual.png" width="850"></p>
+ 
