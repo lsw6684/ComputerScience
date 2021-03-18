@@ -10,9 +10,7 @@
 - [Foundation](#foundation)
 - [Machine Learning with scikit-learn](#machine-learning-with-scikit-learn)
 
-
-
-
+<br />
 
 ## Foundation
 **SciPy** : Scientific Computing으로 수학, 과학, 그리고 공학 관련된 연산을 지원합니다. MATLAB에 대응하기 위한 오픈소스 Computing Tool이라고 생각합니다.
@@ -138,3 +136,34 @@ search를 위한 string 패턴입니다. 복잡한 문자열을 처리할 때 �
 <p align="center"><img src="images/re4.png" width="1500"></p>
 
 ## Machine Learning with scikit-learn
+- **Machine Learning**
+    - 데이터나 경험을 통해 자동으로 알고리즘을 향상시킵니다.
+    - **Data-driven approaches** vs **rule/model-based approaches**
+    - **귀납법 Induction** vs **연역법 deduction**
+    <p align="center"><img src="images/induction_deduction.png" width="1000"></p>
+- **ML approaches (with respect to ***the given data***)**
+    - 지도 학습 Supervised learning - input, desired target이 함께 부여됩니다.
+    - 비지도 학습 Unsupervised learning - input만 부여됩니다.
+    - Reinforcement learning - feedback(reward/penalty)가 부여됩니다.
+- **ML problem formulation**
+    <p align="center"><img src="images/ml_fourmulations.png" width="900"></p>
+- **ML Road Map - Choosing the right algorithm**
+    <p align="center"><img src="images/roadMap.png" width="1400"></p>
+- **scikit-learn**
+    - A Python-based open-source ML library
+    - Built on NumPy, SciPy, and matplotlib
+    - Included in Anaconda by default
+    - Includes *example datasets*
+- **SVM Support vector machine**
+    - Supervised learning models(보통 classification and regression)
+    - A non-probabilistic (deterministic), 비확률적 (결정론적) binary linear classifier.
+        - Finding the maximum-margin **초평면 hyperplane**(boundary - 2D, plane in 3D)
+        - Optimization. 다른 영역으로 가면 음수 - 각 영역에 맞게 Maximize
+    - **Kerner trick**을 이용하면 non-linear classification이 가능합니다.
+        - **Advantages**
+        1. Effective in high-dimensional spaces
+        2. when dimensions > samples
+        3. Customizable by specifying kernel functions
+        - **Disadvantages**
+        1. probabilistic estimates를 바로 제공할 수 없습니다.
+        2. noisy data and large-scale data에서 적절한 사용이 어렵습니다.
