@@ -7,8 +7,8 @@
 <br />
 
 # Natural Language Processing
-- [**Foundation**](#foundation)
-
+- [Foundation](#foundation)
+- [Machine Learning with scikit-learn](#machine-learning-with-scikit-learn)
 
 
 
@@ -16,6 +16,38 @@
 
 ## Foundation
 **SciPy** : Scientific Computing으로 수학, 과학, 그리고 공학 관련된 연산을 지원합니다. MATLAB에 대응하기 위한 오픈소스 Computing Tool이라고 생각합니다.
+- **array**
+    ```python
+    import numpy as np
+    # From a composite data (list or tuple, not set and dictionary)
+    A = np.array([3, 29, 82])                   #리스트
+    B = np.array(((3., 29, 82), (10, 18, 84)))  #튜플, "."은 float 64 의미. 
+    C = np.array([[3, 29, 82], [10, 18, 84]], dtype=float)
+    D = np.array([3, 29, 'choi'])
+    E = np.array([[3], [29], [82]])
+
+    # ndim = 차원, size = element 개수, shape = 행렬. 왜 1이 안나올까
+    # dtype = 데이터타입. 하나를 설정해 놓으면 모두 바뀐다 - homogenous
+    print(A.ndim, A.size, A.shape, A.dtype)     # 1 3 (3,) int 32
+    print(B.ndim, B.size, B.shape, B.dtype)     # 2 6 (2, 3) float64
+    print(C.ndim, C.size, C.shape, C.dtype)     # 2 6 (2, 3) float64
+    print(D.ndim, D.size, D.shape, D.dtype)     # 1 3 (3, 1) 유니코드로 나오고 
+    print(D) # ['3' '29' 'choi']정수들도 텍스트로 변환
+    print(E.ndim, E.size, E.shape, E.dtype)     # 2 3 (3, 1) int32
+
+    # Using initialization functions
+    F = np.zeros((3, 2))            # Create a 3x2 array filled with 0 (default: float 64)
+    G = np.ones((3, 2))             # Create a 2x3 array filled with 1
+    H = np.eye(3, dtype=np.float32) # Create a 3x3 identity matrix (single-precision)
+    I = np.empty((3, 2))            # zeros((3, 2)) but the elemets are 1
+    J = np.empty((0, 9))            # [] width size of (0, 9). just space.
+    K = np.arange(0, 1, 0.2)        # 0이상 1 미만, 0.2(step)차이로 나열
+    L = np.linspace(0, 1, 5)        # 0이상 1 이하, 5개로 나누기
+    M = np. random.random((3, 2)) # == np.random.uniform(size=(3, 2)) cf. normal()    
+    ```
+- **Indexing and slicing**
+<p align="center"><img src="images/indexingSlicing.png" width="650"></p>
+
 
 - **Matplotlib** : 2차원 그래프를 그려주기 위함입니다. 3차원도 지원 하지만, 별로...
     ```python
@@ -46,7 +78,7 @@
 
 - **NumPy** : 다차원 벡터, 행렬을 쉽게 처리할 수 있는 빠른 속도의 라이브러리입니다. array형태의 데이터를 효율적으로(속도↑ 메모리↓) 처리합니다.
     <p align="center"><img src="images/행렬.png" width="600"></p>
-Numpy.array는 **homogeneous**, 제차형 데이터 타입만 포함할 수 있습니다. 
+    Numpy.array는 **homogeneous**, 제차형 데이터 타입만 포함할 수 있습니다. 
     
 - **Data types**
 
@@ -104,3 +136,5 @@ search를 위한 string 패턴입니다. 복잡한 문자열을 처리할 때 �
 <p align="center"><img src="images/re3.png" width="500"></p>
 
 <p align="center"><img src="images/re4.png" width="1500"></p>
+
+## Machine Learning with scikit-learn

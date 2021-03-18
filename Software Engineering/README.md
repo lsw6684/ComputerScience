@@ -7,7 +7,7 @@
 <br />
 
 # Software Engineering
-- [**User Interface**](#user-interface)
+- [User Interface](#user-interface)
 
 <br />
 
