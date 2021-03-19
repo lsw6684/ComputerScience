@@ -7,7 +7,7 @@
 # Reinforcement Learning
 - [Introduction to Reinforcement Learning](#introduction-to-reinforcement-learning)
 - [OpenAI and TensorFlow(with Docker)](#openai-and-tensorflowwith-docker)
-
+-
 <br />
 
 ## Introduction to Reinforcement Learning
@@ -71,7 +71,7 @@
         - Agent가 Environment의 특정 state에 위치할 때, 최종적으로 받을 수 있는 total expected reward를 의미합니다.
         - **Optimal Value Function**은 모든 states에 대하여 더욱 좋은 값을 가지는 Value Function을 최적의 Value Function, Optimal Value Function이라 칭합니다.
         - RL의 궁극적인 목표는 Optimal Value Function을 갖는 **Optimal Policy**를 찾는 것입니다. 
-    - Model
+    - **Model**
         - 환경에 대한 Agent의 Representation입니다.
         - RL은 **Model-based learning** And **Model-free learning**, 총 2가지 타입이 존재합니다.
             - Model-based learning : Agent는 Environment에 대한 Modeling을 갖고 있을 때, Model을 사용하여 특정 Action을 취했을 때 다음 State가 어떻게 될지 정확히 알게 됩니다.
@@ -111,7 +111,7 @@ ex)
 2. Episodic, Non-episodic한 Environment (Invalid)
 ```
 - **RL Platforms** - 시뮬래이션, 빌딩, 렌더링, 그리고 Environment에서 RL 알고리즘을 실험할 수 있습니다.
-    - **OpenAI Gym and OpenAI Universe**
+    - ### OpenAI Gym and OpenAI Universe
         - RL 알고리즘을 만들고, 평가하고, 비교할 수 있는 Tool kit입니다.
         - RL은 ML의 한 종류입니다. Tensorflow, Theano, Keras 등 다양한 ML Framework로 작성된 알고리즘들을 호환하여 사용할 수 있습니다.
         - Agent Structure에 대한 assumption이 없기 때문에 모든 Agent를 사용할 수 있습니다.
@@ -155,4 +155,49 @@ ex)
         4. **Version control** - Docker container images have a **manifest file**. 그렇기 때문에, 버전 컨트롤을 하기 용이합니다.
     - **Container vs Virtual Machine**
     <p align="center"><img src="images/container_virtual.png" width="850"></p>
- 
+- [**OpenAI**](#openai-gym-and-openai-universe)
+- **Tensorflow**
+    - numerical computation을 널리 사용할 수 있는 Google open source software library입니다.
+    - DL, ML 등에서 주로 사용됩니다.
+    - **data flow graph**를 사용하여 계산하기 때문에 다른 플랫폼에서도 쉽게 실행할 수 있습니다.
+    - multi-dimensional array를 지원합니다.<br /><br />
+    **Varialbes, Constants, Placeholders**
+        ```python
+        Variables : 값을 저장하는 Container입니다.
+        - tf.Variable()
+            >> weights = tf.Variable(tf.random_normal({3, 2}, stddev=0.1), name="weights")
+
+        Constants : 상수와 같습니다. 값이 변하지 않습니다.
+        - tf.constant()
+            >> x = tf.constant(13)
+
+        Placeholders : variable과 비슷합니다. data type과 dimension of array를 define하고 value는 assign 하지 않습니다. 즉, value없이 정의 하고 특정 메모리만 잡아둔 다음 runtime에 사용됩니다. 
+        - tf.placeholder()
+            >>> x = tf.placeholder("float", shape = None)
+        # shape이 None으로 설정되어 있으면 어떤 차원이 array도 삽입 가능합니다.
+
+        😃 Variable은 데이터를 저장하기 위해, Placeholder는 external data를 computational graph에 삽입하기 위해 사용됩니다.
+        ```
+    - **Computation Graph**
+        - nodes(mathematical operations)와 edges(tensors)로 구성됩니다.
+        - **Tensorflow에서의 DL**은 multi-dimensional array. 즉 Tensor들이 mathematical operations를 거치면서 결과를 내고 계산하는 과정입니다. 그렇기 때문에 Graph로 표현한다는 것은 굉장히 합리적인 선택이라 할 수 있습니다.
+        - computation graph를 multi core로 독립적인(edge로 연결되어 있지 않은 노드들) 분배 계산을 하여 빠른 계산을 할 수 있기 때문에 효율적입니다.
+    - **Sessions**
+        - 상위 설명한 계산들로 define한 코드들을 열고, 실행합니다.<br />
+        `sess = tf.Session()`<br /> 
+        ***And***<br />
+        `sess.run()`
+        ```python
+        import tensorflow as tf
+        a = tf.multiply(2, 3)
+        print(a)
+        # 6이 나오는 것이 아니라 a라는 노드의 주소 값이 나옵니다.
+
+        import tensrflow as tf
+        a = tf.multiply(2, 3)
+        with tf.Session() as sess:
+            print(sess.run(a))       # 세션 실행
+        ```
+- **TensorBoard** : TensorFlow의 가상화로 계산 과정일 보여줍니다.
+    - **Adding Scope** : 계산을 그룹핑하여 노드들로 나눕니다. 복잡성이 줄고 이해하기 쉬운 TensorBoard를 출력할 수 있습니다.<br />
+    `tf.name_scope()`
