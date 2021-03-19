@@ -8,6 +8,7 @@
 
 # Software Engineering
 - [User Interface](#user-interface)
+- [Cloud Service Model](#cloud-service-model)
 
 <br />
 
@@ -34,3 +35,13 @@ UI는 사용자와 시스템 사이에서 의사소통을 할 수 있도록 고�
     - **접근성** : 사용자 직무, 연령, 성별 등이 고려된 다양한 계층을 수용합니다.
     - **명확성** : 사용자가 개념적으로 쉽게 인지합니다.
     - **오류 발생 해결** : 사용자가 오류에 대한 상황을 정확하게 인지할 수 있습니다.
+
+## Cloud Service Model
+- **SaaS Software as a Service**<br />
+    클라우드 환경에서 동작하는 응용 프로그램을 클라이언트에게 서비스하는 모델로 `on-demand software`로도 불립니다. 소프트웨어 및 관련 데이터는 중앙에 호스팅되고 사용자는 웹 브라우저 등의 클라이언트를 통해 접속하는 형태의 소프트웨어 전달 모델입니다.
+- **PaaS Platform as a Service**<br />
+    애플리케이션을 개발, 실행, 관리할 수 있게 하는 플랫폼을 서비스로 제공하는 모델입니다. 개발자가 맞춤형 애플리케이션을 개발하고 구축할 수 있는 프레임워크를 제공합니다. 스토리지 및 네트워킹은 엔터프라이즈 또는 타사 공급자가 관리할 수 있으며 개발자는 응용 프로그램 관리를 유지할 수 있습니다. 비용면에서 [IaaS](#iaas-infrastructure-as-a-service)보다 비쌉니다.<br />
+    `AWS Elastic Beanstalk, Windows Azure, Heroku`
+- ## IaaS Infrastructure as a Service
+    서버, 네트워크, 스토리지등을 가상화하여 필요에 따라 인프라 자원을 사용할 수 있게 만드는 서비스 모델입니다. OS, Web Server, DB 등 버전까지 선택하여 개발환경을 구축, 즉 컴퓨터 환경만을 빌려서 사용하는 것입니다.<br />
+    `AWS EC2, Google Cloud Platform, Azure Virtual Machines, Naver Cloud Platform`
