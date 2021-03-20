@@ -172,3 +172,13 @@
 <p align="center"><img src="images/KNN.png" width="35%"></p>
 
 ## Probability & Statistics
+```
+Summarizing data set : 결론에 도달하기 위해 data set을 의미있게 표현합니다.
+ex) 평균, 분산, 확률 분포
+
+Probability
+- Mean : 평균 || Expectation : 기댓값 
+- Variance : 분산
+- Covariance : 공분산
+- Covariance matrix : 공분산 행렬
+```
