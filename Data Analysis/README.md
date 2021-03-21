@@ -181,4 +181,26 @@ Probability
 - Variance : 분산
 - Covariance : 공분산
 - Covariance matrix : 공분산 행렬
+
+Distributions
+- Normal★
+- Chi-squared
+- t-distribution★
+- F-distribution
+
+Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 있어야 의미가 있으며 데이터가 많을 수록 실제 평균 값 수렴에 가까워지는 것을 의미합니다.
 ```
+- **Data Collection and Statistics**
+    - **Statistics** : 통계학, 주어진 데이터로부터 정보를 추출합니다.
+        - 주어진 데이터에서 통계적 분석을 합니다.
+        - 데이터를 생성하기 위한 적절한 실험을 설계할 때 사용됩니다.
+    - **Descriptive statistics**
+        - **Describing** data set : 히스토그램, 도수 분포표 등을 통해 요약된 정보를 표현합니다.
+        - **Summarizing** data set : 평균 Sample mean, 분산 Variance, 표준 편차 Standard deviation, 퍼센타일 Sample percentiles 등을 통해 수치로 표현합니다.
+    - **Inferential statistics** : 통계적 추론, 데이터로부터 추론하여 결론 도출
+    - **Population & Samples**
+        - **Population** : 모집단, total collection of elements
+        - **Sample** : 표본, examined subgroup of a population. Random Sample.
+- **Describing Data Set**
+    - **Frequency tables** : 도수 분포표, <br />
+    ![ft](./images/frequency_table.png)
