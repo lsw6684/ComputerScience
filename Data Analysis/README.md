@@ -202,5 +202,19 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
         - **Population** : 모집단, total collection of elements
         - **Sample** : 표본, examined subgroup of a population. Random Sample.
 - **Describing Data Set**
-    - **Frequency tables** : 도수 분포표, <br />
+    - **Frequency tables 도수 분포표** <br />
     ![ft](./images/frequency_table.png)
+    - **Line graph 라인 그래프**
+    ![lg](./images/lg.png)
+    - **Frequency polygon 도수 다각형**<br />
+    ![fp](./images/fp.png) 
+    - **Bar graph**<br />
+    ![bg](./images/bg.png)  
+    - **Relative frequency 상대 도수** : Frequency를 전체 표본의 개수로 나눕니다. <br />
+    ![bg](./images/rf.png) 
+    - **Pie chart 파이 차트** <br />
+    ![pc](./images/pc.png)
+    - **Grouped data**
+        - Class interval 급 간격, class boundary
+        - Left-end inclusion convention (**a <= x < b**) : 왼쪽 끝을 포함합니다.
+        ![gd](./images/gd.png)
