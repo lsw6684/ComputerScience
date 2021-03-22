@@ -196,7 +196,7 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
         - 데이터를 생성하기 위한 적절한 실험을 설계할 때 사용됩니다.
     - **Descriptive statistics**
         - **Describing** data set : 히스토그램, 도수 분포표 등을 통해 요약된 정보를 표현합니다.
-        - **Summarizing** data set : 평균 Sample mean, 분산 Variance, 표준 편차 Standard deviation, 퍼센타일 Sample percentiles 등을 통해 수치로 표현합니다.
+        - **Summarizing** data set : 평균 Sample mean, 분산 Variance, 표준 편차 Standard deviation, 퍼센타일 Sample [percentiles](#percentiles-and-box-plot) 등을 통해 수치로 표현합니다.
     - **Inferential statistics** : 통계적 추론, 데이터로부터 추론하여 결론 도출
     - **Population & Samples**
         - **Population** : 모집단, total collection of elements
@@ -218,3 +218,49 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
         - Class interval 급 간격, class boundary
         - Left-end inclusion convention (**a <= x < b**) : 왼쪽 끝을 포함합니다.
         ![gd](./images/gd.png)
+![gd](./images/data_set_samples.png)
+- ### Percentiles and Box Plot
+    ![gd](./images/percentiles_box.png)
+
+    ```
+    1~17.6까지가 전체의 80%(np).
+    percentile은 항상 가지고 있는 값(22 이내)에서 선택합니다.
+    percentile >> 18
+
+    Quartiles : 특정 percentage.
+    First - 25percentile, Second - 50percentile, Third - 75percentile
+    ```
+- **Scatter diagram**
+    ![gd](./images/scatter_diagram.png)
+- **Sample Correlation Coefficient**
+    ![gd](./images/ccfist.png)
+    ![gd](./images/cc.png)
+- **Probability**
+    - 빈도 분석, Frequency interpretation : 예상 결과에 대한 확률, **사건의 반복**
+    - Subjective interpretaion : beliefs of person. 신뢰도, **반복이 되지 않는** 사건에 대한 믿음의 정도.
+- **Sample space and event** `주사위를 던졌다고 가정하면`
+    - Sample space - S : 1, 2, 3, 4, 5, 6
+    - Event - E : S의 부분집합입니다. `2번 던졌다 가정하면 {1, 2}, {1, 1}.. 등`
+    ![gd](./images/axiom.png)
+- **Conditional Probability and Bayes' formula**
+    - **Conditional Probability**
+        - 두 사건이 있을 때, 사건F가 발생한단 가정 하에 사건E 발생.
+        - P(E) = P(E|F) + P(E|F<sup>c</sup>)<br />
+        ![gd](./images/cp.png)
+
+    - **Bayes' formula** : Prior와 Likelihood로부터 Posterior를 도출합니다.
+        - 부분적인 관찰로 전체를 추론합니다.
+        - Posterior : 사후 사건
+        - Prior : 사전 지식, 편견
+        - Likelihood : 원리, 개연성, 나타날 확률<br />
+        ![gd](./images/bf.png)
+- **Random Variables**
+    - 무작위 사건에 대한 관찰 혹은 결과 값입니다.
+    - Sample space로부터 **real number**로 맵핑해 주는 함수 *(이름만 변수)*입니다. 
+    - cdf는 Discrete RV와 Continuous RV를 공통으로 적용할 수 있습니다.   <br />
+        ![gd](./images/rv.png)
+
+- **Jointly Distributed RVs**
+        ![gd](./images/rvs1.png)
+        ![gd](./images/rvs2.png)
+- **Expectation 평균 혹은 mean**
