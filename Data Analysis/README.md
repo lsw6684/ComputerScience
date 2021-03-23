@@ -200,7 +200,10 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
     - **Inferential statistics** : 통계적 추론, 데이터로부터 추론하여 결론 도출
     - **Population & Samples**
         - **Population** : 모집단, total collection of elements
-        - **Sample** : 표본, examined subgroup of a population. Random Sample.
+        - **Sample** : 표본, examined subgroup of a population. Random Sample. Common distribution이지만 independent 해야 합니다.
+    - **Parametric vs Nonparametric**
+        - **Parametric inference problem 모수적** : 특정 매개변수의 값만 추론하는 것입니다. 
+        - **Nonparametric inference problem 비모수적** : 분포 형태를 쫓아가는 것으로 광범위하게 추론합니다.
 - **Describing Data Set**
     - **Frequency tables 도수 분포표** <br />
     ![ft](./images/frequency_table.png)
@@ -264,3 +267,6 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
         ![gd](./images/rvs1.png)
         ![gd](./images/rvs2.png)
 - **Expectation 평균 혹은 mean**
+- **Central Limit Theorem 중심 극한 정리**
+    - X1부터 Xn까지 존재할 때 각각은 IID(Independent and Identically Distributed)입니다.
+    
