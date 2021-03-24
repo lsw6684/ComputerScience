@@ -9,7 +9,9 @@
 # Natural Language Processing
 - [Foundation](#foundation)
 - [Machine Learning with scikit-learn](#machine-learning-with-scikit-learn)
-
+- [Optimization](#optimization)
+- [Probability](#probability)
+- [Information Theory_Entropy](#information-theoryentropy)
 <br />
 
 ## Foundation
@@ -167,3 +169,80 @@ search를 위한 string 패턴입니다. 복잡한 문자열을 처리할 때 �
         - **Disadvantages**
         1. probabilistic estimates를 바로 제공할 수 없습니다.
         2. noisy data and large-scale data에서 적절한 사용이 어렵습니다.
+
+<br />
+
+## Optimization
+최적화, Criterion(and constraints)에 기반하여 가장 적합한 Element를 찾는 것입니다.
+
+- **Nonlinear Optimization**
+    - 비선형 최적화, NLP
+    - Maxima, Minima or stationary points를 찾는 과정입니다.
+        - Object functions and constraints : nonlinear하며 결과 값이 real-valued인 함수입니다.<br />
+            Maximization : Profit/Utility/Fitness/Reward/...functions <br />
+            Minimization : Loss/Cost/Penalty/...functions <br />
+            🍔Maximization and Minimization is dual.(**Minimization** is usually preferred)
+    - **Gradient descent**
+        - 극값에 이를 때까지 기울기의 절댓값이 낮아지는(가파른) 방향으로 이동합니다.
+    - **Stochastic gradient descent, SGD**
+        - random으로 선택된 데이터로 계산하여 대략적인 기울기를 이용합니다.
+        <p align="center"><img src="images/gradient.png" width="500"></p>
+    - **Newton's method**
+        - 기울기가 아닌, 한 번 더 미분한 값을 이용합니다.
+    - **Gauss-Newton method**
+        - 제곱꼴로 주어진 함수를 이용합니다.
+
+<br />
+
+## Probability
+Event가 얼마나 발생할 지, 어떤 명제의 참/거짓일 정도를 의미합니다.
+- **Axioms**
+    - For any event X, 0 <= P(X) : 확률 값은 항상 0이상입니다.
+    - Probability of the sample space S is P(S) = 1 : 모든 사건들이 일어날 확률은 1입니다.
+    - 독립적인(상호배타적인) 사건 즉 A or B 형태에서 P(X1 U X2) = P(X1) + P(X2) ※*(X1 ∩ X2) = 0*    
+- **Why probability?** 
+    - 불확실한 관찰(noise or error)
+    - 불완전한 데이터(unobservable or missing elements)
+    - 불완벽한 knowledge and model(over-simplified or incorrect)
+- **Random variable**
+    - 특정 상황을 숫자로 Mapping해 주는 것입니c다.
+- **Probability mass function, pmf, 확률 질량 함수**
+    - discrete random variable, 이산 확률 변수
+- **Probability density function, pdf, 확률 밀도 함수**
+    - continuous random variables, 연속 확률 변수
+- **Cumulative distribution function, cdf, 누적 분포 함수**
+    - None-decreasing, right-continuous
+- **Joint probability, 결합 확률**
+    - X와 Y라는 이벤트가 있을 때, 동시에 일어날 확률 `P(X,Y) or P(X∩Y)`
+    - cf. Independence : P(X, Y) = P(X)P(Y)
+- **Conditional probability, 조건부 확률**
+    - X가 일어날 때 Y가 일어날 확률, P(Y|X) = P(Y, X)/P(X)
+    - cf. Independence : P(Y|X) = P(Y)
+    - **Chain rule** : 연쇄적 사건이 발생할 때, 꼬리에 꼬리를 뭅니다.<br />
+        `P(X, Y)=P(Y|X)P(X) / P(X3, X2, X1)=P(X3|X2, X1)P(X2|X1)P(X1)`
+    - **Bayes's theorem** : <br />
+        posterior`P(Y|X)`= likelihood`P(X|Y)`prior`P(Y)`/marginalization`P(X)`
+    - **Marginal probability**
+        ![gd](./images/marginal.png)
+    - **Expectation, 기댓값** : Weighted Average, 가중 평균
+        - Alias : Mean, average, the first moment
+        - cf. Arithmetic mean, 산술 평균 : 각 요소들이 균일하게 발생합니다.
+        - Properties
+            - Linearity : E[X + Y] = E[X] + E[Y] and E[aX] = aE[X]
+            - Non-multiplicativity: E[XY] != E[X]E[Y] <br />
+                `cf. If X and Y are independent, E[XY] = E[X]E[Y]`
+    - **Variance** : 한 개의 random variable에 해당합니다.
+        - Alias : The second central moment.
+        - Calculation : Var(X) = E[X<sup>2</sup>] - E[X]<sup>2</sup>
+        - cf. Covariance : 2개 이상의 random variable에 해당합니다.<br />
+            Cov(X, Y) = E[(X-E[X])(Y-E[Y])]<br />
+            Var(X) = Cov(X, X)
+        - Properties
+            - Var(X) >= 0 : Non-negative
+            - Var(X+a) = Var(X) : Invariant to a location parameter
+            - Var(aX) = a<sup>2</sup>Var(X) : Squared scale
+            - Var(aX + bY) = a<sup>2</sup>Var(X) + b<sup>2</sup>Var(Y) + 2abCov(X, Y)
+<br />
+
+## Information Theory_Entropy
+- **(Shannon)Information**
