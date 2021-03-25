@@ -245,4 +245,10 @@ Event가 얼마나 발생할 지, 어떤 명제의 참/거짓일 정도를 의�
 <br />
 
 ## Information Theory_Entropy
-- **(Shannon)Information**
+- **(Shannon)Information** : I(x) = -log<sub>2</sub>P(x) <br />
+    잘 일어나지 않는 사건(unlikely event)의 정보는 자주 발생할만한 사건보다 정보량이 많다는 것이 핵심입니다. 
+    - Alias : Surprisal, information content
+- **Entropy**
+    - Shannon information의 평균 or 'average of surprise' or 'average of the number of bits'입니다.
+    - **Bernoulli distribution** : 동전을 던질 때
+    ![gd](./images/bernoulli.png)

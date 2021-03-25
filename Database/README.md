@@ -223,6 +223,12 @@
             DELETE FROM test
             WHERE id = 1;
             ```
+    - ### GRANT
+        - 다른 사용자에게 권한을 할당합니다.
+            ```sql
+            GRANT SELECT ON emp to scott            -- emp 테이블의 SELECT 권한을 scott에게 부여합니다.
+            WITH GRANT OPTION;                      -- 받은 권한을 다른 곳에 부여할 수 있는 권한도 포함합니다.
+            ```
     - ### REVOKE
         - 권한을 회수합니다.
             ```sql

@@ -4,13 +4,16 @@
 
 ***
 
-# Reinforcement Learning
-- [Introduction to Reinforcement Learning](#introduction-to-reinforcement-learning)
-- [OpenAI and TensorFlow(with Docker)](#openai-and-tensorflowwith-docker)
--
+# 1. Reinforcement Learning
+- [1. Reinforcement Learning](#1-reinforcement-learning)
+  - [1.1. Introduction to Reinforcement Learning](#11-introduction-to-reinforcement-learning)
+  - [1.2. OpenAI and TensorFlow(with Docker)](#12-openai-and-tensorflowwith-docker)
+  - [1.3. Markov Decision Process and Dynamic Programming](#13-markov-decision-process-and-dynamic-programming)
+
+
 <br />
 
-## Introduction to Reinforcement Learning
+## 1.1. Introduction to Reinforcement Learning
 - **ML : Machine Learning**
     - 프로그램이 데이터로부터 자동으로 학습을 합니다.
     - 데이터의 일부 Example들을 일반화여 특정 문제를 해결하는 알고리즘입니다.
@@ -139,7 +142,7 @@ ex)
     - **Finance** - 상업적 거래를 예측하기 위한 포트폴리오를 관리합니다.
     - **Natural language processing and Computer vision** - DL과 결합된 DRL에 사용되며, text 요약, 정보 축약, 기계 번역(papago 등), 이미지 인식 등의 정확성을 높히는데 사용됩니다.
 
-## OpenAI and TensorFlow(with Docker)
+## 1.2. OpenAI and TensorFlow(with Docker)
 - **Docker**
     - virtual system의 일종으로, 컨테이너에 소프트웨어들이 패키징되어 있습니다.
     - 컨테이너에는 소프트웨어를 사용하는 데 필요한 libraries, system tools, code, and runtime 등이 모두 포함되어 있습니다.
@@ -201,3 +204,85 @@ ex)
 - **TensorBoard** : TensorFlow의 가상화로 계산 과정일 보여줍니다.
     - **Adding Scope** : 계산을 그룹핑하여 노드들로 나눕니다. 복잡성이 줄고 이해하기 쉬운 TensorBoard를 출력할 수 있습니다.<br />
     `tf.name_scope()`
+
+<br />
+
+## 1.3. Markov Decision Process and Dynamic Programming
+- Markov Chain and Markov Process
+    - Markov property : 미래는 오직 현재에 의하며, 그 이상의 과거에는 영향을 받지 않습니다. <br />`t >> t+1 (O), t-1 >> t+1 (X)`
+    - Markov chain
+        - 현재 state에만 기반하여 다음 state를 예측합니다. not previous states
+        - 미래는 과거에 대하여 conditionally independent합니다.
+        - decision-making process가 아니라, 단순히 Markov property를 따르는 확률 모델을 표현합니다.
+            ```
+            지금 구름이 끼면 비가 올 수 있지만, 과거에 구름이 있다고 해서 미래를 예측하진 않습니다.
+            ```
+        - **Transition** : 다음 state로 넘어갑니다.
+        - **Transition probability** : 다음 state로 넘어갈 확률입니다.
+        ![gd](./images/transition.png)
+        - **Markov chain in the form a state diagram with transition probability**
+        ![gd](./images/markov_diagram.png)
+    - **Markov Decision Process, MDP**
+        - Markov chain의 확장판입니다.
+        - decision-making의 framework를 modeling합니다.
+        - 대부분의 RL problem은 MDP로 모델링할 수 있습니다.
+        - **Five important elements to represent MDP**
+        1. **States, (S)** : Agent가 실제로 무언가를 하는 환경의 집합입니다.
+        2. **Actions, (A)** : Agent가 하는 행동에 대한 집합입니다.
+        3. **Transition probability, (P <sup>a</sup><sub>ss'</sub>)** state (s)에서 another state (s')로 이동하면서 action (a)를 함으로써 s에서 s'로 transition될 확률입니다.<br />
+        P <sup>a</sup><sub>ss'</sub> = pr(S <sub>t+1</sub> = s' | s <sub>t</sub> = s, a <sub>t</sub> = a)
+        4. **Reward probability, (R <sup>a</sup><sub>ss'</sub>)** : S 에서 another state s'로 이동하기 위해 a를 수행했을 때 받을 수 있는 Reward의 확률을 의미합니다. <br />
+        R <sup>a</sup><sub>ss'</sub> = E(R <sub>t+1</sub> | s <sub>t</sub> = s, s <sub>t+1</sub> = s', a <sub>t</sub> = a)
+        5. ### Discount factor, (γ)
+            (γ) 당장의 Reward와 미래의 Reward 사이에 importance를 의미합니다. <br />
+            γ를 곱해줌으로써 Episodic task, Continuous task 모두에 대하여 unified <br /> `Hyperparameter - 기계학습에서 자동으로 학습되지 않는 파라미터` <br />
+            Immediate reward보다 Future reward의 중요성을 보장하는 방향으로 합니다.
+            ![gd](./images/discount_factor.png)
+
+            
+
+- **Rewards and Returns**
+![gd](./images/rewards_returns.png)
+
+- **Episodic and Continuous Tasks**
+    - **Episodic task**
+        - 끝이 존재하는 task(end - terminal state)
+        - In RL, Episode는 agent와 environment 사이의 interaction으로 볼 수 있습니다. `interaction : from initial to final states(end)`
+        - 시작 점과 끝 점의 경계 가 명확하고 각 Episode가 독립적으로 전혀 영향을 끼치지 않습니다.
+    - **Continuous Tasks**
+        - 끝나지 않는 task(there is not a terminal state)
+        - R <sub>t</sub>가 존재하지 않습니다. (무한정으로 더해야 하기 때문)
+        - 즉, Reward를 maximize하는 방법이 없으므로 [Discount factor](#discount-factor-γ)를 이용합니다.
+- **Poiacy Function(π)**
+    - π(s) : S → A, 특정 state에서 어떤 action을 취할 ***확률***입니다.
+- **Value Function, V(s)***(=State Value Function)*
+    - Agent가 policy π에 기반하여 특정 state에 있을 때, 해당 Agent가 머물기 좋은 정도를 의미하는 return 값입니다.
+    ![gd](./images/value_function.png)
+- **State-Action Value Function (=Q function), Q(s, a)**
+    - policy π에 기반하여 특정 state에서 어떤 Action이 얼마나 좋은지를 표현하는 return 값입니다.
+    ![gd](./images/savf.png)
+```
+Value Funftion이 특정 state에 있는 것이 얼마나 좋은지 표현하는 것이라면
+Q function은 해당 state에서 특정 action이 얼마나 좋은지 표현합니다.
+```
+- **Recursive Relationships in Value Function**
+![gd](./images/recursive.png) 
+
+<br />
+
+- **Bellman Equation and Optimality**
+    - MDP를 풀 수 있습니다. `= Optimal policy와 Optimal value function을 찾을 수 있습니다.`
+    - Policy가 바뀌면 value function도 바뀝니다.
+    - Optimal value function V*(s)는 모든 state에서 다른 value function보다 더 큰 value를 가집니다. `Optimal = *`<br /> 
+    ![gd](./images/v_star.png) - V <sup>π</sup> (s)가 최대의 S를 가질 때 V값을 말합니다. 
+    - V*(s)가 Maximum return이기 때문에 Maximum Q function도 됩니다.
+    ![gd](./images/v_start2.png)
+```
+Expectation(E), 기댓값
+- 확률변수의 기댓값은 각 사건이 벌어졌을 때의 이득과 그 사건이 벌어질 확률을 곱한 것을 전체 사건에 대해 합한 값입니다.
+- 선형 연산자이며 가산성, 동차성이 성립합니다.
+    >>> E(X + Y) = E(X) + E(Y)
+    >>> E(cX) = cE(X)
+ex) 주사위값의 기댓값
+1*1/6 + 2*1/6 ... 6*1/6 = 3.5
+```
