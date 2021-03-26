@@ -269,4 +269,5 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
 - **Expectation 평균 혹은 mean**
 - **Central Limit Theorem 중심 극한 정리**
     - X1부터 Xn까지 존재할 때 각각은 IID(Independent and Identically Distributed)입니다.
-    
+- **Parameter Estimate**
+    - 
