@@ -7,7 +7,7 @@
 <br />
 
 # Computer Network
-- OSI 7 Layers(#osi-7-layers)
+- [OSI 7 Layers](#osi-7-layers)
 
 <br />
 
