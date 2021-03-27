@@ -287,6 +287,10 @@
             FROM city
             GROUP BY CountryCode, city_name WITH ROLLUP; 
             -- WITH ROLLUP으로 중간 합계를 보여주는 행(들)을 추가합니다.
+
+            GROUP BY ROLLUP(CountryCode, city_name) 개수
+            >>> GROUP BY CountryCode, city_name + GROUP BY city_name + 총 합계
+            즉, (CountryCode별 행 개수 + 합계 1줄) + (city_name별 행 개수 + 합계 1줄) + 총 합계 1줄
             ```
         - LENGTH - 문자열의 길이 반환
             ```sql
