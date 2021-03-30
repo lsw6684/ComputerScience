@@ -286,3 +286,36 @@ Expectation(E), 기댓값
 ex) 주사위값의 기댓값
 1*1/6 + 2*1/6 ... 6*1/6 = 3.5
 ```
+`MDP를 푼다는 것은 Bellman Equation을 이용하여 Optimal policy를 찾는 것을 의미`
+
+<br />
+
+- **Dynamic Programming(DP)**
+    - MDP로 정의된 Environment의 perfect model에 대해 Optimal policy를 계산하는 알고리즘입니다.
+        - Perfect model이 주어졌다? <br />
+        해당 MDP에 대하여 state, action, reward를 알고 있다는 것을 의미
+    - Bellman Optimality equation을 알아냅니다.
+    - Bellman equation을 해결하는 2가지 방법
+        - [Value iteration](#value-iteration)
+        - [Policy iteration](#policy-iteration)
+
+    <br />
+
+    - ### Value Iteration
+    1. Value를 기준으로 반복합니다. 
+    2. random value function으로 시작하여(`ex: 모든 state에 대한 value를 모두 0으로 시작`) optimal value function이 될 때까지 새로운 improved value function을 반복(순환)하여 찾아냅니다.
+        - Optimal은 아니겠지만, V(s)가 도출됩니다. 현재 V(s)를 기준으로 모든 state action pair에 대하여 Q function을 계산하고 특정 state에 max value를 가지는 Q값을 해당 state의 value로 업데이트 합니다.
+    3. 현재 value function이 이전 iteration의 value function의 차이(change in the value between each iteration)가 작을 때 까지 반복합니다.
+        - 찾아낸 optimal value function으로 optimal policy를 쉽게 알아낼 수 있습니다.
+        ![gd](./images/VI1.png)
+
+    - ### Policy Iteration
+    1. random policy로 시작하여 해당 policy의 value function을 찾아내는 방식으로 iteration합니다.
+    2. optimal value function이 아니면 new improved policy를 찾습니다.
+    3. 상위 과정을 반복합니다.
+    
+        **Policy iteration의 2가지 steps**
+        - **Policy evaluation** : policy의 value function을 계산합니다.
+        - **Policy improvement** : optimal value function이 아니라면 new improved policy를 찾습니다. <br />
+
+            ![gd](./images/PI1.png)
