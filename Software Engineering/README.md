@@ -44,6 +44,6 @@ UI는 사용자와 시스템 사이에서 의사소통을 할 수 있도록 고�
 - **PaaS Platform as a Service**<br />
     애플리케이션을 개발, 실행, 관리할 수 있게 하는 플랫폼을 서비스로 제공하는 모델입니다. 개발자가 맞춤형 애플리케이션을 개발하고 구축할 수 있는 프레임워크를 제공합니다. 스토리지 및 네트워킹은 엔터프라이즈 또는 타사 공급자가 관리할 수 있으며 개발자는 응용 프로그램 관리를 유지할 수 있습니다. 비용면에서 [IaaS](#iaas-infrastructure-as-a-service)보다 비쌉니다.<br />
     `AWS Elastic Beanstalk, Windows Azure, Heroku`
-- ## IaaS Infrastructure as a Service
+- ### IaaS Infrastructure as a Service
     서버, 네트워크, 스토리지등을 가상화하여 필요에 따라 인프라 자원을 사용할 수 있게 만드는 서비스 모델입니다. OS, Web Server, DB 등 버전까지 선택하여 개발환경을 구축, 즉 컴퓨터 환경만을 빌려서 사용하는 것입니다.<br />
     `AWS EC2, Google Cloud Platform, Azure Virtual Machines, Naver Cloud Platform`
