@@ -14,6 +14,7 @@
 - [연결 리스트](#연결-리스트)
 - [스택, 큐, 덱](#스택-큐-덱)
 - [BFS](#bfs)
+- [DFS](#dfs)
 
 <br />
 
@@ -327,3 +328,57 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
     }
     (0,0) -> (1,0) -> (0,1) -> (2,0) -> (0,2) -> (3,0) -> (2,1) -> (3,1) -> (2,2) -> (4,1) ->
     ```
+
+<br />
+
+## DFS
+- Depth First Search, 다차원 배열에서 각 칸을 방문할 때 깊이를 우선으로 방문하는 알고리즘입니다.
+- 모든 칸이 Stack에 1번씩 들어가므로 시간복잡도는 칸이 N개일 때 O(N)입니다.
+- 거리 측정은 불가능합니다. (거리 측정은 [BFS사용](#bfs))
+1. 시작하는 칸을 Stack에 넣고 방문 표시를 남깁니다.
+2. Stack에서 원소를 꺼내고 해당 원소의 상하좌우로 인접한 칸에 대해 3번을 진행합니다.
+3. 해당 칸을 이전에 방문했다면 아무 것도 하지 않고(Continue), 처음으로 방문했다면 방문했다는 표시를 남기며 해당 칸을 Stack에 삽입합니다.
+4. Stack이 빌 때 까지 2번을 반복합니다.
+- DFS 구현
+    ```cpp
+    #include <iostream>
+    #include <stack>
+    #define X first
+    #define Y second
+    using namespace std;
+
+    int board[502][502] ={ 
+    {1,1,1,0,1,0,0,0,0,0},
+    {1,0,0,0,1,0,0,0,0,0},
+    {1,1,1,0,1,0,0,0,0,0},
+    {1,1,0,0,1,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0} };
+    bool vis[502][502];
+    int n = 7, m = 10;
+    int dx[4] = { 1, 0, -1, 0 };
+    int dy[4] = { 0, 1, 0, -1 };
+
+    int main() {
+        ios::sync_with_stdio(0), cin.tie(0);
+        stack<pair<int, int>> S;
+        vis[0][0] = 1;
+        S.push({ 0, 0 });
+
+        while (!S.empty()) {
+            pair<int, int> cur = S.top(); S.pop();
+            cout << '(' << cur.X << ',' << cur.Y << ") -> ";
+            for (int dir = 0; dir < 4; dir++) {
+                int nx = cur.X + dx[dir];
+                int ny = cur.Y + dy[dir];
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+                if (vis[nx][ny] || board[nx][ny] != 1) continue;
+                vis[nx][ny] = 1;
+                S.push({ nx, ny });
+            }
+        }
+    }
+    ```
+
+
