@@ -143,20 +143,36 @@ search를 위한 string 패턴입니다. 복잡한 문자열을 처리할 때 �
     - **Data-driven approaches** vs **rule/model-based approaches**
     - **귀납법 Induction** vs **연역법 deduction**
     <p align="center"><img src="images/induction_deduction.png" width="1000"></p>
+- **ML procedure**
+    1. Data acquisition, 데이터 준비
+    2. Data preprocessing, 전처리(라벨링, 정규화 등)
+    3. Feature selection and extraction, 유의미한 특징 도출
+    4. Model and cost function selection (or design)
+    5. Hyperparameter selection (learning rate, optimizer)
+    6. Model **training**
+    7. Model **testing**
 - **ML approaches (with respect to ***the given data***)**
     - 지도 학습 Supervised learning - input, desired target이 함께 부여됩니다.
+        - Weakly supervised learning : semi-supervised learning
     - 비지도 학습 Unsupervised learning - input만 부여됩니다.
+        - Clustering, Dimensional reduction
     - Reinforcement learning - feedback(reward/penalty)가 부여됩니다.
 - **ML problem formulation**
     <p align="center"><img src="images/ml_fourmulations.png" width="900"></p>
 - **ML Road Map - Choosing the right algorithm**
-    <p align="center"><img src="images/roadMap.png" width="1400"></p>
+    <p align="center"><img src="images/roadMap.png" width="1400"></p> <br />
 - **scikit-learn**
     - A Python-based open-source ML library
     - Built on NumPy, SciPy, and matplotlib
     - Included in Anaconda by default
-    - Includes *example datasets*
-- **SVM Support vector machine**
+    - Includes *example datasets* <br />
+
+    사용 순서
+    1. Instantiation, 객체를 생성합니다.
+    2. Training(fit)
+    3. testing(predict)
+- ### SVM Support vector machine
+    - 데이터가 적을 때와 high-dimensional일 때 적절합니다.
     - Supervised learning models(보통 classification and regression)
     - A non-probabilistic (deterministic), 비확률적 (결정론적) binary linear classifier.
         - Finding the maximum-margin **초평면 hyperplane**(boundary - 2D, plane in 3D)
@@ -169,6 +185,45 @@ search를 위한 string 패턴입니다. 복잡한 문자열을 처리할 때 �
         - **Disadvantages**
         1. probabilistic estimates를 바로 제공할 수 없습니다.
         2. noisy data and large-scale data에서 적절한 사용이 어렵습니다.
+- **How to get good results?**<br />
+    답이 없습니다. <br />
+    Trial and error (more data and more computing power), but your intuition and experience are also important.
+- **Cross-validation, CV** <br />
+    trained model이 독립적인 data set으로 일반화 되는 model evaluation입니다.
+    - **Exhaustive cross-validation**, 모든 조합에 대하여 적용
+        - **Leave-p-out cross-validaion, LpOCV** : n-p data and test p data
+        - **Leave-one-out cross-validation, LOOCV** : n times of trainings (p=1)
+    - **Non-exhaustive corss-validation**, 근사적으로 일부 조합에 대하여 적용
+        - **k-foldcross-validation** : LOOCV에서 One이 한 개의 데이터가 아닌 한 개의 Unit입니다.
+- **Classification**
+    - **Binary classification**
+        - 2가지로 분류합니다. (0 or 1, True or False)
+        - e.g. 대화내용에서 주소 찾기
+        - Accuracy는 imbalanced data에 적절하지 않습니다.
+        - **Confusion matrix**
+        ![gd](./images/confusion%20matrix.png)
+    - **Multiclass classification**
+        - 3개 이상인 멀티클래스
+        ![gd](./images/ms.png)
+    - [**SVM**](#svm-support-vector-machine)
+    - **Decision tree**
+        - if-then-else flowchart
+        - 장점 : white box로 과정을 볼 수 있으며 modifying이 쉽습니다.
+        - 단점 : Unstable, sensitive and inaccurate. <br />
+        이를 보완하기 위해**Random forest**를 사용합니다. 여러 개의 decision tree를 사용합니다.
+    - **Naive Bayes classifiers**
+        - Naive assumption을 기반으로 bayes' theorem을 이용합니다.
+- **Regression**
+    - **Linear regression** : scalar response(y)와 observed variables(x) 사이의 관계를 모델링하는 선형 approach입니다.
+- **Clustering**
+    - **k-means clustering** : within-cluster sum of squares(WCSS)를 최소화 하는 centroid(mean)를 찾습니다.
+- **Feature Extraction**
+    - **Bag-of-words model, BoW** : 각각의 단어로 쪼개고 순서와 상관 없이 벡터화합니다.<br />
+        ![gd](./images/bow1.png)    ![gd](./images/bow2.png)
+    - **TF-IDE weighting** : 단순한 count가 아닌 단어의 중요도를 반영합니다.
+        - **TF, term frequency** - document d를 단어의 빈도에 대하여 normalize 시켜줍니다.
+    - **IDF, inverse document frequency** - in all documents D
+    - **TF-IDF** = tf(t, d) x idf(t, D)
 
 <br />
 
