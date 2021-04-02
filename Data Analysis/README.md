@@ -9,7 +9,7 @@
 # Data Analysis
 - [통계적 학습 이론 Statistical Learning](#통계적-학습-이론-statistical-learning)
 - [Probability & Statistics](#probability--statistics)
-
+- [Regression](#regression)
 <br />
 
 ## 통계적 학습 이론 Statistical Learning
@@ -270,4 +270,20 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
 - **Central Limit Theorem 중심 극한 정리**
     - X1부터 Xn까지 존재할 때 각각은 IID(Independent and Identically Distributed)입니다.
 - **Parameter Estimate**
-    - 
+
+<br />
+
+## Regression
+- Linear Regression <br />
+    dependent variable과 independent variable의 관계가 Linear한 경우를 말합니다.
+    - Linear regression equation은 random error e를 가지고 있습니다. **e는 입력변수와 독립**입니다.
+    ![gd](./images/lr.png)
+    - Expected response : X를 알면 Y를 알 수 있으며 e를 소거할 수 있습니다.
+    - 변수가 1개면 simple regression, 여러 개면 multiple linear regression.
+    - "학습을 시킨다" : 데이타로부터 베타값을 알아냅니다. `Y = α + βx + e`
+    - Residual : actual value - predicted value
+    - SS : sum of squared difference, SS를 최소화 시킬 수록 정해진 답에 가까워집니다.
+    - Least squares estimator : SS를 가장 작게 만드는 것입니다.
+    - Convex : 특정 함수는 x에 대하여 convex하다는 것은 해당 함수가 2차함수이며 아래로 볼록이라, 미분하면 최소 값을 알 수 있음을 의미합니다.
+    - Notation 암기
+        ![gd](./images/notation.png)
