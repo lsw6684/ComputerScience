@@ -15,6 +15,7 @@
 - [스택, 큐, 덱](#스택-큐-덱)
 - [BFS](#bfs)
 - [DFS](#dfs)
+- [재귀(보류중..)](#재귀보류중)
 
 <br />
 
@@ -381,4 +382,34 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
     }
     ```
 
+<br />
 
+## 재귀(보류중..)
+하나의 함수에서 자기 자신을 다시 호출하여 작업을 수행하는 알고리즘입니다. <br />
+- 특정 입력에 대하여 자기 자신을 호출하지 않고 종료되어야 하며 **(Base condition||Base case), 모든 입력은 base condition으로 수렴**해야 합니다.
+- 모든 재귀 함수는 반복문으로 동일한 구현이 가능합니다.
+- 재귀는 반복문에 비해 코드가 간결하지만, 메모리/시간 영역에서는 손해를 봅니다.
+- 재귀함수는 자기 자신을 부를 때 **스택 영역에 계속 누적**됩니다.
+- **BOJ 1629 - 곱셈 : mod 연산**
+
+    ```cpp
+    #include<iostream>
+    #define ll long long
+    using namespace std;
+
+    ll mod(ll a, ll b, ll c)
+    {
+        ios::sync_with_stdio(0), cin.tie(0);
+        if (b == 1) return a % c;
+        ll val = mod(a, b / 2, c);
+        val = val * val % c;
+        if (b % 2 == 0) return val;
+        return val * a % c;
+    }
+
+    int main() {
+        int a, b, c;
+        cin >> a >> b >> c;
+        cout << mod(a, b, c);
+    }
+    ```
