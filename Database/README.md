@@ -110,6 +110,7 @@
                 col1    INT NULL,                       -- 정수, null 허용
                 col2    FLOAT NULL,                     -- 실수, null 허용
                 col3    VARCHAR(45) NULL                -- 가변길이 최대 45, null 허용
+                전공과목 CHAR(15) CHECK (전공과목 in ('수학', '영어'))  -- 전공과목은 수학과 영어 중에 선택 가능.
             );
             ```
         - 데이터베이스 생성
