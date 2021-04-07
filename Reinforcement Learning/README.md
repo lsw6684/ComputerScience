@@ -4,16 +4,15 @@
 
 ***
 
-# 1. Reinforcement Learning
-- [1. Reinforcement Learning](#1-reinforcement-learning)
-  - [1.1. Introduction to Reinforcement Learning](#11-introduction-to-reinforcement-learning)
-  - [1.2. OpenAI and TensorFlow(with Docker)](#12-openai-and-tensorflowwith-docker)
-  - [1.3. Markov Decision Process and Dynamic Programming](#13-markov-decision-process-and-dynamic-programming)
-
+# Reinforcement Learning
+- [Introduction to Reinforcement Learning](#introduction-to-reinforcement-learning)
+- [OpenAI and TensorFlow(with Docker)](#openai-and-tensorflowwith-docker)
+- [Markov Decision Process and Dynamic Programming](#markov-decision-process-and-dynamic-programming)
+- [Monte Carlo Methods](#monte-carlo-methods)
 
 <br />
 
-## 1.1. Introduction to Reinforcement Learning
+## Introduction to Reinforcement Learning
 - **ML : Machine Learning**
     - 프로그램이 데이터로부터 자동으로 학습을 합니다.
     - 데이터의 일부 Example들을 일반화여 특정 문제를 해결하는 알고리즘입니다.
@@ -142,7 +141,7 @@ ex)
     - **Finance** - 상업적 거래를 예측하기 위한 포트폴리오를 관리합니다.
     - **Natural language processing and Computer vision** - DL과 결합된 DRL에 사용되며, text 요약, 정보 축약, 기계 번역(papago 등), 이미지 인식 등의 정확성을 높히는데 사용됩니다.
 
-## 1.2. OpenAI and TensorFlow(with Docker)
+## OpenAI and TensorFlow(with Docker)
 - **Docker**
     - virtual system의 일종으로, 컨테이너에 소프트웨어들이 패키징되어 있습니다.
     - 컨테이너에는 소프트웨어를 사용하는 데 필요한 libraries, system tools, code, and runtime 등이 모두 포함되어 있습니다.
@@ -207,7 +206,7 @@ ex)
 
 <br />
 
-## 1.3. Markov Decision Process and Dynamic Programming
+## Markov Decision Process and Dynamic Programming
 - Markov Chain and Markov Process
     - Markov property : 미래는 오직 현재에 의하며, 그 이상의 과거에는 영향을 받지 않습니다. <br />`t >> t+1 (O), t-1 >> t+1 (X)`
     - Markov chain
@@ -319,3 +318,28 @@ ex) 주사위값의 기댓값
         - **Policy improvement** : optimal value function이 아니라면 new improved policy를 찾습니다. <br />
 
             ![gd](./images/PI1.png)
+
+<br />
+
+## Monte Carlo Methods
+공학 전반에서 사용되는 방법으로 RL에 적용될 수 있습니다.
+- 환경에 대한 정보를 모를 때, model dynamics(transition probaility)를 모를 경우, 모집단에서 random sampling한 표본집단으로 approximate solution을 찾아냄으로 statistical technique입니다.
+- random sampling을 통해 approximates(근사치)를 찾아내며 실행 횟수를 늘릴수록 optimal solution과 가까워집니다.
+- terminal state(끝 점)가 있어야 하기 때문에 episodic task에만 적용할 수 있습니다.
+- model 없이도 가능하기 때문에 **model-free learning algorithm**으로도 불립니다.`DP는 model based learning algorithm`
+- expected return이 아닌 episode에서 나오는 평균 값(mean return)을 굼하으로써 state의 value function을 approximation합니다.
+- 과정
+1. value function을 estimation하는 것이 목적이므로 value function을 random 값으로 initialize 시킵니다.
+2. return들을 저장 할 empty list를 만듭니다.
+3. episode를 생성하고 해당 episode의 states에 대한 return을 계산하여
+4. empty list에 append합니다.
+5. return의 평균을 구하고 value function을 update합니다.
+<p align="center"><img src="images/mrp.png" width="300"></p>
+
+- **Two types of Monte Carlo Prediction**
+    - **First visit Monte Carlo** <br />
+        - 하나의 episode에서 같은 state에 여러 번 방문할 수 있지만, 첫 번째 방문만 고려합니다.
+        ![gd](./images/fv.png)
+        
+    - **Every visit Monte Carlo**
+        - 여러 번 방문한..
