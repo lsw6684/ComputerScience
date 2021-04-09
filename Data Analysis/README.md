@@ -274,12 +274,12 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
 <br />
 
 ## Regression
-- Linear Regression <br />
+- **Linear Regression** <br />
     dependent variable과 independent variable의 관계가 Linear한 경우를 말합니다.
     - Linear regression equation은 random error e를 가지고 있습니다. **e는 입력변수와 독립**입니다.
     ![gd](./images/lr.png)
     - Expected response : X를 알면 Y를 알 수 있으며 e를 소거할 수 있습니다.
-    - 변수가 1개면 simple regression, 여러 개면 multiple linear regression.
+    - 변수가 1개면 simple regression(T), 여러 개면 multiple linear regression(F).
     - "학습을 시킨다" : 데이타로부터 베타값을 알아냅니다. `Y = α + βx + e`
     - Residual : actual value - predicted value
     - SS : sum of squared difference, SS를 최소화 시킬 수록 정해진 답에 가까워집니다.
@@ -287,3 +287,29 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
     - Convex : 특정 함수는 x에 대하여 convex하다는 것은 해당 함수가 2차함수이며 아래로 볼록이라, 미분하면 최소 값을 알 수 있음을 의미합니다.
     - Notation 암기
         ![gd](./images/notation.png)
+- **Multiple Linear Regression**
+    ![gd](./images/mlr.png)
+    - predictor끼리 독립적이어야 이상적인 balanced design이라 할 수 있습니다. 하지만 실질적으로는 **predictor끼리 연관되어** 있기 때문에 correlation이 높으면 문제가 될 수 있습니다.
+    - sum of squared residuals값을 최소화 시키는 베타들을 계산해야 합니다.(RSS, Residual sum of squared가 최소가 되도록 하는 OLS, ordinary least square) <br />
+        `A regression of shark attacks versus ice cream sales`
+    - **Important Qustions** <br />
+    1. Respponse에 대하여 최소 하나의 의미있는 predictor를 가질 것인가?<br />
+    `Null hypothesis, 모든 베타의 값을 0으로 가정(β1+β2...=0)합니다. 이 식이 성립 하면 predictor들은 전부 의미 없는 값들이고, 성립하지 않는다면 Alternative hypothesis로 유의미한 값이 존재합니다.`
+    2. subset 선택<br />
+    `Greedy al gorithm을 사용하여 현재 상태에서 최선의 선택을 합니다. `
+        - **Forward selection**
+        - **Backward selection**
+    3. model이 잘 fit 되는가?
+    4. Response Value는 무엇이고 얼마나 정확한가?
+        - **Confidence interval**
+        - **Prediction interval**
+- **Other Consideration in Regression Model**<br />
+실수 값 추정이 아닌 참/거짓, non-linear 값을 고려합니다.
+    - **Qualitative predictors** : Dummy variables, 의미 없는 변수 정의<br />
+    - **Extension of linear model** : Synergy or interaction effect
+    - **Non-linear Effects of Predictors** : 2차식 이상으로 표현 가능할 때 사용합니다.
+- **Potential Problems of Linear Regression** 암기
+    - Non-constant variance of error terms, variance가 일정하지 않고 input에 따라 달라집니다.
+    - Outliers, 거짓말쟁이, 다른 관측치와 크게 다른 데이터 포인트입니다.
+    - High leverage points, 주변 관측치가 없이 하나 뿐이라 영향력이 큽니다.
+    - Collinearity, 경향이 같습니다.

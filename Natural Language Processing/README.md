@@ -260,7 +260,7 @@ Event가 얼마나 발생할 지, 어떤 명제의 참/거짓일 정도를 의�
     - 불완전한 데이터(unobservable or missing elements)
     - 불완벽한 knowledge and model(over-simplified or incorrect)
 - **Random variable**
-    - 특정 상황을 숫자로 Mapping해 주는 것입니c다.
+    - 특정 상황을 숫자로 Mapping해 주는 것입니다.
 - **Probability mass function, pmf, 확률 질량 함수**
     - discrete random variable, 이산 확률 변수
 - **Probability density function, pdf, 확률 밀도 함수**
