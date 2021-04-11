@@ -39,6 +39,7 @@
             장단점이 공존하므로 Trade-off가 존재합니다.
             두 가지 전략은 적당한 비율로 유지되어야 합니다.
             ```
+        - **exploration(탐험)과 exploitation(활용)엔 trade-off가 있으며 동시에 둘 다 시행할 수 없어서 선택이 필요합니다.**
 - **Typical RL Algorithm**
 1. Agent가 환경과 Interaction 하여 Action을 취합니다.
 2. Agent가 Another state로 움직입니다.
@@ -49,9 +50,9 @@
 
 - **RL이 ML들과 다른 점**
     - Compared to **Supervised Learnning**
-        - 지도학습(Supervised Learning)은 Machine(agent)이 training data로부터 무언가(패턴)를 배웁니다. Learning Data로부터 정규화(normalization)하는 모델을 만드는 것으로 input과 output 즉, 정답값(label)을 가지고 있는  data를 가진다고 할 수 있습니다. 실제로 본적 없는 데이터(unseen data)를 적용했을 때 올바른 결과에 근접할 수 있도록 특정 환경을 기반으로 하는 지식을 보유한 External Supervisor가 존재합니다.
+        - 지도학습(Supervised Learning)은 Machine(agent)이 training data로부터 무언가(패턴)를 배웁니다. Learning Data로부터 정규화(normalization)하는 모델을 만드는 것으로 input과 output 즉, 정답값(label)을 가지고 있는  data를 가진다고 할 수 있습니다. 실제로 본적 없는 데이터(unseen data)를 적용했을 때 올바른 결과에 근접할 수 있도록 특정 환경을 기반으로 하는 지식을 보유한 External Supervisor가 존재합니다. 즉, **Supervised Learning은 명확한 지표가 있습니다.**
     - Compared to **Unsupervised Learning**
-        - 모델에 training data를 준다는 점은 Supervised Learning과 같지만 output 없이 input만 전달하고 **input에 포함된 hidden pattern**을 학습하여 reward를 maximizing하는 모델을 만듭니다.
+        - 모델에 training data를 준다는 점은 Supervised Learning과 같지만 Unsupervised Learning은 output 없이 input만 전달하고 **input에 포함된 hidden structure**을 학습하는 것입니다. 그리고 **RL의 Model은 reward를 maximizing**하는 것을 의미합니다. `RL은 지속적 피드백을 요구합니다.`
 
 <br />
 
