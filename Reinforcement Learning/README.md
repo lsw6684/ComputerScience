@@ -142,7 +142,7 @@ ex)
     - **Finance** - 상업적 거래를 예측하기 위한 포트폴리오를 관리합니다.
     - **Natural language processing and Computer vision** - DL과 결합된 DRL에 사용되며, text 요약, 정보 축약, 기계 번역(papago 등), 이미지 인식 등의 정확성을 높히는데 사용됩니다.
 
-## OpenAI and TensorFlow(with Docker)
+## OpenAI Gym and TensorFlow(with Docker)
 - **Docker**
     - virtual system의 일종으로, 컨테이너에 소프트웨어들이 패키징되어 있습니다.
     - 컨테이너에는 소프트웨어를 사용하는 데 필요한 libraries, system tools, code, and runtime 등이 모두 포함되어 있습니다.
@@ -177,7 +177,7 @@ ex)
         Placeholders : variable과 비슷합니다. data type과 dimension of array를 define하고 value는 assign 하지 않습니다. 즉, value없이 정의 하고 특정 메모리만 잡아둔 다음 runtime에 사용됩니다. 
         - tf.placeholder()
             >>> x = tf.placeholder("float", shape = None)
-        # shape이 None으로 설정되어 있으면 어떤 차원이 array도 삽입 가능합니다.
+        # shape이 None으로 설정되어 있으면 어떤 차원의 array도 삽입 가능합니다.
 
         😃 Variable은 데이터를 저장하기 위해, Placeholder는 external data를 computational graph에 삽입하기 위해 사용됩니다.
         ```
@@ -224,7 +224,7 @@ ex)
         ![gd](./images/markov_diagram.png)
     - **Markov Decision Process, MDP**
         - Markov chain의 확장판입니다.
-        - decision-making의 framework를 modeling합니다.
+        - decision-making의 framework를 Mathematic하게 modeling합니다.
         - 대부분의 RL problem은 MDP로 모델링할 수 있습니다.
         - **Five important elements to represent MDP**
         1. **States, (S)** : Agent가 실제로 무언가를 하는 환경의 집합입니다.
@@ -253,7 +253,7 @@ ex)
         - 끝나지 않는 task(there is not a terminal state)
         - R <sub>t</sub>가 존재하지 않습니다. (무한정으로 더해야 하기 때문)
         - 즉, Reward를 maximize하는 방법이 없으므로 [Discount factor](#discount-factor-γ)를 이용합니다.
-- **Poiacy Function(π)**
+- **Policy Function(π)**
     - π(s) : S → A, 특정 state에서 어떤 action을 취할 ***확률***입니다.
 - **Value Function, V(s)***(=State Value Function)*
     - Agent가 policy π에 기반하여 특정 state에 있을 때, 해당 Agent가 머물기 좋은 정도를 의미하는 return 값입니다.
@@ -275,7 +275,7 @@ Q function은 해당 state에서 특정 action이 얼마나 좋은지 표현합�
     - Policy가 바뀌면 value function도 바뀝니다.
     - Optimal value function V*(s)는 모든 state에서 다른 value function보다 더 큰 value를 가집니다. `Optimal = *`<br /> 
     ![gd](./images/v_star.png) - V <sup>π</sup> (s)가 최대의 S를 가질 때 V값을 말합니다. 
-    - V*(s)가 Maximum return이기 때문에 Maximum Q function도 됩니다.
+    - V*(s)가 Maximum return이기 때문에 Maximum Q function도 됩니다. <br />
     ![gd](./images/v_start2.png)
 ```
 Expectation(E), 기댓값
@@ -327,8 +327,8 @@ ex) 주사위값의 기댓값
 - 환경에 대한 정보를 모를 때, model dynamics(transition probaility)를 모를 경우, 모집단에서 random sampling한 표본집단으로 approximate solution을 찾아냄으로 statistical technique입니다.
 - random sampling을 통해 approximates(근사치)를 찾아내며 실행 횟수를 늘릴수록 optimal solution과 가까워집니다.
 - terminal state(끝 점)가 있어야 하기 때문에 episodic task에만 적용할 수 있습니다.
-- model 없이도 가능하기 때문에 **model-free learning algorithm**으로도 불립니다.`DP는 model based learning algorithm`
-- expected return이 아닌 episode에서 나오는 평균 값(mean return)을 굼하으로써 state의 value function을 approximation합니다.
+- model 없이도 가능하기 때문에 **model-free learning algorithm**으로도 불립니다. `DP는 model based learning algorithm`
+- expected return이 아닌 episode에서 나오는 평균 값(mean return)을 구함으로써 state의 value function을 approximation합니다.
 - 과정
 1. value function을 estimation하는 것이 목적이므로 value function을 random 값으로 initialize 시킵니다.
 2. return들을 저장 할 empty list를 만듭니다.
@@ -343,4 +343,36 @@ ex) 주사위값의 기댓값
         ![gd](./images/fv.png)
         
     - **Every visit Monte Carlo**
-        - 여러 번 방문한..
+        - 첫 번째 방문만 고려하는 것이 아니라 states 방문에 대한 모든 value를 각각 사용하여 평균을 냅니다.<br />
+
+    두 MC 모두 state S에 visit하는 횟수가 무한대로 갈 수록 V<sup>π</sup>(s)에 converge합니다. 하지만 현실적으로 무한대만큼 할 수 없기 때문에 **해당 state에 업데이트 되는 value function이** 이전 루프에서의 값과 **차이가 작다면 converge**한 것으로 봅니다.
+    - **converge 하는 이유**
+        - 각각의 return은 independent(episode끼리 독립이라)하고 유한 분산을 가지는 V<sup>π</sup>(s)이다(IID).
+        - **The law of large numbers, 큰 수의 법칙**을 따릅니다.<br />
+            `큰 모집단에서 무작위로 뽑은 표본의 평균은 모집단의 평균과 가까울 가능성이 높다.`
+- **Monte Carlo Control**<br />cc
+    DP의 Policy iteration처럼 Policy evaluation과 Policy improvement를 반복하여 Optimal policy를 찾습니다. Policy는 업데이트된 value function으로 improve되고 value function은 새롭게 계산된 Policy로 다시 업데이트 됩니다.
+    ![gd](./images/mcc.png)
+- **Monte Carlo Exploration Starts**
+    각 에피소드마다 임의의 상태에서 시작하여 탐험적으로 행동을 수행하는 것을 의미합니다. 즉, 많은 에피소드가 있을 경우, 가능한 모든 행동으로 모든 상태를 포괄할 수 있습니다. 이 것을 **MC-ES**라고 합니다. <br />
+
+    **MC-ES 순서**
+    1. Q function과 Policy를 Random value로 초기화하고 return을 저장할 empty list를 생성합니다.
+    2. 임의로 초기화된 정책으로 에피소드를 시작합니다.
+    3. 에피소드에서 발생하는 모든 고유한 상태-행동 쌍에 대한 계산을 하고 return 리스트에 추가합니다.
+    4. 하나의 에피소드에 동일한 상태-행동 쌍이 여러번 발생하기 때문에 고유한 상태-행동 쌍에 대해서만 계산합니다.
+    5. return 리스트에서 평균을 취해 그 값을 규함수에 할당합니다.
+    6. 최적의 Policy를 선택하고 그 상태에서 최대 Q(s, a)를 갖는 행동을 선택합니다.
+    7. 모든 states와 action 쌍을 포괄하도록 위 과정을 반복합니다.
+    ![gd](./images/mces.png)
+
+- **On-policy / Off-policy MC Control** <br />
+MC-ES에서 모든 combination의 states와 actions를 explore하기엔 너무 많은 시간이 걸립니다. 이 문제를 현실적으로 해결하기 위해 2 가지 control algorithm을 사용합니다.
+    - **In On-policy MC control, ε-greedy policy or ε-soft policy**
+        - 1-ε의 확률로 탐험 없이 현재 상태에서 최선의 행동을 선택합니다.
+    - **Off-policy MC control**
+        - **Target policy** : 학습을 하여 Optimal policy가 되도록 합니다.
+        - **Behavior policy** : 행동을 generation할 때 쓰이며 가능한 모든 possible states와 action을 explore합니다.
+    - **Importance sampling** : 다른 distribution의 sample에서 표본을 추출하고 원래의 모집단 value를 계산합니다.
+        - **Ordinary importance sampling**
+        - **Weighted importance sampling**
