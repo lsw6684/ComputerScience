@@ -10,6 +10,8 @@
 - [통계적 학습 이론 Statistical Learning](#통계적-학습-이론-statistical-learning)
 - [Probability & Statistics](#probability--statistics)
 - [Regression](#regression)
+- [Classification](#classification)
+
 <br />
 
 ## 통계적 학습 이론 Statistical Learning
@@ -313,3 +315,7 @@ Weak law of large number : 평균을 낼 때 일정량 이상의 데이터가 �
     - Outliers, 거짓말쟁이, 다른 관측치와 크게 다른 데이터 포인트입니다.
     - High leverage points, 주변 관측치가 없이 하나 뿐이라 영향력이 큽니다.
     - Collinearity, 경향이 같습니다.
+
+## Classification
+순서가 상관 없는 Qualitative variable이며 각 카테고리에 속할 확률을 계산합니다. <br />
+`ex) eye color ∈ {brown, blue, green, black}` <br />
