@@ -78,7 +78,7 @@
     - ### SELECT
         - 요구하는 데이터를 가져옵니다. 
             ```sql
-            SELECT  coulumn_name                        -- SELECT DISTINCT는 중복 제거 출력
+            SELECT  column_name                        -- SELECT DISTINCT는 중복 제거 출력
             FROM    table_references        
             WHERE   height > 150 AND Conuntry = 'KOREA'
                AND  price BETWEEN 1000 and 2000
