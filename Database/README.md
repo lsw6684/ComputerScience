@@ -85,9 +85,8 @@
                AND  Pet IN ('cat', 'dog')
             GROUP BY country_code                       -- 데이터를 묶어줍니다. 상세내용 아래 기타.
             HAVING
-            ORDER BY - city_population DESC             -- ASC 오름 차순(default), DESC 내림 차순
+            ORDER BY  city_population DESC             -- ASC 오름 차순(default), DESC 내림 차순
             LIMIT 10;                                   -- 결과에 대한 상위 10개만 출력
-                                                        
             ```
     - JOIN
         - 여러 테이블에서 가져온 레코드를 조합하여 하나의 테이블이나 결과 집합으로 출력합니다.
@@ -109,7 +108,7 @@
                 id      INT NOT NULL PRIMARY KEY,       -- 정수, null 금지, 기본 키
                 col1    INT NULL,                       -- 정수, null 허용
                 col2    FLOAT NULL,                     -- 실수, null 허용
-                col3    VARCHAR(45) NULL                -- 가변길이 최대 45, null 허용
+                col3    VARCHAR(45) NULL,               -- 가변길이 최대 45, null 허용
                 전공과목 CHAR(15) CHECK (전공과목 in ('수학', '영어'))  -- 전공과목은 수학과 영어 중에 선택 가능.
             );
             ```
@@ -149,7 +148,7 @@
             2. 삽입, 삭제, 갱신 작업에 많은 제한 사항을 가집니다.
             3. 자신만의 인덱스를 가질 수 없습니다.
             CREATE VIEW testView AS                         
-            SELECT Col1, Co2
+            SELECT Col1, Col2
             FROM test;
             ```
             [뷰 수정](#뷰-수정), [뷰 삭제](#뷰-삭제)
@@ -194,7 +193,7 @@
         - ### 뷰 수정
             ```sql
             ALTER VIEW testView AS
-            SELECT Col1, Co2, Col3
+            SELECT Col1, Col2, Col3
             FROM test;
             ```
     - ### INSERT
@@ -212,7 +211,7 @@
         - WHERE절을 생략하면 테이블의 전체 행에 적용됩니다.
             ```sql
             UPDATE test
-            SET col1=1, co2=1.0, col3='TT'
+            SET col1=1, col2=1.0, col3='TT'
             WHERE id = 1;
             ```
     - ### DELETE
@@ -290,7 +289,7 @@
             -- WITH ROLLUP으로 중간 합계를 보여주는 행(들)을 추가합니다.
 
             GROUP BY ROLLUP(CountryCode, city_name) 개수
-            >>> GROUP BY CountryCode, city_name + GROUP BY city_name + 총 합계
+            >>> GROUP BY CountryCode + GROUP BY city_name + 총 합계
             즉, (CountryCode별 행 개수 + 합계 1줄) + (city_name별 행 개수 + 합계 1줄) + 총 합계 1줄
             ```
         - LENGTH - 문자열의 길이 반환
