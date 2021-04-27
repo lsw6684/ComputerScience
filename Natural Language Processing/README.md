@@ -13,6 +13,7 @@
 - [Probability](#probability)
 - [Information Theory_Entropy](#information-theoryentropy)
 - [Deep Learning with PyTorch](#deep-learning-with-pytorch)
+- [CNN, Convolutional Neural Network](#cnn-convolutional-neural-network)
 
 <br />
 
@@ -308,37 +309,69 @@ Event가 얼마나 발생할 지, 어떤 명제의 참/거짓일 정도를 의�
 - **Entropy**
     - Shannon information의 평균 or 'average of surprise' or 'average of the number of bits'입니다.
     - **Bernoulli distribution** : 동전을 던질 때
-    ![gd](./images/bernoulli.png)
+    
+        ![gd](./images/bernoulli.png)
 
 
 ## Deep Learning with PyTorch
 **Deep Learning**
-- DNN(Deep Neural Network)를 활용한 ML이라 할 수 있습니다.
+- **DNN(Deep Neural Network)** 를 활용한 것입니다.
 - Representation learning, 표현 학습 혹은 Feauture Learning 특징 학습이라 할 수 있습니다. `Representation is very important.`
 - DL은 **일반적으로** 특징을 추출하지 않고 기본적인 Data를 바로 사용합니다.
-![gd](./images/DLML.png)
+
+    ![gd](./images/DLML.png)
+
 - DL is **scalable** : 데이터의 크기에 의해 제한받지 않습니다.
-![gd](./images/scalable.png)
+
+    ![gd](./images/scalable.png)
 
 <br />
 
 **PyTorch**
-Python 기반의 DL library입니다. NumPy의 extension 개념으로 GPU가속, 자동 미분이 가능합니다.
+Python 기반의 DL library입니다. NumPy의 extension 개념으로 **GPU가속, 자동 미분**이 가능합니다. + neural network를 처리하기 위한 module들이 추가되었습니다.
 - **tensor** : A n-dimensional array, matrix를 포함하는 개념으로 n차원이 가능합니다.
 
 <br />
 
 **Artificial Neural Network** <br />
 = Neural net, Neuron(Perceptron이라 불리는 기본 단위)과 가중치(연결의 강도)로 구성되어 있습니다.
-![gd](./images/ann.png)
+
+![gd](./images/nn.png)
+
 - **Multi-layer perceptron, MLP**
     - input은 layer에 포함하지 않습니다. `가중치 위주` 
     - input, output을 제외한 layer(node)는 hidden layer라고 칭합니다.
     - **FC layer**, Fully connected layer - 모든 layer가 연결되어 있습니다.
-    ![gd](./images/mlp.png)
-- **Activation function**
-    ![gd](./images/af.png)
+
+        ![gd](./images/mlp.png)
+- **Activation function** <br />
+    ![gd](./images/af.png) 
+    - +Leaky ReLU
+    - **Why ReLU**
+        - [vanishing gradient problem](#vanishing-gradient-problem-br)을 완화할 수 있습니다.
+        - 실제 neural의 생물학적 유사성이 있습니다.
 - **Loss function**
+    - **Training a neural network(optimization)**
     - **Mean squared error**
     - **Binary cross entropy error**
     - **Cross entropy error**
+- **Python Virtual Environment**
+    - **Isolated** Python **runtime environment**
+- **Backpropagation 역전파**
+    - optimal weight variable을 찾는 Gradient descent
+    ![gd](./images/bp.png) 
+    - ### Vanishing gradient problem <br />
+        Gradient가 0에 가까워 집니다.
+
+<br />
+
+## CNN, Convolutional Neural Network
+- **Convolution**
+    ![gd](./images/convolution.png) 
+    - 커널 크기가 커지면 사이즈가 missing됩니다.
+    - **1D discrete convolution**
+            ![gd](./images/1d.png)
+    - **2D discrete convolution**
+            ![gd](./images/2d.png)
+
+- **Convolutional layer**
