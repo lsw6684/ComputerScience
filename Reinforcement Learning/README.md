@@ -9,6 +9,7 @@
 - [OpenAI and TensorFlow(with Docker)](#openai-and-tensorflowwith-docker)
 - [Markov Decision Process and Dynamic Programming](#markov-decision-process-and-dynamic-programming)
 - [Monte Carlo Methods](#monte-carlo-methods)
+- [Temporal Difference Learning](#temporal-difference-learning)
 
 <br />
 
@@ -376,3 +377,39 @@ MC-ES에서 모든 combination의 states와 actions를 explore하기엔 너무 �
     - **Importance sampling** : 다른 distribution의 sample에서 표본을 추출하고 원래의 모집단 value를 계산합니다.
         - **Ordinary importance sampling**
         - **Weighted importance sampling**
+
+<br />
+
+## Temporal Difference Learning
+Monte Carlo처럼 model free algorithm입니다. 즉, model dynamics를 몰라도 되며 **non-episodic task에도 적용이 가능합니다.**
+- Monte Carlo와 DP를 결합한 형태입니다.
+- 경험(sample data)로 직접 learning을 하기 때문에 environment의 model dynamics가 없어도 됩니다.
+- DP처럼 학습된 estimation의 일부에만 기반하여 update가 가능합니다. 즉, final outcome(end of episode)를 기다릴 필요 없이 일부로도 가능합니다.
+- 이전에 학습된 결과를 기반으로 현재 estimation을 approximation 하는 것을 **Bootstrapping**이라 칭합니다.
+- DP, TD, and Monte Carlo방법은 모두 **policy iteration**
+
+**Incremental Implementation** <br />
+메모리, 프로세싱 타임 등을 보다 효율적으로 구현합니다. <br />
+ex) 기존의 값들을 모두 메모리에 저장하고 새로운 값이 추가되면 다시 전체 계산을 하기 때문에 비효율적인 평균식을 향상시킵니다. <br />
+![gd](./images/II.png)
+
+**TD Prediction** <br />
+TD, Monte Carlo 모두 sample(experience)를 기반으로 Prediction을 합니다. <br />
+V(S<sub>t</sub>) ← V(S<sub>t</sub>) + α[R<sub>t+1</sub> + ϒV(S<sub>t+1</sub>) - V(S<sub>t</sub>)] <br />
+- 이러한 TD를 TD(0) or One-step TD라고도 칭합니다.
+- actual reward와 expected reward의 차이를 업데이트 하는 것입니다.
+- R<sub>t+1</sub> + ϒV(S<sub>t+1</sub>) - V(S<sub>t</sub>)는 actual reward와 prediction 되어 있는 value의 차이 값이기 때문에 Error로도 볼 수 있습니다. = **TD error, δ<sub>t</sub>**
+- 목적은 차이 값이 0에 가까워질 때 까지 iteration을 반복합니다. (try to minimize error)
+
+**Advantages of TD Prediction** <br />
+- DP와 비교하여 dynamics를 몰라도 계산 가능합니다.
+- 하나의 step만을 필요로 하기 때문에, Monte Carlo와 비교하여 **naturally implemented**하며 **fully incremental fashion**입니다.
+- episodes가 끝날 때 까지 대기하지 않아도 됩니다.
+- α size를 너무 크지 않게 조절해야 합니다.
+
+**SARSA, Q-learning** <br />
+Generalized Policy Iteration(GPI), policy를 evaluation하고 prediction 하는 점은 같지만 TD를 사용합니다.
+- **SARSA : On-policy TD Control**
+    - Q value update
+- **Q-Learning : Off-policy TD Control**
+    - 
