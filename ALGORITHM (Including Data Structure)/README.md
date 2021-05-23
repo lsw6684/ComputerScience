@@ -19,6 +19,7 @@
 - [백트래킹(보류중..)](#백트래킹보류중)
 - [시뮬레이션](#시뮬레이션)
 - [Greedy](#greedy)
+- [Dynamic Programming](#dynamic-programming)
 
 <br />
 
@@ -432,3 +433,32 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
 
 ## Greedy
 지금 가장 최적인 답을 근시안적으로 택하는 알고리즘입니다. 관찰을 통해 탐색 범위를 줄인다고 볼 수 있습니다.
+
+<br />
+
+## Dynamic Programming
+DP, 여러 개의 하위 문제를 먼저 푼 후 그 결과를 쌓아올려 주어진 문제를 해결합니다.
+### 피보나치 재귀 → DP
+- **재귀, O(1.628<sup>N</sup>)**
+    ```cpp
+    int fibo(int n) {
+        if(n >= 1)
+            return 1;
+        return fibo(n-1) + fibo(n-2);
+    }
+    ```
+- **DP, O(N)**
+    ```cpp
+    int fibo(int n) {
+        int f[20];
+        f[0] = f[1] = 1;
+        for(int i = 2 ; i <=n; i++)
+            f[i] = f[i-1] + f[i-2];
+        return f[n];
+    }
+    ```
+    중간 결과를 저장하여 이용함에 따라 극적인 차이가 발생합니다.
+### DP를 푸는 과정
+1. 테이블 정의하기
+2. 점화식 찾기
+3. 초기값 정하기
