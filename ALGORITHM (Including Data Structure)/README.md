@@ -15,9 +15,10 @@
 - [스택, 큐, 덱](#스택-큐-덱)
 - [BFS](#bfs)
 - [DFS](#dfs)
-- [재귀(보류중..)](#재귀보류중)
-- [백트래킹(보류중..)](#백트래킹보류중)
+- [재귀](#재귀)
+- [백트래킹](#백트래킹)
 - [시뮬레이션](#시뮬레이션)
+- [정렬](#정렬)
 - [Greedy](#greedy)
 - [Dynamic Programming](#dynamic-programming)
 
@@ -388,7 +389,7 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
 
 <br />
 
-## 재귀(보류중..)
+## 재귀
 하나의 함수에서 자기 자신을 다시 호출하여 작업을 수행하는 알고리즘입니다. <br />
 - 특정 입력에 대하여 자기 자신을 호출하지 않고 종료되어야 하며 **(Base condition||Base case), 모든 입력은 base condition으로 수렴**해야 합니다.
 - 모든 재귀 함수는 반복문으로 동일한 구현이 가능합니다.
@@ -420,7 +421,7 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
 
 <br />
 
-## 백트래킹(보류중..)
+## 백트래킹
 현재 상태에서 가능한 모든 후보군(선택지)을 따라 들어가며 탐색하는 알고리즘입니다. <br />
 `프린세스 메이커, 역전 재판 등 선택지에 의해 결과가 달라지는 게임을 생각합니다. 전 미연시 안합니다. 예시로 찾아져서 쓴겁니다.`
 
@@ -428,6 +429,154 @@ Floyd's cycle-finding algorithm을 이용하여, 공간복잡도 O(1), 시간복
 
 ## 시뮬레이션
 
+<br />
+
+## 정렬
+### 기초 정렬 : O(N<sup>2</sup>)
+<p align="center"><img src="images/정렬.png" width="50%"></p>
+
+```cpp
+int arr[10] = {3, 2, 7, 116, 62, 345, 1, 23, 55, 77};
+int n = 10;
+for(int i = n-1; i > 0; i--) {
+    int mxIdx = 0;
+    for(int j = 1; j <= i; j++)
+        if(arr[mxIdx] < arr[j]) mxIdx = j;
+    swap(arr[mxIdx], arr[i]);
+}
+
+or
+
+int arr[10] = {3, 2, 7, 116, 62, 345, 1, 23, 55, 77};
+int n = 10;
+for(int i = n-1; i > 0; i--)
+    swap(*max_eleme nt(arr, arr + i + 1), arr[i]);
+```
+### 버블 정렬 O(N<sup>2</sup>)
+```cpp
+int arr[5] = {-2, 2, 4, 6, 13};
+int n = 5;
+for(int i = 0; i < n; i++)
+    for(int j = 0; j < n - i - 1; j++)
+        if(arr[j] > arr[j + 1])
+            swap(arr[j], arr[j + 1]);
+```
+### Merge Sort : O(N logN)
+수열(정렬 된 배열)을 재귀적으로 나누고 합치는 정렬.
+
+- **Merge Sort 순서**
+1. 주어진 리스트를 2개로 나눕니다..
+2. 각 리스트 정렬.
+3. 규칙에 맞게 합칩니다.
+<p align="center"><img src="images/mergeSort.png" width="35%"></p>
+
+- **수열인 상태**
+    ```cpp
+    #include<iostream>
+    using namespace std;
+
+    int n, m;
+    int a[1000002], b[1000002], c[2000002];
+
+    int main()
+    {
+        ios::sync_with_stdio(0), cin.tie(0);
+        cin >> n >> m;
+        for (int i = 0; i < n; i++) cin >> a[i];
+        for (int i = 0; i < m; i++) cin >> b[i];
+
+        int aidx = 0, bidx = 0;
+        for (int i = 0; i < n + m; i++) {
+            if (bidx == m) c[i] = a[aidx++];
+            else if (aidx == n)	c[i] = b[bidx++];
+            else if (a[aidx] <= b[bidx])	c[i] = a[aidx++];
+            else c[i] = b[bidx++];
+        }
+        for (int i = 0; i < n + m; i++)
+            cout << c[i] << ' ';
+    }
+    ```
+
+- **정렬이 필요한 상태**
+    ```cpp
+    #include<iostream>
+    using namespace std;
+
+    int n = 10;
+
+    // merge 함수에서 리스트 2개를 합친 결과를 임시로 저장하고 있을 변수
+    int arr[1000001], tmp[1000001];
+
+    void merge(int st, int en) {
+        int mid = (st + en) / 2;
+        int lidx = st;			// a[st : mid]에서 값을 보기 위해 사용하는 index
+        int ridx = mid;			// a[mid : en]에서 값을 보기 위해 사용하는 index
+        for (int i = st; i < en; i++) {
+            if (ridx == en) tmp[i] = arr[lidx++];
+            else if (lidx == mid) tmp[i] = arr[ridx++];
+            else if (arr[lidx] <= arr[ridx]) tmp[i] = arr[lidx++];
+            else tmp[i] = arr[ridx++];
+        }
+        for (int i = st; i < en; i++) arr[i] = tmp[i];	// tmp에 임시저장해둔 값을 a로 다시 옮김
+    }
+
+    // a[st:en]을 정렬하고 싶다.
+    void merge_sort(int st, int en) {
+        if (en - st == 1) return;	// 길이 1인 경우
+        int mid = (st + en) / 2;
+        merge_sort(st, mid);		// st to mid - 1을 정렬한다.
+        merge_sort(mid, en);		// mid to en - 1을 정렬한다.
+        merge(st, en);
+
+    }
+
+    int main()
+    {
+        ios::sync_with_stdio(0), cin.tie(0);
+        int n;
+        cin >> n;
+        for (int i = 0; i < n; i++)	cin >> arr[i];
+        merge_sort(0, n);
+        for (int i = 0; i < n; i++)	cout << arr[i] << '\n';
+    }
+    ```
+- **Merge Sort - Stable Sort**
+    우선 순위가 같은 원소들 끼리는 원래의 순서를 지킵니다. 
+    <p align="center"><img src="images/stableSort.png" width="35%"></p>
+
+### Quick Sort : 평균 - O(NlogN), 최악 - O(N<sup>2</sup>)
+대부분의 정렬 알고리즘보다 빠릅니다. Pivot을 기준으로 정렬하며 해당 배열 안에서의 자리 바꿈으로 진행되기 때문에 ***cache hit rate***가 높아 속도가 빠릅니다. 추가적 공간을 사용하지 않는 정렬을 **In-Place Sort**라고 합니다.
+<p align="center"><img src="images/quickSort.png" width="35%"></p>
+
+- **Quick Sort순서**
+1. Pivot을 기준으로 보다 작은 값, 보다 큰 값이 나올 때 까지 l과 r을 이동시킵니다.
+2. 두 포인터가 가리키는 원소의 값을 Swap합니다.
+3. l과r이 교차할 때까지 반복합니다.
+4. Pivot과 r을 Swap합니다. 
+
+
+```cpp
+#include<iostream>
+using namespace std;
+ 
+int main()
+{
+	ios::sync_with_stdio(0), cin.tie(0);
+    int arr[8] = {6, -8, 1, 12, 8, 3, 7, -7};
+    int pivot = arr[0];
+    int l = 1, r = 7;
+    while(1) {
+        while(l <= 3 && arr[l] <= pivot) l++;
+        while(l <= r && arr[r] > pivot) r--;
+        if(l > r) break;
+        swap(arr[l], arr[r]);
+    }
+    seap(arr[0], arr[r]);
+}
+```
+
+### Merge Sort VS Quick Sort
+<p align="center"><img src="images/MvsQ.png" width="55%"></p>
 
 <br />
 
