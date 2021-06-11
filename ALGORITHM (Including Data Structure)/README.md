@@ -578,6 +578,67 @@ int main()
 ### Merge Sort VS Quick Sort
 <p align="center"><img src="images/MvsQ.png" width="55%"></p>
 
+### Counting Sort, 계수 정렬 - O(N) ~ O(N + K)
+미리 만들어진 테이블에 각 수의 등장횟수를 기록합니다. 범위가 크면 사용할 수 없지만 1억 미만까지는 빠른 속도로 사용 가능합니다. ***(코테에선 천만 이하일 때만 권장)***
+- **음수 포함 계수 정렬**
+    ```cpp
+    #include<iostream>
+    #define endl '\n'
+    using namespace std;
+
+    int board[2000002];
+
+    int main()
+    {
+        ios::sync_with_stdio(0), cin.tie(0);
+        int n, tmp, mx = 0;
+        cin >> n;
+        for(int i = 0 ; i < n; i++){
+            cin >> tmp;
+            board[tmp+1000000]++;
+            mx = max(mx, tmp+1000000);
+        }
+        for (int i = 0; i <= mx; i++) {
+            while (board[i]--) {
+                cout << i - 1000000<< endl;
+            }
+        }
+    }
+    ```
+### Radix Sort, 기수 정렬 - O(D(N + K)) >> O(DN)
+자릿수를 이용하여 정렬하는 알고리즘입니다.
+<p align="center"><img src="images/radix.png" width="30%"></p>
+
+### Comparison Sort vs Non - Comparison Sort
+|Comparison|Non - Comparison|
+|:---:|:---:|
+|버블, 머지, 퀵|카운팅 라딕스|
+
+### STL sort (for 코딩 테스트)
+Quick sort기반이지만, 재귀의 깊이가 일정 이상 지속되면, 다른 알고리즘을 사용합니다. 즉, 최악의 경우에도 O(NlogN)이 보장됩니다. <br />
+**Stable sort**가 아니기 때문에 동일 우선순위를 가진 원소 간에 상대적 순서가 보존되지 않을 수 있습니다. Stable sort가 필요하다면 **stable_sort**함수를 사용하면 됩니다.
+
+```cpp
+int a[5] = {1, 4, 5, 2, 7};
+sort(a, a+5);
+
+vector<int> b = {1, 4, 5, 2, 7};
+sort(b.begin(), b.end());       // or sort(b.begin(), b.begin + 5)
+
+or
+
+// a가 b의 앞에 와야할 때 true, 그렇지 않을 때(같을 때 포함) false
+// 같은 값일 때 true를 반환하면 운 좋게 통과할 수 있지만, runtime error발생 확률이 높습니다.
+// 값의 복사하는 연산은 불필요하기 때문에 Reference를 보내는 것이 바람직합니다. (코딩 테스트에선 상관 없음)
+bool cmp(const int& a, const int& b) {
+    return a > b;
+}
+int a[7] = {1, 2, 3, 4, 5, 6, 7};
+sort(a, a + 7, cmp);
+
+
+``` 
+
 <br />
 
 ## Greedy
