@@ -2,6 +2,7 @@
 
 ## :memo: Table of Contents
 - [**Algorithm (Including Data Structure)**](https://github.com/lsw6684/ComputerScience/tree/master/ALGORITHM%20(Including%20Data%20Structure)) - ***based on CPP***
+- [**Compiler Construction**](https://github.com/lsw6684/ComputerScience/tree/master/Compiler%20Construction)
 - [**Computer Network**](https://github.com/lsw6684/ComputerScience/tree/master/Computer%20Network)
 - [**Data Analysis**](https://github.com/lsw6684/ComputerScience/tree/master/Data%20Analysis)
 - [**Database**](https://github.com/lsw6684/ComputerScience/tree/master/Database)
