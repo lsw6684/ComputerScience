@@ -59,3 +59,15 @@ Sweep 후의 압축 과정입니다. 분산된 객체들을 Heap의 시작 주�
         ```
         기억 장치의 빈 공간 또는 자료가 여러 개의 조각으로 나뉘는 현상을 말합니다. 사용 가능한 공간이 줄어들고, 읽기와 쓰기의 수행 속도를 늦추는 문제점이 있습니다.
         ```
+
+### Heap의 구조
+
+<p align="center"><img src="images/generation.png" width="35%"></p>
+
+### Young Generation
+- 새로운 객체들이 할당되는 영역으로 Eden, Survivor 0, Survivor 1로 나뉩니다.
+    - Eden : 새로운 객체들이 할당되고, 
+### Old Generation
+- Young Generation에서 오랫동안 살아남은 객체들이 존재하는 영역.
+### Permanent Generation
+- Method Area라고도 하며 자바8 이후, **Meta space**가 대체합니다.
