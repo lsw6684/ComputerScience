@@ -5,6 +5,7 @@
 - [**Compiler Construction**](https://github.com/lsw6684/ComputerScience/tree/master/Compiler%20Construction)
 - [**Computer Network**](https://github.com/lsw6684/ComputerScience/tree/master/Computer%20Network)
 - [**Data Analysis**](https://github.com/lsw6684/ComputerScience/tree/master/Data%20Analysis)
+- [**Data Structure**](https://github.com/lsw6684/ComputerScience/tree/master/Data%20Structure)
 - [**Database**](https://github.com/lsw6684/ComputerScience/tree/master/Database)
 - [**Information Security**](https://github.com/lsw6684/ComputerScience/tree/master/Information%20Security)
 - [**Java**](https://github.com/lsw6684/ComputerScience/tree/master/Java)
