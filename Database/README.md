@@ -12,7 +12,8 @@
 - [SQL](#sql)
 - [정규화](#정규화)
 - [트랜잭션](#트랜잭션)
-
+- [NoSQL](#nosql)
+    - [SQL VS NoSQL](#sql-vs-nosql)
 <br />
 
 ## 무결성
@@ -471,8 +472,13 @@ DB의 상태를 변환시키는, 하나의 논리적 기능을 수행하기 위�
     - **완료 Committed** : 트랜잭션이 성공적으로 종료되어 Commit 연산을 실행한 후의 상태
 <p align="center"><img src="images/transaction_state.png" width="400">
 
+## NoSQL
+non-SQL 혹은 non-relational을 의미하며 테이블 형식으로 구성되지 않는, 비 관계형 형식의 데이터를 관리하는 데이터베이스입니다.
 
-
+### SQL VS NoSQL
+|SQL|NoSQL|
+|:----|:---|
+|주로 관계형 데이터베이스(RDBMS) 입니다.|주로 비 관계형 또는 분산 데이터베이스입니다.|
 
 
 
