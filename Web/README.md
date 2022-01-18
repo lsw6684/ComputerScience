@@ -12,6 +12,8 @@
 - [HTTP](#http)
 - [WAS](#was)
 - [REST, REST API, RESTful](#rest-rest-api-restful)
+- [GraphQL](#graphql)
+  - [REST API vs GraphQL](#rest-api-vs-graphql)
 
 <br />
 
@@ -180,3 +182,25 @@ RESTful은 일반적으로 REST라는 아키텍처를 구현하는 웹 서비스
   **RESTful의 목적** <br />
     - 이해와 사용이 쉬운 REST API를 만듭니다.
     - RESTful한 API를 구현하는 근본적인 목적은 성능 향상에 있는 것이 아니라 일관적인 컨벤션을 통한 API의 이해도 및 호환성을 높이는 것입니다. 즉, 성능이 중요한 상황에서 굳이 RESTful한 API를 구현할 필요는 없습니다.
+
+
+## GraphQL
+페이스북이 만든 API를 위한 쿼리 언어입니다. 서버측 런타임으로 **클라이언트에게 요청한 만큼의 데이터를 제공**하는 데 우선 순위를 둡니다. <br /><br />
+더욱 빠르고 유연하며, 개발자 친화적으로 만들기 위해 설계되었습니다.
+
+### GraphQL API의 특징
+- 주로 하나의 Endpoint를 사용합니다.
+- 요청할 때 사용한 Query에 따라 응답 구조가 다릅니다.
+- Text 만으로 하기 힘든 File 전송 따위를 처리하기 힘듭니다.
+
+### REST API vs GraphQL
+- **HTTP 요청 횟수** : REST API는 각 Resource 종류 별로 요청 해야하지만, GraphQL은 원하는 정보를 하나의 Query에 담아 한 번에 요청합니다.
+- **HTTP 응답 Size** : REST API는 응답의 형태가 정해져 있지만, Graph QL은 원하는 대로 정보를 요청하는 것이 가능하기 때문에 불필요하게 거대한 응답을 요청할 필요가 없습니다.
+
+### REST API or GraphQL
+- GraphQL
+  - 서로 다른 데이터로 응답해야 할 때
+  - 대부분의 요청이 CRUD에 해당할 때
+- REST API
+  - HTTP와 HTTPs에 의한 Caching을 사용할 때
+  - File 전송 등 단순한 Text로 처리되지 않는 요청들이 있을 때
