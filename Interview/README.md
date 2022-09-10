@@ -118,6 +118,38 @@ Heap은 그 자체로 우선순위큐 구현과 일치합니다. 와전이진트
 
 ***
 
+### BST는 어떤 자료구조인가요?
+이진 탐색트리는 정렬된 tree입이니다. 어느 node를 선택하든 해당 node의 left subtree에는 그 node 값보다 작은 값들을 지닌 node로만 이루어져 있습니다. 그리고 right subtree에는 그 node의 값보다 큰 값들을 지닌 node로만 이루어져 있는 O(log n)의 binary tree입니다.
+
+BST는 저장과 동시에 정렬을 하는 자료구조로, 노드들을 바닥에 투영 시 오름차순 정렬 된다는 것을 알 수 있습니다.
+
+<br />
+
+#### 이진트리(Binary tree)는 어떤 자료구조인가요?
+모든 node의 child nodes의 갯수가 2 이하인 트리를 이진트리라고 합니다.
+
+<br />
+
+#### BST의 worst case의 시간복잡도는 어떻게 되며, 어떤 경우에 발생하나요?
+O(n)이며, 균형 없이 한 쪽으로 치우친 tree의 경우 발생합니다. Linked List와 다를 게 없어진다고 볼 수 있습니다.
+
+해결 방법으로는 자가 균형 이진 탐색 트리(Self-Balancing BST)가 있습니다. 이진 트리의 균형을 유지하며, 대표적으로 AVL트리와 Red-Black Tree가 있습니다. Java에서는 hashmap의 sepaerate chaining으로써 Linked List와 Red-Black Tree를 병행하여 저장합니다.
+- AVL Tree : 균형도를 사용하여 삽입/삭제 시 균형을 맞춥니다. **균형도가 절댓값 2 미만이면 균형 트리이며, 2 이상이면 불균형 트리**입니다.
+    - leaf노드의 높이는 항상 0
+    - 자식이 한 개만 있으면 없는 쪽은 -1로 계산(null node)
+    - 부모 노드 높이 = Max(좌측 노드 높이, 우측 노드 높이) + 1
+    - **균형도** = 좌측 노드 높이 - 우측 노드 높이
+        - 균형도가 양수 : 좌측 서브 트리가 비대
+        - 균형도가 음수 : 우측 서브 트리가 비대
+- Red-Black Tree :
+    - 모든 노드는 red, black으로 구성
+    - 루트 노트는 black
+    - nil 노드는 black : nil 노드는 존재하지 않음을 의미하며 자녀가 없을 때 자녀를 nil노드로 표기함으로써 값이 있는 노드와 동등하게 취급합니다. **RB트리에서 leaf노드는 nil노드**로 계산합니다.
+    - red의 자녀들은 black, red는 연속일 수 없습니다.
+    - 임의의 노드에서 자손 nil 노드들 까지 가는 경로들에서 **black**의 수는 같습니다.
+    - black height : 노드 x에서 임의의 자손 nill 노드까지 내려가는 경로에서의 black 수.
+***
+
 ### Hash table은 어떤 자료구조인가요?
 효율적인 탐색(빠른 탐색)을 위한 자료구조로 key-value쌍의 데이터를 입력받습니다. hash function h에 key값을 입력하여 얻은 해시값 h(k)를 위치로 지정하여 key-value 데이터 쌍을 저장합니다. 저장/삭제/검색 시간 복잡도는 모두 O(1)이며 해당 공간을 slot 또는 bucket이라고 합니다.
 - Direct-address Table : 직접 주소화 테이블로 key값으로 k를 갖는 원소는 index k에 저장합니다. 불필요한 공간 낭비와 다양한 자료형을 담을 수 없게 된다는 단점이 있습니다.
