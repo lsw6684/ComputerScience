@@ -9,6 +9,7 @@ ___
 # Interview
 - [Data Structure](#data-structure)
 - [Java](#java)
+- [Operating System](#operating-system)
 ---
 ## Data Structure
 ### Array는 어떤 자료구조인가요?
@@ -265,3 +266,44 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 
 #### 보조 해시 함수가 무엇인데요?
 객체의 해시값을 비트연산자로 조작하여 인덱스 값 분포를 고르게 하는 역할을 합니다. Java 8의 HashMap 보조 해시 함수는 상위 16비트 값을 xor 연산하는 형태입니다.
+
+***
+
+## Operating System
+### Process를 설명해주세요.
+프로세스란, 실행 중인 프로그램을 의미합니다. 즉, 실행파일 형태로 존재하던 프로그램이 Memory에 적재되어 CPU에 의해 실행(연산)되는 것을 프로세스라 합니다.
+- Memory : CPU가 직접 접근할 수 있는 컴퓨터 내부의 기억장치입니다. 프로그램이 CPU에서 실행 되려면, 해당 내용이 Memory에 적재된 상태여야만 합니다.
+    <p align="left"><img src="images/memory.png" width="50%"></p>
+
+
+
+- CPU의 연산과 PC register
+프로그램의 코드를 토대로 CPU가 실제 연산을 해야만 프로그램이 실행된다고 볼 수 있으며, 어떤 코드를 읽어야 하는가를 정하는 것은 CPU 내부에 있는 **PC(Program Counter) register**에 저장되어 있습니다. PC register에는 다음에 실행될 코드(명령어, instruction)의 주소값이 저장되어 있습니다. 즉, Memory에 적재되어있는 프로세스 Code 영역의 명령어중 다음 연산에서 읽어야할 명령어의 주소값을 PC register가 순차적으로 가리키게 되고, 해당 명령어를 읽음으로써 CPU가 연산을 하게 되면, process가 실행되는 것입니다.
+
+<br />
+
+#### Process의 Memory 영역에 대해서 설명해주세요.
+프로세스가 운영체제에서 할당받는 메모리 공간은 Code, Data, Heap, Stack 영역으로 구분됩니다.
+|영역|설명|
+|:---|:---|
+|Code|실행한 프로그램의 코드가 저장되는 메모리 영역|
+|Data|프로그램의 전역 변수와 static 변수가 저장되는 메모리 영역|
+|Heap|프로그래머가 직접 공간을 할당(malloc)/해제(free)하는 메모리 영역|
+|Stack|함수 호출 시 생성되는 지역 변수와 매개 변수가 저장 되는 임시 메모리 영역|
+
+
+***
+
+### Multi Process에 대해서 설명해주세요.
+2개 이상의 프로세스가 동시에 실행되는 것을 말합니다. 여기서 동시라는 표현은 동시성인 Concurrency와 병렬성인 Parallelism, 두 가지를 의미합니다.
+
+동시성은 CPU core가 1개일 때, 여러 process를 짧은 시간 동안 번갈아 가면서 연산을 하게 되는 **시분할 시스템(Time Sharing Syste)** 으로 실행되는 것입니다.
+
+병렬성은 CPU core가 여러개일 때, core들이 각각의 process를 연산함으로써 process가 동시에 실행되는 것입니다.
+
+|동시성|병렬성|
+|:---|:---|
+|Single core|Multi core|
+|동시에 실행되는 것 같아 보입니다.|실제로 동시에 여러 작업이 처리 됩니다.|
+
+- 메모리관리 : Multi Process는 2개 이상의 process가 동시에 실행되며, 이 떄 process들은 CPU와 메모리를 공유하게 됩니다.
