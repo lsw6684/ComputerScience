@@ -274,9 +274,6 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 프로세스란, 실행 중인 프로그램을 의미합니다. 즉, 실행파일 형태로 존재하던 프로그램이 Memory에 적재되어 CPU에 의해 실행(연산)되는 것을 프로세스라 합니다.
 - Memory : CPU가 직접 접근할 수 있는 컴퓨터 내부의 기억장치입니다. 프로그램이 CPU에서 실행 되려면, 해당 내용이 Memory에 적재된 상태여야만 합니다.
     <p align="left"><img src="images/memory.png" width="50%"></p>
-
-
-
 - CPU의 연산과 PC register
 프로그램의 코드를 토대로 CPU가 실제 연산을 해야만 프로그램이 실행된다고 볼 수 있으며, 어떤 코드를 읽어야 하는가를 정하는 것은 CPU 내부에 있는 **PC(Program Counter) register**에 저장되어 있습니다. PC register에는 다음에 실행될 코드(명령어, instruction)의 주소값이 저장되어 있습니다. 즉, Memory에 적재되어있는 프로세스 Code 영역의 명령어중 다음 연산에서 읽어야할 명령어의 주소값을 PC register가 순차적으로 가리키게 되고, 해당 명령어를 읽음으로써 CPU가 연산을 하게 되면, process가 실행되는 것입니다.
 
@@ -291,6 +288,42 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 |Heap|프로그래머가 직접 공간을 할당(malloc)/해제(free)하는 메모리 영역|
 |Stack|함수 호출 시 생성되는 지역 변수와 매개 변수가 저장 되는 임시 메모리 영역|
 
+<br />
+
+#### Process의 Context가 무엇인가요?
+process가 현재 어떤 상태로 수행되고 있는지에 대한 정보입니다. 해당 정보는 PCB에 저장합니다.
+
+시분할 시스템에서는 한 process가 매우 짧은 시간동안 CPU를 점유하여 일정부분의 명령을 수행하고, 다른 process에게 넘깁니다. 그 후 차례가 되면 다시 CPU를 점유하여 명령을 수행합니다. 따라서 이전에 어디까지 명령을 수행했고, register에는 어떤 값이 저장되어 있었는지에 대한 정보가 바로 **context**입니다. context 정보들은 PCB(Process Control Block)에 저장합니다.
+
+#### PCB에 저장되는 것들은 무엇이 있나요?
+PCB는 운영체제가 process에 대해 필요한 정보를 모아놓은 자료구조입니다. 일반적으로 
+- Process number
+- Process state
+- Program Counter(PC), 레지스터
+- CPU 스케쥴링 정보, 우선순위
+- 메모리 정보(해당 process의 주소 공간 등) 
+
+PCB(Process Control Bolck) : OS가 프로세스를 표현한 자료구조입니다. PCB에는 프로세스의 중요한 정보가 포함되어 있기 때문에, 일반 사용자가 접근하지 못하도록 보호된 메모리 영역 안에 저장됩니다. 일부 OS에서 PCB는 커널 스택에 위치합니다. 이 메모리 영역은 보호를 받으면서도 비교적 접근하기가 편리하기 때문입니다.
+|PCB||
+|:---|:---|
+|Process State|new, running, waiting, halted 등의 state가 있습니다.|
+|Process Number|해당 process의 number|
+|Program Counter(PC)|해당 process가 다음에 실행할 명령어의 주소를 가리킵니다.|
+|Registers|컴퓨터 구조에 따라 다양한 수와 유형을 가진 register값들을 가집니다.|
+|Memory limits|base register, limit register, page table, sgment table 등|
+
+<br />
+
+#### Context switch에 대해서 설명해주세요.
+한 process에서 다른 process로 CPU제어권을 넘겨주는 것을 말합니다. 이 때 이전의 프로세스 상태를 **PCB에 저장하여 보관**하고 새로운 프로세스의 **PCB를 읽어서 보관된 상태를 복구**하는 작업이 이루어집니다.
+
+<br />
+
+#### process의 state에는 어떤 것들이 있나요?
+process는 실행(running), 준비(ready), 봉쇄(wait, sleep, blocked) 세 가지 상태로 구분됩니다.
+- 실행 : 프로세스가 CPU를 점유하고 명령을 수행중인 상태
+- 준비 : CPU만 할당받으면 즉시 명령을 수행할 수 있도록 준비된 상태
+- 봉쇄 : CPU를 할당받아도 명령을 실행할 수 없는 상태 - `I/O작업 대기`
 
 ***
 
@@ -306,4 +339,115 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 |Single core|Multi core|
 |동시에 실행되는 것 같아 보입니다.|실제로 동시에 여러 작업이 처리 됩니다.|
 
-- 메모리관리 : Multi Process는 2개 이상의 process가 동시에 실행되며, 이 떄 process들은 CPU와 메모리를 공유하게 됩니다.
+- 메모리관리 : Multi Process는 2개 이상의 process가 동시에 실행되며, 이 떄 process들은 CPU와 메모리를 공유합니다. 여기서 서로 다른 process의 영역을 침범하지 않고 자신의 memory영역에만 접근하도록 OS가 관리해줍니다.
+
+***
+
+### Thread가 무엇인가요?
+한 process 내에서 실행되는 동작(기능 function)의 단위입니다. 각 Thread는 속해있는 process의 Stack 메모리를 제외한 나머지 Memory 영역인 Code, Data, Heap을 공유할 수 있습니다.
+
+Thread는 process 내에서 독립적인 기능을 수행합니다. 독립적인 기능을 수행한다는 것은 독립적으로 함수를 호출함을 의미합니다.
+
+<br />
+
+#### Thread는 왜 독립적인 Stack Memory 영역이 필요한가요?
+Stack 영역은 함수 호출 시 전달되는 인자, 함수의 Return Address, 함수 내 지역변수 등이 저장되며 각 thred가 함수 호출 시 각각의 Stack memory를 사용합니다.
+
+
+<br />
+
+#### Multi thread는 무엇인가요?
+하나의 process가 동시에 여러개의 일을 수행할 수 있도록 해주는 것입니다. 즉, 하나의 process(실행된 하나의 program)에서 여러 작업을 병렬로 처리하기 위한 단위입니다.
+
+<br />
+
+#### process와 thread를 비교하여 설명해주세요.
+process는 운영체제로부터 자원을 할당받는 작업의 단위이고, thread는 process가 할당받은 자원을 이용하는 실행의 단위입니다. 즉, process는 실행파일이 memory에 적재되어 CPU를 할당받아 실행되는 것입니다. 
+
+Thread는 한 process 내에서 실행되는 동작의 단위이며, stack 영역을 제외한 code, data, heap 영역을 공유합니다.
+
+<br />
+
+#### Multi process와 Multi thread를 비교하여 설명해주세요.
+- Multi thread는 Multi process보다 적은 메모리 공간을 차지하고, **Context Switching**이 빠릅니다.
+- Multi process는 Multi thread보다 많은 메모리공간과 CPU 시간을 차지합니다.
+- Multi thread는 동기화 문제와 하나의 thread 장애로 전체 thread가 종료될 위험이 있습니다.
+- Multi process는 하나의 process에 문제가 발생해도 다른 process에 영향을 주지 않아, 안정성이 높습니다.
+- 메모리 구분이 필요한 경우 Multi process가 유리합니다.
+- Context Switching이 자주 일어나고, 데이터 공유가 빈번한 경우, 그리고 자원을 효율적으로 사용해야 되는 경우 Multi thread가 유리합니다.
+
+    ||Multi Process|Multi Thread|
+    |:---|:---|:---|
+    |메모리 사용<br />CPU 시간|많음|적음|
+    |Context<br />Switching|느림|빠름|
+    |안전성|높음|낮음|
+
+<br />
+
+#### Multi thread가 Multi process보다 좋은 점은 무엇인가요?
+Multi process를 이용하던 작업을 Multi thread로 구현할 경우, 메모리 공간과 시스템 자원 소모가 줄어들게 됩니다. 또한 process를 생성하고 자원을 할당하는 등의 system call을 생략할 수 있기 때문에, 자원을 효율적으로 관리할 수 있습니다. 뿐만 아니라 Context swtiching 시 캐시 메모리를 초기화할 필요가 없어서 속도가 빠릅니다.
+
+데이터를 주고 받을 때를 비교해 보면, process 간의 통신(IPC)보다 Multi thread 간의 통신 비용이 적기 때문에, 오버헤드가 적습니다.
+- IPC(Inter-Process Communication) : process는 각각의 독립적 주소를 가지는데, 다른 process가 이 주소공간을 참조하는 것은 허용하지 않습니다. 그렇기 때문에 다른 process와 데이터를 주고받을 수 없습니다. 이를 해결하고자 운영체제는 IPC기법을 통해 process들 간에 통신을 가능하게 합니다.<br />
+process간 통신(IPC)에는 기본적으로 공유메모리(shared memory)와 메시지 전달(message passing)의 두 가지 모델이 있습니다.
+    - **공유 메모리(shared memory)** : process들이 주소 공간의 일부를 공유합니다. 공유한 메모리 영역에 읽기/쓰기를 통해서 통신을 수행합니다. process가 공유 메모리할당을 kernel에 요청하면, kernel은 해당 process에 메모리 공간을 할당해줍니다. 공유 메모리 영역이 구축된 이후에는 모든 접근이 일반적인 메모리 접근으로 취급되기 때문에 더 이상 kernel의 도움 없이도 각 process들이 메모리 영역에 접근할 수 있습니다. 따라서 kernel의 관여 없이 데이터 통신을 할 수 있기 때문에, **IPC속도가 빠르다**는 장점이 있습니다. <br />
+    공유 메모리 방식은 process 간의 통신을 수월하게 만들지만, 동시에 같은 메모리 위치에 접근하게 되면 일관성 문제가 발생할 수 있습니다. 이에 대해서는 kernel이 관여하지 않기 때문에 process들 끼리 직접 공유 메모리 접근에 대한 동기화 문제를 책임져야 합니다.
+    - **메시지 전달(message passing)** : 통상 system call을 사용하여 구현됩니다. kernel을 통해 send(message)와 receive(message)라는 두 가지 연산을 제공받습니다. 예를 들면, process1이 kernel로 message를 보내면, kernel이 process2에게 message를 보내주는 방식으로 작동합니다.<br />
+    메모리 공유보다는 속도가 느리지만, **충동을 회피할 필요가 없기**때문에 적은 양의 데이터를 교환하는 데 유용합니다. 또, 구현하기 쉽다는 장점이 있습니다. `pipe, socket, message queue`
+
+<br />
+
+#### IPC의 예시를 들어주실 수 있나요?
+IPC는 크게 공유 메모리 모델과 메시지 전달 모델로 나눌 수 있습니다. 공유 메모리 모델은 주소 공간의 일부를 공유하며 공유한 메모리 영역에 read/write를 통해 통신하게 되는데, 예시로는 공유메모리와 POSIX가 있습니다. 메시지 전송 모델의 경우, kernel을 통해 send/receive 연산으로 데이터를 전송합니다. 예시로는 `pipe, socket, message queue`등이 있습니다.
+
+<br />
+
+#### Multi process환경에서 process 간에 데이터를 어떻게 주고 받을까요?
+원칙적으로 process는 독립적 주소 공간을 가지며, 다른 process의 주소 공간을 참조할 수 없습니다. 하지만, 경우에 따라 운영체제는 process 간의 자원 접근을 위한 매커니즘인 **프로세스 간 통신(IPC)**을 제공합니다. `pipe, socket, 공유 메모리`
+
+<br />
+
+#### Multi thread가 Multi process보다 안 좋은 점은 무엇인가요?
+thread 간의 자원 공유 시 동기화문제가 발생할 수 있어서, 프로그램 설계 시 주의가 필요하고, 하나의 thread에 문제가 생기면, process 내의 다른 thread에도 문제가 생길 수 있습니다.
+
+<br />
+
+#### 공유 메모리와 메시지 전달 모델의 장단점을 설명해주세요.
+공유 메모리 모델은 초기 공유 메모리 할당을 제외하면, kernel 관여 없이 통신을 유지할 수 있기 때문에 빠른 속도를 자랑합니다. 하지만, process가 동시에 메모리에 접근하기 때문에, 동기화 과정을 구현해야 한다는 단점이 있습니다.
+
+메시지 전달 모델은 kernel을 통해 데이터를 주고 받기 때문에, 통신 속도가 느리다는 단점이 있습니다. 하지만, kernel의 제어로 동기화 문제를 신경쓰지 않아도 됩니다.
+
+***
+
+### Multi process/thread 환경에서 동기화 문제를 어떻게 해결하나요?
+Mutex와 Semaphore 기법 등을 사용할 수 있습니다. 
+- Mutex란 1개의 스레드만이 공유 자원에 접근할 수 있도록 하여, 경쟁 상황(race condition)을 방지하는 기법입니다. 공유 자원을 점유하는 thread가 `lock`을 걸면, thread는 `unlock` 상태가 될 때까지 해당 자원에 접근할 수 없습니다.
+    ```c++
+    acquire() // entry sction
+
+    // critical section
+
+    release() // exit section
+    ```
+- Semaphore란 S개(세마포 변수의 값만큼)의 thread만이 공유 자원에 접근할 수 있도록 제어하는 동기화 기법입니다. Semaphore 기법에서는 정수형 변수 `S(세마포)` 값을 가용한 자원의 수로 초기화하고, 자원에 접근할 때는 `S--` 연산을 수행하여 세마포 값을 감소시키고 자원을 방출할 때는 `S++`연산을 수행하여 세마포 값을 증가시킵니다. 이 때 세마포 값이 0이 되면 모든 자원이 사용 중임을 의미하고, 이후 자원을 사용하려는 프로세스는 세마포 값이 0보다 커질 때까지 `block`됩니다.
+    ```c++
+    wait(S) // entry section
+
+    // critical section
+
+    signal(S) // exit section
+    ```
+    - Binary Semaphore : Semaphore 값이 0, 1만 가질 수 있는 경우로, Mutex랑 유사하게 작동합니다.
+- Busy waiting은 자원을 얻기 위해 권한을 얻을 때까지 확인하는 것을 의미합니다. CPU의 자원을 쓸데 없이 낭비하기 때문에 권장되지 않는 동기화 방식입니다.
+
+<br />
+
+#### 임계영역(critical section)에 대해 설명해주세요.
+둘 이상의 process/thread가 동시에 동일한 자원에 접근하도록 하는 프로그램 코드 부분을 의미합니다. 중요한 특징중 하나는, 한 process/thread가 자신의 임계구역에서 수행하는 동안에는 다른 process/thread들은 그들의 임계구역에 들어갈 수 없어야 한다는 사실입니다. 즉, 임계영역 내의 코드는 원자적으로(atomically) 실행이 되어야 합니다.
+
+원자적으로 실행되기 위해서 각각의 process/thread는 자신의 임계구역으로 진입하려면 진입 허가를 요청해야합니다. 이 부분을 entry section이라고 하고, 진입이 허가되면 임계영역을 실행할 수 있습니다. 임계영역이 끝나고 나면 exit section으로 퇴출을 하게 됩니다. 이렇게 임계영역의 원자성을 보장하는 것을 동기화라고 하며, 대표적으로 `Mutext`와 `Semaphore`가 있습니다.
+
+***
+### 
+
+***
