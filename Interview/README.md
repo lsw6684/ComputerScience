@@ -613,3 +613,30 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 Spring은 자바 언어 기반의 프레임워크로 객체지향의 핵심인 다형성을 극대화합니다. DI와 DI 컨테이너를 제공하여, 다형성과 OCP, DIP를 가능하도록 지원합니다.
 
 마치 부품을 교체하듯이, 클라이언트 코드의 변경 없이 기능을 확장할 수 있습니다.
+
+***
+
+### JUnit이 무엇인가요?
+단위 테스트 프레임워크입니다.
+
+`JUnit4`는 하나의 jar파일로 의존성을 불러오고 다른 라이브러리를 참조해서 사용하는 구조였지만, `JUit5`부터는 그 자체로 모듈화가 되어있습니다.
+- JUnit5의 구성
+    - Platform : 테스트를 실행해주는 런처를 제공하며 TestEngine API를 제공합니다.
+    - Jupiter : `JUnit5`를 지원하는 TestEngine API 구현체입니다.
+    - Vintage : `JUnit4`와 3를 지원하는 TestEngine 구현체입니다.
+- `JUnit5`와 `JUnit4`의 차이점.
+    - `@Test` : `JUnit5`의 Jupiter에는 Annotation들이 존재하기 때문에, `JUnit4`와 다르게 어떠한 속성도 선언하지 않습니다.
+        ```java
+        //JUnit4
+        @Test(expected = Exception.class)
+        void create() throws Exception {
+            ...
+        }
+
+        //JUnit5
+        @Test
+        void create() {
+
+        }
+        ```
+- Mock : 단위 테스트를 위해서 한 번에 하나의 메서드만을 실행하는데, 이러한 메서드가 의존성이 강하여 구현하기 힘들 경우 사용됩니다. 즉, 테스트프로그램을 실행 시키기 위한 가짜 객체입니다.
