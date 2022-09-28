@@ -1076,9 +1076,11 @@ Proxy Server는 익명성으로 보안을 향상시키고, 캐시를 통한 속�
 
 #### Proxy Server에는 어떤 종류가 있나요?
 Forward Proxy와 Reverse Proxy가 있습니다.
+- `Client - 인터넷 - Server`
 
 Forward Proxy는 일반적인 프록시 서버로 Client와 Web Server의 중계를 담당합니다. Client의 앞에 위치하며, Client가 Proxy Server에 요청한 내용을 Proxy Server에 캐시로 저장해 두고, 후에 데이터를 재요청하면, 캐시된 데이터를 사용하여 전송 시간을 절약할 수 있습니다. Proxy Server는 Client가 요청하기 전까지 웹 서버의 주소를 알 수 없으며 캐싱 기능을 제공함과 동시에 특정 사이트의 접근을 제한할 수도 있습니다.
 - Client 정보가 노출되지 않습니다.
+- `청소년의 성인 컨텐츠 접근 제어`
 
 Reverse Proxy는 Web Server 앞에 놓여져 있습니다. Client와 Web Server 사이에 위치하여 제어역할을 합니다. Client가 바로 Server에 데이터를 요청하여 받아올 수도 있지만, DB 노출을 최소화 하고 로드 밸런싱으로 트래픽을 분산시킵니다.
 - Server 정보가 노출되지 않습니다.
@@ -1087,12 +1089,6 @@ Reverse Proxy는 Web Server 앞에 놓여져 있습니다. Client와 Web Server 
 
 #### 로드 밸런싱 기법 중에 라운드로빈(Round Robin Method) 방식이라고 알고 계신가요?
 Server에 들어온 요청을 순서대로 돌아가며 배정합니다. 보유한 서버들이 동일한 스펙을 갖고 있고, 서버와의 연결(세션)이 오래 지속되지 않는 경우에 적합합니다.
-
-
-
-
-
-
 
 ***
 
