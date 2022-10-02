@@ -626,6 +626,17 @@ ACID로 총 4가지가 있습니다.
 
 <br />
 
+#### 트랜잭션 격리수준 종류에 대해 말씀해주세요.
+- READ UNCOMMITTED (커밋되지 않은 읽기)
+
+    커밋되지 않은 데이터를 다른 트랜잭션이 조회할 수 있으며 이것을 **Dirty read**라고 합니다.
+- READ COMMITTED (커밋된 읽기)
+
+    커밋한 데이터를 다른 트랜잭션에서 조회합니다. 따라서 **Dirty Read**는 발생하지 않지만, **NON-REPEATABLE READ**와 **Phantom READ**는 발생할 수 있습니다. 주로 오라클에서 기본으로 사용되는 격리 수준이며, 온라인 서비스에서 가장 많이 선택되는 격리수준입니다.
+- REPEAT
+
+<br />
+
 #### 동시성 제어에 대해 말씀해주세요.
 여러 개의 Transaction이 한 개의 데이터를 동시에 갱신(UPDATE)할 때 어느 한 transaction의 갱신이 무효화 될 수 있는데, 이를 **갱신 손실**이라고 합니다. 갱신 손실을 막기 위한 동작으로, transsaction이 동시에 수행될 때 일관성을 해치치 않도록 transaction의 데이터 접근을 제어하는 DBMS의 기능입니다.
 
@@ -678,7 +689,6 @@ ROLLBACK은 작업 중 문제가 발생했을 때, transaction 처리 과정에�
 
 - **제 2정규형**
     - 제 1정규형을 만족한 상태에서 부분 함수 종속을 제거합니다.
-    - Key가 아닌 값들은 모두 Key에 종속되어야 합니다.
 <p align="center"><img src="images/제2a.png" width="700"> <img src="images/제2b.png" width="600"></p>
 
 - **제 3정규형**
