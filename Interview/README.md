@@ -274,7 +274,7 @@ PCB는 운영체제가 process에 대해 필요한 정보를 모아놓은 자료
 <br />
 
 #### 컨택스트 스위칭이 많이 발생하면 왜 안 좋을까요?
-컨텍스트 스위칭이 발새하는 동안, CPU는 아무 일도 하지 못합니다. 즉 순수한 오버헤드이기 때문에 성능이 저하됩니다.
+컨텍스트 스위칭이 발생하는 동안, CPU는 아무 일도 하지 못합니다. 즉 순수한 오버헤드이기 때문에 성능이 저하됩니다.
 
 <br />
 
@@ -355,8 +355,8 @@ Multi process를 이용하던 작업을 Multi thread로 구현할 경우, 메모
 
 <br />
 
-#### IPC가 무엇인가요?
-IPC(Inter-Process Communication) : process는 각각의 독립적 주소를 가지는데, 다른 process가 이 주소공간을 참조하는 것은 허용하지 않습니다. 그렇기 때문에 다른 process와 데이터를 주고받을 수 없습니다. 이를 해결하고자 운영체제는 IPC기법을 통해 process들 간에 통신을 가능하게 합니다.<br />
+#### IPC(Inter-Process Communication)가 무엇인가요?
+process는 각각의 독립적 주소를 가지는데, 다른 process가 이 주소공간을 참조하는 것은 허용하지 않습니다. 그렇기 때문에 다른 process와 데이터를 주고받을 수 없습니다. 이를 해결하고자 운영체제는 IPC기법을 통해 process들 간에 통신을 가능하게 합니다.<br />
 process간 통신(IPC)에는 기본적으로 공유메모리(shared memory)와 메시지 전달(message passing)의 두 가지 모델이 있습니다.
 
 <br />
