@@ -1494,6 +1494,17 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 
 ***
 
+### Java 메모리 구조는 어떻게 되어있나요?
+자바 메모리 구조는 크게 5가지로 구분됩니다. 스레드마다 PC Register, JVM Stack, Native Method Stack이 있으며 스레드 공통으로는 Method Area와 Heap이 존재합니다.
+- PC Register는 수행 중인 JVM 명령어가 들어가며
+- JVM Stack은 호출된 메소드의 매개변수, 지역변수, 리턴 정보들이 저장됩니다.
+- Native Method Stack은, 자바 외의 언어인 C나 C++같은 것들을 수행하기 위한 영역이고,
+- Method Area는 클래스 별로 전역변수, 정적 변수, 메소드 정보들이 저장되며,
+- Heap 영역은 런타임중 생성되는 객체들이 동적으로 할당되는 곳입니다.
+
+
+***
+
 ### GC가 무엇인가요?
 Garbage Collection으로 JVM의 Heap 영역에서 사용하지 않는 객체를 삭제하는 프로세스를 말합니다.
 
