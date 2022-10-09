@@ -111,7 +111,7 @@ Array와 다르게 Linked List는 물리적 메모리상으로 연속적이지 �
 #### Queue 구현 시 Array-Base와 List-Base에 어떤 차이가 있나요?
 **Array-Base**는 메모리 낭비를 줄이기 위해 Circular queue로 구현하는 것이 일반적입니다. fixed size를 넘어간 상태에서 enqueue가 발생하면, Dynamic Array와 같은 방법으로 Array size를 확장시켜야 하지만, 시간복잡도는 amortized O(1)을 유지할 수 있습니다.
 
-**List-Base**는 보통 singly-linked list로 구현합니다. enqueue는 단순히 singly-linked list에서 append 하는 것으로 구현되며 dequeue는 맨 앞의 원소를 제거하고 first head를 변경하면 되기 떄문에 모두 O(1)로 가능합니다.
+**List-Base**는 보통 singly-linked list로 구현합니다. enqueue는 단순히 singly-linked list에서 append 하는 것으로 구현되며 dequeue는 맨 앞의 원소를 제거하고 first head를 변경하면 되기 문에 모두 O(1)로 가능합니다.
 
 두 방법 모두 O(1)의 시간복잡도를 갖습니다. Array-Base의 경우 전반적으로 performance가 더 좋지만, worst case의 경우 resize로 인해 더욱 느릴 수 있습니다. List-Base는 enqueue 발생 시 마다 meomory allocation을 해야 하기 때문에 전반적인 runtime이 느릴 수 있습니다.
 
@@ -298,7 +298,7 @@ process는 실행(running), 준비(ready), 봉쇄(wait, sleep, blocked) 세 가�
 |Single core|Multi core|
 |동시에 실행되는 것 같아 보입니다.|실제로 동시에 여러 작업이 처리 됩니다.|
 
-- 메모리관리 : Multi Process는 2개 이상의 process가 동시에 실행되며, 이 떄 process들은 CPU와 메모리를 공유합니다. 여기서 서로 다른 process의 영역을 침범하지 않고 자신의 memory영역에만 접근하도록 OS가 관리해줍니다.
+- 메모리관리 : Multi Process는 2개 이상의 process가 동시에 실행되며, 이 때 process들은 CPU와 메모리를 공유합니다. 여기서 서로 다른 process의 영역을 침범하지 않고 자신의 memory영역에만 접근하도록 OS가 관리해줍니다.
 
 ***
 
@@ -1389,6 +1389,11 @@ HTTP의 connectionless(비연결성), stateless(비상태성)라는 특징 때�
 
 <br />
 
+#### 상속의 단점에는 무엇이 있나요?
+캡슐화를 깨며 상위 클래스의 변경이 하위 클래스의 변경에 영향을 줄 수 있습니다.
+
+<br />
+
 #### 접근제어자를 설명해보세요.
 객체가 수행하는 기능의 협력 범위를 표현합니다. 접근 제어자는 외부에 보여주고 싶은 정보들을 선택적으로 제공하여 캡슐화가 가능합니다.
 - `public` : 전체 영역에서 접근 가능합니다.
@@ -1410,6 +1415,8 @@ Call by Reference란 참조에 의한 호출을 의미하며, 전달받은 값�
 추상클래스는 미완성 메서드를 포함하고 있는 클래스로 인스턴스 생성은 불가능하며 다른 클래스인 자손 클래스를 작성하는데 도움을 줄 목적으로 작성합니다. 또한 단일 상속만 가능합니다.
 
 인터페이스는 추상 자료형으로 클래스들이 구현해야 할 동작을 지정하는 데 사용됩니다. 선언과 구현을 분리해 표준화가 가능하며 다중 상속이 가능하므로 공통된 기능이 있다면, 협력 관계를 맺어줄 수 있다는 장점이 있습니다.
+
+자바8 이후 인터페이스에 디폴트 메서드가 추가되어, 추상클래스와의 차이가 점점 모호해지고 있습니다.
 
 ***
 
@@ -1457,6 +1464,21 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 `Iterable` 인터페이스는 `Iterator` 인터페이스를 반환하는 `Iterator()`메서드를 강제하여, `Iterable` 인터페이스를 상속, 구현하는 객체는 for-each를 사용할 수 있습니다.
 
 `Iterator`인터페이스는 `hasNext()`, `next()`같은 메서드를 가지고 있고, `Iterator`인터페이스를 구현하는 객체가 이를 구현하여 Collection의 요소들을 순회하는 기능을 구현합니다.
+
+***
+
+### String 객체를 리터럴 방시긍로 생성하면 JVM의 어느 영역에 저장되나요?
+String Constant Pool에 저장됩니다.
+
+<br />
+
+#### 내부적으로 어떤 메서드가 호출되는지 아시나요?
+intern()메서드를 사용합니다.
+
+***
+
+### StringBuffer와 StringBuilder의 차이점이 무엇인가요?
+StringBuffer는 내부적으로 synchronized 키워드를 사용하며 Thread safe 하다고 할 수 있지만, StringBuilder는 Thread safe 하지 않습니다.
 
 ***
 
@@ -1527,7 +1549,7 @@ GC Root로 부터 참조할 수 있는 Reachable Object와 참조가 끊긴 Unre
 <br />
 
 #### Young Generation에서 발생하는 작업을 설명해주세요.
-우선, 새로웅 객체들이 Eden 영역에 할당되고, 꽉 차면 `Minor GC`가 발생합니다. 여기서 Mark and Sweep이 발생하고 살아남은 객체들은 Survivor영역으로 이동합니다.
+우선, 새로운 객체들이 Eden 영역에 할당되고, 꽉 차면 `Minor GC`가 발생합니다. 여기서 Mark and Sweep이 발생하고 살아남은 객체들은 Survivor영역으로 이동합니다.
 
 Survivor 영역의 객체들은 age가 증가하고 다시 Eden영역에 객체들이 유입됩니다. 이러한 일련의 동작이 반복 되고, Survivor의 객체들의 age가 특정 임계치에 도달하게 되면, Old Generation으로 이동합니다. 이 것을 Promoted라고 합니다.
 
@@ -1551,7 +1573,7 @@ GC를 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것입�
 <br />
 
 #### 자바 직렬화는 언제 사용하나요?
-객체 상태를 영속해야 할 필요가 있을 떄 사용합니다.
+객체 상태를 영속해야 할 필요가 있을 때 사용합니다.
 1. File, DB, Cache 등에 저장
 2. 바이트 스트림으로 변환해서 전송할 때
 
@@ -1565,6 +1587,30 @@ GC를 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것입�
 - Serializable은 아무 것도 없지만, 사용하지 않으면, `NotSerializableException`이 발생합니다.
 - 직렬화 & 역직렬화 흐름
     - Object - writeObject - DB / File / Memory - readObject - Object
+
+***
+
+### Error와 Exception의 차이점
+Error는 Unchecked Type으로 컴피알 시점에 알 수 없고, 런타임에서 발견됩니다. 코드로 핸들링 할 수 없는 오류입니다.
+
+Exception은 Checked Type과 Unchecked Type으로 나뉘며, 코드로 핸들링할 수 있는 오류입니다.
+
+<br />
+
+#### Checked Exception과 Unchecked Exception에 대해서 설명해주세요.
+Checked Exception은 컴파일 시점에 확인할 수 있는 예외를 의미합니다. 예외처리를 하지 않으면 컴파일 되지 않기 때문에, 예외 처리를 강제합니다.
+- FileNotFoundException
+
+Unchecked Exception은 컴파일 시점에 확인할 수 없는 예외를 의미하며 런타임 시점에 발생합니다.
+- NPE
+
+***
+
+### `System.out.println()`메서드를 지양하는 이유를 아시나요?
+대표적으로 세 가지가 있습니다.
+- 우선, 휘발성으로, 어디에 적재되는 것이 아니라 출력 후 사라지기 때문에 로그로 추적할 수 없습니다.
+- 둘째로 로그의 시간, 위치, 수준 등이 전혀 없으므로 정보가 부족하다고 할 수 있습니다.
+- 마지막으로 성능이 저하됩니다. **synchronized**키워드를 사용하는데, 해당 메서드는 임계영역이 되고, 한 thread씩 접근해서 처리하며 I/O작업이 완료될 때까지 CPU가 대기하게 됩니다.
 
 ***
 
