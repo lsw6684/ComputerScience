@@ -1480,6 +1480,15 @@ intern()메서드를 사용합니다.
 ### StringBuffer와 StringBuilder의 차이점이 무엇인가요?
 StringBuffer는 내부적으로 synchronized 키워드를 사용하며 Thread safe 하다고 할 수 있지만, StringBuilder는 Thread safe 하지 않습니다.
 
+<br />
+
+#### String과 StringBuffer 혹은 StringBuilder의 차이는 무엇인가요?
+String은 new 연산을 통해 생성된 인스턴스의 메모리 공간이 변하지 않으며(Immutable), Garbage Collector로 제거되어야 합니다.
+
+객체가 불변하므로, Multi-thread에서 동기화를 신경 쓸 필요가 없으며 조회 연산에 매우 적절하다고 할 수 있습니다.
+
+StringBuffer와 StringBuilder는 new 연산으로 클래스를 한 번만 만들고, 문자열 연산 시 새로 객체를 만들지 않고, 크기를 변경시킵니다.
+
 ***
 
 ### HashMap과 HashTable의 차이는 무엇인가요?
