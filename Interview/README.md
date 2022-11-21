@@ -1443,10 +1443,59 @@ HTTP의 connectionless(비연결성), stateless(비상태성)라는 특징 때�
 클린코드로 유명한 로버트 마틴이 정리한 객체지향 설계 원칙입니다.
 1. SRP, Single Responsiblity Principle로 단일 책임 원칙입니다.
     - 한 클래스에 하나의 책임만을 요구하며, 이를 판단하는 기준은 **변경**입니다. 변경 시에 파급 효과가 적다면 SRP를 잘 따른 것입니다.
+        - Before
+            ```java
+            class Guitar {
+                private String serialNumber;
+                private double price;
+                private Maker maker;
+                private Type type;
+                private String model;
+                private Wood topWood;
+                private Wood backWood;
+                private int stringNum;
+                public Guitar(String serialNumber, double price, Maker maker, Type type
+                        , String model, Wood backWood, Wood topWood, int stringNum) {
+                    this.serialNumber = serialNumber;
+                    this.price = price;
+                    this.maker = maker;
+                    this.type = type;
+                    this.model = model;
+                    this.backWood = backWood;
+                    this.topWood = topWood;
+                    this.stringNum = stringNum;
+                }
+            }
+            ```
+        - After
+            ```java
+            class Guitar {
+                private String serialNumber;
+                private GuitarSpec spec;
+
+                public Guitar(String serialNumber, GuitarSpec spec) {
+                    this.serialNumber = serialNumber;
+                    this.spec = spec;
+                }
+
+            }
+
+            class GuitarSpec {
+                double price;
+                Maker maker;
+                Type type;
+                String model;
+
+            }            
+            ```
+            **※ 변화 요소와 고유 정보를 분리**
+
 2. OCP, Open/Closed Principle로 개방/폐쇄 원칙입니다. 
     - 소프트웨어 요소는 확장에는 열려있으나, 변경에는 닫혀 있어야 합니다. **다형성**을 활용하는데, 인터페이스를 구현한 클래스를 만들고 새로운 기능을 구현합니다.
+        - 인터페이스의 변경을 최소화합니다.
 3. LSP, Liskov Substitution Principle로 리스코프 치환 원칙입니다.
     - 인터페이스의 규약을 지켜서 구현해야 합니다. 특정 메서드가 상위 타입을 인자로 사용할 때, 그 타입의 하위 타입도 문제 없이 정상 작동해야함을 의미합니다. 증가 버튼을 감소로 구현하는 경우 LSP 위반이라 할 수 있습니다.
+        - 자식 클래스가 항상 부모 클래스의 역할에 충실해야 합니다.
 4. ISP, Interface Segregation Principle로 인터페이스 분리 원칙입니다.
     - 특정 클라이언트를 위한 인터페이스 여러 개가 범용 인터페이스 하나보다 좋다는 의미입니다.
     - 사용하지 않는 Method의 의존성을 제거하여 결합도를 제거합니다.
