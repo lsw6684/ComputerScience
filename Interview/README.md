@@ -393,8 +393,7 @@ Thread는 한 process 내에서 실행되는 동작의 단위이며, stack 영�
 - Multi thread는 Multi process보다 적은 메모리 공간을 차지하고, **Context Switching**이 빠릅니다.
 - Multi process는 Multi thread보다 많은 메모리공간과 CPU 시간을 차지합니다.
 - Multi thread는 동기화 문제와 하나의 thread 장애로 전체 thread가 종료될 위험이 있습니다.
-- Multi process는 하나의 process에 문제가 발생해도 다른 process에 영향을 주지 않아, 안정성이 높습니다.
-- 메모리 구분이 필요한 경우 Multi process가 유리합니다.
+- Multi process는 하나의 process에 문제가 발생해도 다른 process에 영향을 주지 않아, 안정성이 높습니다. 즉, 메모리 구분이 필요한 경우 Multi process가 권장됩니다.
 - Context Switching이 자주 일어나고, 데이터 공유가 빈번한 경우, 그리고 자원을 효율적으로 사용해야 되는 경우 Multi thread가 유리합니다.
 
     ||Multi Process|Multi Thread|
@@ -406,7 +405,7 @@ Thread는 한 process 내에서 실행되는 동작의 단위이며, stack 영�
 <br />
 
 #### Multi thread가 Multi process보다 좋은 점은 무엇인가요?
-Multi process를 이용하던 작업을 Multi thread로 구현할 경우, 메모리 공간과 시스템 자원 소모가 줄어들게 됩니다. 또한 process를 생성하고 자원을 할당하는 등의 system call을 생략할 수 있기 때문에, 자원을 효율적으로 관리할 수 있습니다. 뿐만 아니라 Context swtiching 시 캐시 메모리를 초기화할 필요가 없어서 속도가 빠릅니다.
+Multi process를 이용하던 작업을 Multi thread로 구현할 경우, 메모리 공간과 시스템 자원 소모가 줄어들게 됩니다. 또한 process를 생성하고 자원을 할당하는 등의 **system call**을 생략할 수 있기 때문에, 자원을 효율적으로 관리할 수 있습니다. 뿐만 아니라 Context swtiching 시 캐시 메모리를 초기화할 필요가 없어서 속도가 빠릅니다.
 
 데이터를 주고 받을 때를 비교해 보면, process 간의 통신(IPC)보다 Multi thread 간의 통신 비용이 적기 때문에, 오버헤드가 적습니다.
 
@@ -771,7 +770,7 @@ ACID로 총 4가지가 있습니다.
 
 - SERIALIZABLE (직렬화 가능)
 
-    가장 엄격한 트랜잭션 격리 수준으로, Dirty Read, Phantom Read 등의 모든 문제가 발생하지 않지만, 단순 SElECT 쿼리도 Lock이 걸릴 수 있어서, 동시성 처리 성능이 급격히 떨어질 수 있습니다.
+    가장 엄격한 트랜잭션 격리 수준으로, Dirty Read, Phantom Read 등의 모든 문제가 발생하지 않지만, 단순 SELECT 쿼리도 Lock이 걸릴 수 있어서, 동시성 처리 성능이 급격히 떨어질 수 있습니다.
 
 <br />
 
@@ -1615,7 +1614,7 @@ Collection 인터페이스는 `Iterable` 인터페이스를 상속 받고 있기
 
 ***
 
-### String 객체를 리터럴 방시긍로 생성하면 JVM의 어느 영역에 저장되나요?
+### String 객체를 리터럴 방식으로 생성하면 JVM의 어느 영역에 저장되나요?
 String Constant Pool에 저장됩니다.
 
 <br />
@@ -1820,6 +1819,20 @@ Unchecked Exception은 컴파일 시점에 확인할 수 없는 예외를 의미
 - 우선, 휘발성으로, 어디에 적재되는 것이 아니라 출력 후 사라지기 때문에 로그로 추적할 수 없습니다.
 - 둘째로 로그의 시간, 위치, 수준 등이 전혀 없으므로 정보가 부족하다고 할 수 있습니다.
 - 마지막으로 성능이 저하됩니다. **synchronized**키워드를 사용하는데, 해당 메서드는 임계영역이 되고, 한 thread씩 접근해서 처리하며 I/O작업이 완료될 때까지 CPU가 대기하게 됩니다.
+
+<br />
+
+#### 로그를 사용하는 이유가 무엇인가요?
+- 쓰레드 정보, 클래스 이름 같은 부가 정보를 함께 볼 수 있고, 출력 모양과 로그 레벨을 조정할 수 있습니다. 
+    - `서버에는 모든 로그 출력, 운영 서버에는 출력 x`
+- 파일, 네트워크 등 로그를 별도의 위치에 다양한 형태로 저장할 수 있습니다.
+- 내부 버퍼링, 멀티 쓰레드 등, `System.out`보다 성능이 수십 배 이상 뛰어나기 때문에, 실무에선 꼭 로그를 사용해야 합니다. 
+
+<br />
+
+#### 로그 사용 시 `log.debug("data="+data)`와 `log.debug("data={}", data)`의 차이는 무엇인가요?
+연산자를 사용한 로그는, 실제 CPU를 사용하여 연산이 발생하고, 파라미터를 넘기는 메서드는, 로그 레벨에 따라 실제 아무 연산이 발생하지 않기도 합니다. 
+
 
 ***
 
