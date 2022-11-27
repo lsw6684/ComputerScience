@@ -519,7 +519,10 @@ Mutex와 Semaphore 기법 등을 사용할 수 있습니다.
 
 ***
 
-### Paging이 무엇인가요?
+### 배치 정책이 무엇이고 어떤 것들이 있나요?
+프로세스를 메모리 어디에 위치시킬지 결정하는 정책이며, Paging, Segmentation, Paged segmentation이 있습니다.
+
+#### Paging이 무엇인가요?
 process가 할당받은 메모리 공간을 일정한 **page 단위**로 나누어, 물리 메모리에서 연속되지 않는 **서로 다른 위치**에 저장하는 메모리 관리 기법입니다.
 
 paging 기법에는 주소 바인딩(address binding)을 위해 모든 프로세스가 각각의 주소 변환을 위한 page table을 갖습니다.
@@ -534,11 +537,6 @@ paging 기법은 process의 논리적 주소 공간과 물리적 메모리가 �
 - 논리적 주소(logical address) : process가 memory에 적재되기 위해 독자적 주소 공간인 논리적 주소가 생성됩니다. 논리적 주소는 각 process마다 독립적으로 할당되며, 0번지부터 시작합니다.
 - 물리적 주소(physical address) : process가 실제로 메모리에 적재되는 위치를 말합니다.
 - 주소 바인딩(address binding) : CPU가 기계어 명령을 수행하기 위해 process의 논리적 주소가 실제 물리적 메모리의 어느 위치에 매핑되는지 확인하는 과정을 주소 바인딩(address binding)이라고 합니다.
-
-***
-
-### 배치 정책이 무엇이고 어떤 것들이 있나요?
-프로세스를 메모리 어디에 위치시킬지 결정하는 정책이며, Paging, Segmentation, Paged segmentation이 있습니다.
 
 <br />
 
@@ -1555,6 +1553,7 @@ Call by Reference란 참조에 의한 호출을 의미하며, 전달받은 값�
 추상클래스는 미완성 메서드를 포함하고 있는 클래스로 인스턴스 생성은 불가능하며 다른 클래스인 자손 클래스를 작성하는데 도움을 줄 목적으로 작성합니다. 또한 단일 상속만 가능합니다.
 
 인터페이스는 추상 자료형으로 클래스들이 구현해야 할 동작을 지정하는 데 사용됩니다. 선언과 구현을 분리해 표준화가 가능하며 다중 상속이 가능하므로 공통된 기능이 있다면, 협력 관계를 맺어줄 수 있다는 장점이 있습니다.
+- `implements가 아닌, extends`
 
 자바8 이후 인터페이스에 디폴트 메서드가 추가되어, 추상클래스와의 차이가 점점 모호해지고 있습니다.
 
@@ -1796,10 +1795,20 @@ GC를 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것입�
 - 직렬화 & 역직렬화 흐름
     - Object - writeObject - DB / File / Memory - readObject - Object
 
+<br />
+
+#### serialVersionUID를 선언하는 이유가 무엇인가요?
+JVM은 직렬화나 역 직렬화 시점의 클래스에 대해 version 번호를 부여합니다. 클래스의 정의가 바뀌게 되면, version 번호가 재 할당되는데 직렬화와 역 직렬화의 version 번호가 같은지 검사해야 하므로 사용합니다.
+
+<br />
+
+#### 직렬화의 단점은 무엇인가요?
+직렬화 시 용량이 커지게 되거나 객체 인스턴스의 변경 시 예외가 발생합니다.
+
 ***
 
 ### Error와 Exception의 차이점
-Error는 Unchecked Type으로 컴피알 시점에 알 수 없고, 런타임에서 발견됩니다. 코드로 핸들링 할 수 없는 오류입니다.
+Error는 Unchecked Type으로 컴파일 시점에 알 수 없고, 런타임에서 발견됩니다. 코드로 핸들링 할 수 없는 오류입니다.
 
 Exception은 Checked Type과 Unchecked Type으로 나뉘며, 코드로 핸들링할 수 있는 오류입니다.
 
@@ -1811,6 +1820,21 @@ Checked Exception은 컴파일 시점에 확인할 수 있는 예외를 의미�
 
 Unchecked Exception은 컴파일 시점에 확인할 수 없는 예외를 의미하며 런타임 시점에 발생합니다.
 - NPE
+
+***
+
+### volatile 키워드가 무엇인가요?
+Java 변수를 **Main Memory에 저장**한다는 것을 명시합니다. 변수의 값을 Read할 때, CPU cache에 저장된 값이 아닌 Main Memory에서 읽어옵니다.
+
+<br />
+
+#### volatile은 언제 사용하나요?
+CPU Cache의 **변수 값 불일치 문제**를 해결하기 위해 사용합니다. Multi Thread 환경에서 하나의 Thread만 read & write하고 나머지 Thread가 read하는 상황에서 **가장 최신의 값을 보장**합니다.
+ 
+***
+
+### Reflection이란 무엇인가요?
+클래스의 타입을 알지 못해도 해당 클래스의 메소드, 타입, 변수에 접근할 수 있도록 해주는 Java API입니다.
 
 ***
 
@@ -1868,6 +1892,7 @@ Dependency Injection(의존성 주입, 의존 관계)으로 의존 관계 주입
 - Constructor Injection
     ```java
     public class TController {
+        // final 필수
         private final TService tService;
 
         @Autowired
@@ -1875,7 +1900,6 @@ Dependency Injection(의존성 주입, 의존 관계)으로 의존 관계 주입
             this.tService = tService;
         }
     }
-    
     ```
 
 <br />
