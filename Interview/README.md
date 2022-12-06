@@ -1788,6 +1788,22 @@ GC 설계 시, 대부분의 객체는 금방 garbage가 되고, 오래된 객체
 #### Stop-The-World란 무엇인가요?
 GC를 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것입니다. 즉, GC 실행 쓰레드 외의 모든 쓰레드가 작업을 중단합니다.
 
+<br />
+
+#### GC의 종류와 Java 버전 별 default GC들을 말씀해 보세요.
+- Serial GC
+    - 순차적 GC라는 의미로, Mark/Sweep/Compaction 알고리즘이 **한 번에 하나씩만 작동**합니다. 가장 오래된 GC이며, **Stop-The-World 시간이 길기 때문에** 최근에는 잘 사용되지 않습니다.
+        - 싱글 스레드나 협소한 Heap 영역 환경에서 사용됩니다.
+- Parallel GC `Java 7, 8`
+    - **멀티 스레드로 Mark-Sweep-Compaction을 수행**하기 때문에 **Stop-The-World 시간이 짧습니다.**
+- CMS GC
+    - Concurrent-Mark-Sweep으로 Stop-The-World 시간을 최소화하기 위해 고안됐습니다. 
+        - 대부분의 Garbage 수집 작업을, Application Thread와 동시에 수행하여 Stop-The-World 시간을 줄일 수 있습니다.
+        - 메모리와 CPU를 많이 사용하고 Compaction이 기본적으로 제공되지 않는다는 단점이 있습니다.
+        - G1 GC 등장으로 대체되었습니다.
+- G1 GC `Java 9 이상`
+    - Garbage First의 줄임말입니다. Heap을 일정 크기의 Region으로 나누어, Young Generation과 Old Generation을 구분하고, 필요에 따라 개수를 가변적으로 변경하여 Stop-The-World를 최소화합니다.
+
 ***
 
 ### 직렬화란 무엇인가요?
@@ -2017,7 +2033,7 @@ Aspect Oriented Programming으로, 핵심 관심 사항(core concern)과 공통 
     - timeout : 지정한 시간 내에 메서드 수행이 완료되지 않으면 rollback 합니다.
         - -1일 경우 timeout을 사용하지 않습니다.
     - readOnly : 트랜잭션을 읽기 전용으로 설정합니다.
-- [Isolation 참고](#트랜잭션-격리수준-종류에-대해-말씀해주세요.)
+- [Isolation 참고](#트랜잭션-격리수준-종류에-대해-말씀해주세요)
 
 ***
 
